@@ -6,7 +6,7 @@
   <link href="http://universeinheart.github.io/atom.xml" rel="self"/>
   
   <link href="http://universeinheart.github.io/"/>
-  <updated>2021-04-15T00:38:46.122Z</updated>
+  <updated>2021-04-17T09:18:32.736Z</updated>
   <id>http://universeinheart.github.io/</id>
   
   <author>
@@ -17,11 +17,105 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>00、Netty基础</title>
+    <link href="http://universeinheart.github.io/2021/04/16/Netty/01/"/>
+    <id>http://universeinheart.github.io/2021/04/16/Netty/01/</id>
+    <published>2021-04-16T15:26:37.000Z</published>
+    <updated>2021-04-17T09:18:32.736Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>学习本课程的目标</p><ol><li>掌握<code>Java</code>网络编程基础知识和原理</li><li>使用<code>Netty</code>构建一个<code>Java</code>网络服务器</li><li>熟悉<code>Netty</code>核心源码以及深层原理</li><li>熟练诊断、分析并排查<code>Netty</code>使用中的故障</li></ol></blockquote><ul><li>本质：网络应用程序框架</li><li>实现：异步，事件驱动</li><li>特性：高性能、可维护、快速开发</li><li>用途：开发服务器和客户端</li></ul><img src="/2021/04/16/Netty/01/image-20210416233502685.png" class="" title="image-20210416233502685"><p>第一章、<code>Netty</code> 背景，现状与趋势</p><p>第二章、<code>Netty</code> 源码，从领域知识的角度剖析</p><p>第三章、<code>Netty</code> 源码，从请求处理的角度剖析</p><p>第四章、<code>Netty</code> 实战入门，写一个玩具项目</p><p>第五章、<code>Netty</code> 实战进阶，把玩具变产品</p><p>第六章、成为<code>Netty</code> 贡献者</p><h2 id="经典的三种IO模型"><a href="#经典的三种IO模型" class="headerlink" title="经典的三种IO模型"></a>经典的三种IO模型</h2><blockquote><p>BIO 同步阻塞方式</p><p>NIO 同步非阻塞方式</p><p>AIO 异步非阻塞方式</p></blockquote><img src="/2021/04/16/Netty/01/image-20210417142957552.png" class="" title="image-20210417142957552"><h4 id="阻塞与非阻塞"><a href="#阻塞与非阻塞" class="headerlink" title="阻塞与非阻塞"></a>阻塞与非阻塞</h4><ul><li>菜没好，要不要死等 -&gt; 数据就绪前要不要等待？</li><li>没有数据传过来时，读会阻塞直到有数据；缓冲区满时，写操作也会阻塞。</li><li>非阻塞遇到这些情况，都是直接返回。</li></ul><h4 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h4><ul><li>菜好了，谁端 -&gt; 数据就绪后，数据操作谁完成？</li><li>数据就绪后需要自己去读是同步</li><li>数据就绪直接读好再回调给程序是异步</li></ul><h3 id="为什么Netty目前只支持NIO"><a href="#为什么Netty目前只支持NIO" class="headerlink" title="为什么Netty目前只支持NIO"></a>为什么Netty目前只支持NIO</h3><p>为什么不建议使用BIO？</p><ul><li>连接数高的情况下：阻塞-&gt; 耗资源、效率低</li></ul><p>为什么删掉已经做好的AIO？</p><ul><li>Windows实现成熟，但是很少用来做服务器。</li><li>Linux常用来做服务器，但是AIO实现不够成熟。</li><li>Linux下AIO相比较NIO的性能提升不明显</li></ul><h2 id="Reactor的三种版本"><a href="#Reactor的三种版本" class="headerlink" title="Reactor的三种版本"></a>Reactor的三种版本</h2><p>Reactor是一种开发模式， 模式的核心流程：</p><ol><li>注册感兴趣的事件</li><li>扫描是否有感兴趣的事件发生</li><li>事件发生后作出相应的处理</li></ol><img src="/2021/04/16/Netty/01/image-20210417145140095.png" class="" title="image-20210417145140095"><h4 id="Reactor模式V1：单线程"><a href="#Reactor模式V1：单线程" class="headerlink" title="Reactor模式V1：单线程"></a>Reactor模式V1：单线程</h4><img src="/2021/04/16/Netty/01/image-20210417150923036.png" class="" title="image-20210417150923036"><h4 id="Reactor模式V2：多线程"><a href="#Reactor模式V2：多线程" class="headerlink" title="Reactor模式V2：多线程"></a>Reactor模式V2：多线程</h4><img src="/2021/04/16/Netty/01/image-20210417150944752.png" class="" title="image-20210417150944752"><h4 id="Reactor模式V3：主从多线程"><a href="#Reactor模式V3：主从多线程" class="headerlink" title="Reactor模式V3：主从多线程"></a>Reactor模式V3：主从多线程</h4><img src="/2021/04/16/Netty/01/image-20210417151004621.png" class="" title="image-20210417151004621"><h4 id="如何在Netty中使用Reactor模式"><a href="#如何在Netty中使用Reactor模式" class="headerlink" title="如何在Netty中使用Reactor模式"></a>如何在Netty中使用Reactor模式</h4><img src="/2021/04/16/Netty/01/image-20210417151230262.png" class="" title="image-20210417151230262"><h2 id="解析Netty对Reactor模式支持的常见疑问"><a href="#解析Netty对Reactor模式支持的常见疑问" class="headerlink" title="解析Netty对Reactor模式支持的常见疑问"></a>解析Netty对Reactor模式支持的常见疑问</h2><h4 id="Netty如何支持主从Reactor模式的？"><a href="#Netty如何支持主从Reactor模式的？" class="headerlink" title="Netty如何支持主从Reactor模式的？"></a>Netty如何支持主从Reactor模式的？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//io.netty.bootstrap.ServerBootstrap#group(io.netty.channel.EventLoopGroup, io.netty.channel.EventLoopGroup)</span></span><br><span class="line">    <span class="keyword">volatile</span> EventLoopGroup group;</span><br><span class="line"><span class="function"><span class="keyword">public</span> ServerBootstrap <span class="title">group</span><span class="params">(EventLoopGroup parentGroup, EventLoopGroup childGroup)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 对group进行赋值</span></span><br><span class="line">        <span class="keyword">super</span>.group(parentGroup);</span><br><span class="line">        ObjectUtil.checkNotNull(childGroup, <span class="string">&quot;childGroup&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.childGroup != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;childGroup set already&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.childGroup = childGroup;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//io.netty.bootstrap.AbstractBootstrap#initAndRegister</span></span><br><span class="line">    <span class="comment">//开始register</span></span><br><span class="line">   <span class="comment">// parentGroup 绑定 channel  -&gt;  NioServerSocketChannel</span></span><br><span class="line">        ChannelFuture regFuture = config().group().register(channel);</span><br><span class="line">        <span class="keyword">if</span> (regFuture.cause() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (channel.isRegistered()) &#123;</span><br><span class="line">                channel.close();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                channel.unsafe().closeForcibly();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//io.netty.bootstrap.ServerBootstrap.ServerBootstrapAcceptor#channelRead</span></span><br><span class="line"><span class="comment">// msg -&gt; NioSocketChannel</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> Channel child = (Channel) msg;</span><br><span class="line"></span><br><span class="line">            child.pipeline().addLast(childHandler);</span><br><span class="line"></span><br><span class="line">            setChannelOptions(child, childOptions, logger);</span><br><span class="line">            setAttributes(child, childAttrs);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// childGroup 绑定 channel  -&gt;  NioSocketChannel</span></span><br><span class="line">                childGroup.register(child).addListener(<span class="keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationComplete</span><span class="params">(ChannelFuture future)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (!future.isSuccess()) &#123;</span><br><span class="line">                            forceClose(child, future.cause());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                forceClose(child, t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h4 id="为什么说Netty的main-reactor-大多并不能用到一个线程组，只能线程组里面的一个？"><a href="#为什么说Netty的main-reactor-大多并不能用到一个线程组，只能线程组里面的一个？" class="headerlink" title="为什么说Netty的main reactor 大多并不能用到一个线程组，只能线程组里面的一个？"></a>为什么说Netty的main reactor 大多并不能用到一个线程组，只能线程组里面的一个？</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定地址和端口</span></span><br><span class="line">io.netty.bootstrap.AbstractBootstrap#doBind </span><br><span class="line">   |</span><br><span class="line">   v</span><br><span class="line"><span class="comment">// parentGroup 绑定 channel  -&gt;  NioServerSocketChannel</span></span><br><span class="line">io.netty.bootstrap.AbstractBootstrap#initAndRegister</span><br></pre></td></tr></table></figure><p>因为服务一般只绑定一个端口，<code>doBind</code>只会调用一次，所以<code>initAndRegister</code>只调用一次</p><h4 id="Netty给Channel-分配NIO-event-loop-的规则是什么？"><a href="#Netty给Channel-分配NIO-event-loop-的规则是什么？" class="headerlink" title="Netty给Channel 分配NIO event loop 的规则是什么？"></a>Netty给Channel 分配NIO event loop 的规则是什么？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NioEventLoopGroup 继承 MultithreadEventLoopGroup</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//io.netty.channel.MultithreadEventLoopGroup#register(io.netty.channel.Channel)</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(Channel channel)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// next()方法根据下面的选择器中next方法选择一个NioEventLoop，将channel绑定到上面</span></span><br><span class="line">    <span class="keyword">return</span> next().register(channel);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// executors -&gt; NioEventLoop[]</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EventExecutorChooser <span class="title">newChooser</span><span class="params">(EventExecutor[] executors)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//根据待绑定的executor是否是2的幂次方，做出不同的选择</span></span><br><span class="line">    <span class="keyword">if</span> (isPowerOfTwo(executors.length)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PowerOfTwoEventExecutorChooser(executors);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GenericEventExecutorChooser(executors);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="通用模式的NIO-实现多路复用器是怎么跨平台的？"><a href="#通用模式的NIO-实现多路复用器是怎么跨平台的？" class="headerlink" title="通用模式的NIO 实现多路复用器是怎么跨平台的？"></a>通用模式的NIO 实现多路复用器是怎么跨平台的？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SelectorProvider.provider 不同的JDK有不同的实现 </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NioEventLoopGroup</span><span class="params">(<span class="keyword">int</span> nThreads, ThreadFactory threadFactory)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>(nThreads, threadFactory, SelectorProvider.provider());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">Netty基础</summary>
+    
+    
+    
+    <category term="Netty" scheme="http://universeinheart.github.io/categories/Netty/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+    <category term="Netty" scheme="http://universeinheart.github.io/tags/Netty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>09、Redis 切片集群</title>
+    <link href="http://universeinheart.github.io/2021/04/16/Redis/09/"/>
+    <id>http://universeinheart.github.io/2021/04/16/Redis/09/</id>
+    <published>2021-04-16T14:00:00.000Z</published>
+    <updated>2021-04-16T14:49:06.307Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用 <code>RDB</code> 进行持久化时，Redis 会  <code>fork</code> 子进程来完成，<code>fork</code> 操作的用时和 Redis 的数据量是 <strong>正相关</strong> 的，而 fork 在执行时会阻塞主线程。数据量越大，<code>fork</code>  操作造成的主线程阻塞的时间越长。所以，在使用 RDB 对 25GB 的数据进行持久化时，数据量较大，后台运行的子进程在 fork  创建时阻塞了主线程，于是就导致 Redis 响应变慢了。</p><p>切片集群，也叫分片集群，就是指启动多个  Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。 在切片集群中，实例在为 5GB 数据生成 RDB 时，数据量就小了很多，fork 子进程一般不会给主线程带来较长时间的阻塞。采用多个实例保存数据切片后，我们既能保存 25GB 数据，又避免了 fork 子进程阻塞主线程而导致的响应突然变慢。</p><h2 id="数据切片和实例的对应分布关系"><a href="#数据切片和实例的对应分布关系" class="headerlink" title="数据切片和实例的对应分布关系"></a>数据切片和实例的对应分布关系</h2><p><code>Redis Cluster</code> 方案中就规定了数据和实例的对应规则。</p><p><code>Redis Cluster</code>  方案采用哈希槽（<code>Hash Slot</code>，接下来我会直接称之为 <code>Slot</code>），来处理数据和实例之间的映射关系。在 <code>Redis Cluster</code>  方案中，一个切片集群共有 <code>16384</code> 个哈希槽，这些哈希槽类似于数据分区，每个键值对都会根据它的 key，被映射到一个哈希槽中。</p><p>首先根据键值对的 key，按照 <code>CRC16</code> 算法计算一个 16 bit 的值；然后，再用这个 16bit 值对 <code>16384</code> 取模，得到 0~16383 范围内的模数，每个模数代表一个相应编号的哈希槽</p><p>在部署 <code>Redis Cluster</code> 方案时，可以使用 <code>cluster create</code> 命令创建集群，此时，Redis 会自动把这些槽平均分布在集群实例上。例如，如果集群中有 N 个实例，那么，每个实例上的槽个数为 16384/N 个。我们也可以使用 <code>cluster meet</code> 命令手动建立实例间的连接，形成集群，再使用 <code>cluster addslots</code> 命令，指定每个实例上的哈希槽个数。<strong>在手动分配哈希槽时，需要把 16384 个槽都分配完，否则 Redis 集群无法正常工作。</strong></p><h2 id="客户端如何定位数据？"><a href="#客户端如何定位数据？" class="headerlink" title="客户端如何定位数据？"></a>客户端如何定位数据？</h2><blockquote><p>客户端为什么可以在访问任何一个实例时，都能获得所有的哈希槽信息呢？</p><p>这是因为，Redis 实例会把自己的哈希槽信息发给和它相连接的其它实例，来完成哈希槽分配信息的扩散。当实例之间相互连接后，每个实例就有所有哈希槽的映射关系了。</p><p>客户端收到哈希槽信息后，会把哈希槽信息缓存在本地。当客户端请求键值对时，会先计算键所对应的哈希槽，然后就可以给相应的实例发送请求了。</p></blockquote><p>实例和哈希槽的对应关系变更：</p><p>1、在集群中，实例有新增或删除，Redis 需要重新分配哈希槽。</p><p>2、为了负载均衡，Redis 需要把哈希槽在所有实例上重新分布一遍。</p><blockquote><p>客户端是无法主动感知最新的哈希槽分配信息，怎么办？</p><p>答：Redis Cluster 方案提供了一种重定向机制，当客户端把一个键值对的操作请求发给一个实例时，如果这个实例上并没有这个键值对映射的哈希槽，那么，这个实例就会给客户端返回下面的 <code>MOVED</code> 命令响应结果，这个结果中就包含了新实例的访问地址。</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; MOVED 命令表示，客户端请求的键值对所在的哈希槽 13320，实际是在 172.16.19.5 这个实例上</span><br><span class="line">GET hello:key</span><br><span class="line">(error) MOVED 13320 172.16.19.5:6379</span><br></pre></td></tr></table></figure><img src="/2021/04/16/Redis/09/image-20210119151846324.png" class="" title="image-20210119151846324">]]></content>
+    
+    
+    <summary type="html">数据增多了，是该加内存还是加实例？</summary>
+    
+    
+    
+    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
+    
+    
+    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>11、Redis String 为什么不好用了？</title>
+    <link href="http://universeinheart.github.io/2021/04/16/Redis/10/"/>
+    <id>http://universeinheart.github.io/2021/04/16/Redis/10/</id>
+    <published>2021-04-16T14:00:00.000Z</published>
+    <updated>2021-04-16T14:53:52.340Z</updated>
+    
+    <content type="html"><![CDATA[<p>String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 <strong>保存数据时所消耗的内存空间较多</strong></p><p>使用 <strong>二级编码</strong>，实现 <strong>用集合类型保存单键值对</strong>，可以明显降低Redis实例的内存空间消耗</p><h3 id="String-类型的内存空间消耗在哪儿了"><a href="#String-类型的内存空间消耗在哪儿了" class="headerlink" title="String 类型的内存空间消耗在哪儿了?"></a>String 类型的内存空间消耗在哪儿了?</h3><p>除了记录实际数据，String 类型还需要额外的内存空间记录数据长度、空间使用等元数据信息</p><blockquote><p>String 类型具体是怎么保存数据的呢？</p><p>保存 64 位有符号整数时，String 类型会把它保存为一个 8 字节的 Long 类型整数，这种保存方式通常也叫作 int 编码方式。</p><p>保存的数据中包含字符时，String 类型就会用简单动态字符串（Simple Dynamic String，SDS）结构体来保存,在 <code>SDS</code> 中，<code>buf</code> 保存实际数据，而 <code>len</code> 和 <code>alloc</code> 本身其实是 <code>SDS</code> 结构体的额外开销。</p><ul><li><code>buf</code>：字节数组，保存实际数据。为了表示字节数组的结束，Redis 会自动在数组最后加一个“\0”，这就会额外占用 1 个字节的开销。</li><li><code>len</code>：占 4 个字节，表示 buf 的已用长度。</li><li><code>alloc</code>：也占个 4  字节，表示 buf 的实际分配长度，一般大于 len。</li></ul></blockquote><p>RedisObject </p><p>全局哈希表</p><p>jemalloc </p><h3 id="用什么数据结构可以节省内存"><a href="#用什么数据结构可以节省内存" class="headerlink" title="用什么数据结构可以节省内存?"></a>用什么数据结构可以节省内存?</h3><p><strong>压缩列表（ziplist）</strong>，这是一种非常节省内存的结构，压缩列表表头有三个字段 <code>zlbytes</code>、<code>zltail</code> 和 <code>zllen</code>，分别表示 <strong>列表长度</strong>、<strong>列表尾的偏移量</strong>，以及 <strong>列表中的 entry 个数</strong>。压缩列表尾还有一个 <code>zlend</code>，表示列表结束。</p><p>压缩列表之所以能节省内存，就在于它是用一系列 <strong>连续的 entry 保存数据</strong>。</p><p>每个 entry 的元数据包括下面几部分。</p><ul><li><code>prev_len</code>，表示前一个 entry  的长度。prev_len 有两种取值情况：1 字节或 5 字节。取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1  字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255  表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len  取值为 1 字节，否则，就取值为 5 字节。</li><li><code>len</code>：表示自身长度，4 字节；</li><li><code>encoding</code>：表示编码方式，1  字节；</li><li><code>content</code>：保存实际数据。</li></ul><h3 id="如何用集合类型保存单值键值对"><a href="#如何用集合类型保存单值键值对" class="headerlink" title="如何用集合类型保存单值键值对?"></a>如何用集合类型保存单值键值对?</h3><p>采用基于 Hash 类型的二级编码方法。就是把一个单值的数据拆分成两部分，前一部分作为 Hash 集合的 key，后一部分作为 Hash 集合的 value，这样一来，我们就可以把单值数据保存到 Hash 集合中了。</p><p>以图片 ID 1101000060  和图片存储对象 ID 3302000080 为例，我们可以把图片 ID 的前 7 位（1101000）作为 <strong>Hash 类型的键</strong>，把图片 ID  的最后 3 位（060）和图片存储对象 ID 分别作为 <strong>Hash 类型值中的 key 和 value</strong>。按照这种设计方法，我在 Redis  中插入了一组图片 ID 及其存储对象 ID 的记录，并且用 info 命令查看了内存开销，我发现，增加一条记录后，内存占用只增加了 16  字节，如下所示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039120</span><br><span class="line">127.0.0.1:6379&gt; hset 1101000 060 3302000080</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039136</span><br></pre></td></tr></table></figure><h3 id="Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"><a href="#Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？" class="headerlink" title="Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"></a>Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？</h3><p>Hash  类型设置了用压缩列表保存数据时的两个阈值，一旦超过了阈值，Hash  类型就会用哈希表来保存数据了。</p><p>这两个阈值分别对应以下两个配置项：</p><p><code>hash-max-ziplist-entries</code>：表示用压缩列表保存时哈希集合中的 <strong>最大元素个数</strong>。</p><p><code>hash-max-ziplist-value</code>：表示用压缩列表保存时哈希集合中 <strong>单个元素的最大长度</strong>。</p><p>如果我们往 Hash 集合中写入的元素个数超过了 <code>hash-max-ziplist-entries</code>，或者写入的单个元素大小超过了 <code>hash-max-ziplist-value</code>，Redis  就会自动把 Hash 类型的实现结构由 <strong>压缩列表转为哈希表</strong>。一旦从压缩列表转为了哈希表，Hash  类型就会一直用哈希表进行保存，而不会再转回压缩列表了。在节省内存空间方面，哈希表就没有压缩列表那么高效了。</p><p>为了能充分使用压缩列表的精简内存布局，我们一般要 <strong>控制保存在 Hash 集合中的元素个数</strong>。所以，在刚才的二级编码中，我们只用图片 ID 最后 3 位作为 Hash 集合的 key，也就保证了 Hash  集合的元素个数不超过 1000，同时，我们把 hash-max-ziplist-entries 设置为 1000，这样一来，Hash  集合就可以一直使用压缩列表来节省内存空间了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 &lt;strong&gt;保存数据时所消耗的内存空间较多&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用 &lt;strong&gt;二级编码&lt;/strong&gt;，实现 &lt;strong&gt;用集合类型保存单键值对&lt;/strong&gt;，可以明显降</summary>
+      
+    
+    
+    
+    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
+    
+    
+    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>11、Redis String 为什么不好用了？</title>
+    <link href="http://universeinheart.github.io/2021/04/16/Redis/11/"/>
+    <id>http://universeinheart.github.io/2021/04/16/Redis/11/</id>
+    <published>2021-04-16T14:00:00.000Z</published>
+    <updated>2021-04-16T15:16:33.554Z</updated>
+    
+    <content type="html"><![CDATA[<p>String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 <strong>保存数据时所消耗的内存空间较多</strong></p><p>使用 <strong>二级编码</strong>，实现 <strong>用集合类型保存单键值对</strong>，可以明显降低Redis实例的内存空间消耗</p><h3 id="String-类型的内存空间消耗在哪儿了"><a href="#String-类型的内存空间消耗在哪儿了" class="headerlink" title="String 类型的内存空间消耗在哪儿了?"></a>String 类型的内存空间消耗在哪儿了?</h3><p>除了记录实际数据，String 类型还需要额外的内存空间记录数据长度、空间使用等元数据信息</p><blockquote><p>String 类型具体是怎么保存数据的呢？</p><p>保存 64 位有符号整数时，String 类型会把它保存为一个 8 字节的 Long 类型整数，这种保存方式通常也叫作 int 编码方式。</p><p>保存的数据中包含字符时，String 类型就会用简单动态字符串（Simple Dynamic String，SDS）结构体来保存,在 <code>SDS</code> 中，<code>buf</code> 保存实际数据，而 <code>len</code> 和 <code>alloc</code> 本身其实是 <code>SDS</code> 结构体的额外开销。</p><ul><li><code>buf</code>：字节数组，保存实际数据。为了表示字节数组的结束，Redis 会自动在数组最后加一个“\0”，这就会额外占用 1 个字节的开销。</li><li><code>len</code>：占 4 个字节，表示 buf 的已用长度。</li><li><code>alloc</code>：也占个 4  字节，表示 buf 的实际分配长度，一般大于 len。</li></ul></blockquote><p>RedisObject </p><p>全局哈希表</p><p>jemalloc </p><h3 id="用什么数据结构可以节省内存"><a href="#用什么数据结构可以节省内存" class="headerlink" title="用什么数据结构可以节省内存?"></a>用什么数据结构可以节省内存?</h3><p><strong>压缩列表（ziplist）</strong>，这是一种非常节省内存的结构，压缩列表表头有三个字段 <code>zlbytes</code>、<code>zltail</code> 和 <code>zllen</code>，分别表示 <strong>列表长度</strong>、<strong>列表尾的偏移量</strong>，以及 <strong>列表中的 entry 个数</strong>。压缩列表尾还有一个 <code>zlend</code>，表示列表结束。</p><img src="/2021/04/16/Redis/11/image-20210119201052779.png" class="" title="image-20210119201052779"><p>压缩列表之所以能节省内存，就在于它是用一系列 <strong>连续的 entry 保存数据</strong>。</p><p>每个 entry 的元数据包括下面几部分。</p><ul><li><code>prev_len</code>，表示前一个 entry  的长度。prev_len 有两种取值情况：1 字节或 5 字节。取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1  字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255  表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len  取值为 1 字节，否则，就取值为 5 字节。</li><li><code>len</code>：表示自身长度，4 字节；</li><li><code>encoding</code>：表示编码方式，1  字节；</li><li><code>content</code>：保存实际数据。</li></ul><h3 id="如何用集合类型保存单值键值对"><a href="#如何用集合类型保存单值键值对" class="headerlink" title="如何用集合类型保存单值键值对?"></a>如何用集合类型保存单值键值对?</h3><p>采用基于 Hash 类型的二级编码方法。就是把一个单值的数据拆分成两部分，前一部分作为 Hash 集合的 key，后一部分作为 Hash 集合的 value，这样一来，我们就可以把单值数据保存到 Hash 集合中了。</p><p>以图片 ID 1101000060  和图片存储对象 ID 3302000080 为例，我们可以把图片 ID 的前 7 位（1101000）作为 <strong>Hash 类型的键</strong>，把图片 ID  的最后 3 位（060）和图片存储对象 ID 分别作为 <strong>Hash 类型值中的 key 和 value</strong>。按照这种设计方法，我在 Redis  中插入了一组图片 ID 及其存储对象 ID 的记录，并且用 info 命令查看了内存开销，我发现，增加一条记录后，内存占用只增加了 16  字节，如下所示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039120</span><br><span class="line">127.0.0.1:6379&gt; hset 1101000 060 3302000080</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039136</span><br></pre></td></tr></table></figure><h3 id="Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"><a href="#Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？" class="headerlink" title="Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"></a>Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？</h3><p>Hash  类型设置了用压缩列表保存数据时的两个阈值，一旦超过了阈值，Hash  类型就会用哈希表来保存数据了。</p><p>这两个阈值分别对应以下两个配置项：</p><p><code>hash-max-ziplist-entries</code>：表示用压缩列表保存时哈希集合中的 <strong>最大元素个数</strong>。</p><p><code>hash-max-ziplist-value</code>：表示用压缩列表保存时哈希集合中 <strong>单个元素的最大长度</strong>。</p><p>如果我们往 Hash 集合中写入的元素个数超过了 <code>hash-max-ziplist-entries</code>，或者写入的单个元素大小超过了 <code>hash-max-ziplist-value</code>，Redis  就会自动把 Hash 类型的实现结构由 <strong>压缩列表转为哈希表</strong>。一旦从压缩列表转为了哈希表，Hash  类型就会一直用哈希表进行保存，而不会再转回压缩列表了。在节省内存空间方面，哈希表就没有压缩列表那么高效了。</p><p>为了能充分使用压缩列表的精简内存布局，我们一般要 <strong>控制保存在 Hash 集合中的元素个数</strong>。所以，在刚才的二级编码中，我们只用图片 ID 最后 3 位作为 Hash 集合的 key，也就保证了 Hash  集合的元素个数不超过 1000，同时，我们把 hash-max-ziplist-entries 设置为 1000，这样一来，Hash  集合就可以一直使用压缩列表来节省内存空间了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 &lt;strong&gt;保存数据时所消耗的内存空间较多&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用 &lt;strong&gt;二级编码&lt;/strong&gt;，实现 &lt;strong&gt;用集合类型保存单键值对&lt;/strong&gt;，可以明显降</summary>
+      
+    
+    
+    
+    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
+    
+    
+    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
     <title>08、Redis 哨兵集群</title>
     <link href="http://universeinheart.github.io/2021/04/15/Redis/08/"/>
     <id>http://universeinheart.github.io/2021/04/15/Redis/08/</id>
     <published>2021-04-15T00:00:00.000Z</published>
-    <updated>2021-04-15T00:38:46.122Z</updated>
+    <updated>2021-04-16T15:17:21.400Z</updated>
     
     <content type="html"><![CDATA[<h2 id="基于-pub-sub-机制的哨兵集群组成"><a href="#基于-pub-sub-机制的哨兵集群组成" class="headerlink" title="基于 pub/sub 机制的哨兵集群组成"></a>基于 pub/sub 机制的哨兵集群组成</h2><p>哨兵实例之间可以相互发现，要归功于 <strong>Redis 提供的 pub/sub 机制</strong>，也就是 <strong>发布 / 订阅机制</strong></p><p>哨兵只要和主库建立起了连接，就可以在主库上发布消息了，比如说发布它自己的<strong>连接信息</strong>（IP 和端口）。同时，它也可以从主库上订阅消息，获得<strong>其他哨兵发布的连接信息</strong>。当多个哨兵实例都在主库上做了发布和订阅操作后，它们之间就能知道彼此的 IP 地址和端口。</p><p>为了区分不同应用的消息，Redis 会以<strong>频道</strong>的形式，对这些消息进行分门别类的管理。只有订阅了同一个频道的应用，才能通过发布的消息进行信息交换。</p><blockquote><p>在主从集群中，主库上有一个名为**_ _ sentinel _ _:hello**的频道，不同哨兵就是通过它来相互发现，实现互相通信的。</p></blockquote><img src="/2021/04/15/Redis/08/image-20210116154316161.png" class="" title="image-20210116154316161"><h2 id="基于-pub-sub-机制的客户端事件通知"><a href="#基于-pub-sub-机制的客户端事件通知" class="headerlink" title="基于 pub/sub 机制的客户端事件通知"></a>基于 pub/sub 机制的客户端事件通知</h2><p>客户端可以从哨兵订阅消息。哨兵提供的消息订阅频道有很多，不同频道包含了主从库切换过程中的不同关键事件。</p><img src="/2021/04/15/Redis/08/image-20210116154651991.png" class="" title="image-20210116154651991"><p>客户端读取哨兵的配置文件后，可以获得哨兵的地址和端口，和哨兵建立网络连接。然后，我们可以在客户端执行 <strong>订阅命令</strong>，来获取不同的事件消息。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;订阅“所有实例进入客观下线状态的事件”</span><br><span class="line">SUBSCRIBE +odown</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;订阅所有的事件</span><br><span class="line">PSUBSCRIBE  *</span><br></pre></td></tr></table></figure><p>当哨兵把新主库选择出来后，客户端就会看到下面的 <code>switch-master</code> 事件。这个事件表示主库已经切换了，新主库的 IP 地址和端口信息已经有了。这个时候，客户端就可以用这里面的新主库地址和端口进行通信了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">switch-master &lt;master name&gt; &lt;oldip&gt; &lt;oldport&gt; &lt;newip&gt; &lt;newport&gt;</span><br></pre></td></tr></table></figure><p>有了这些事件通知，客户端不仅可以在主从切换后得到新主库的连接信息，还可以监控到主从库切换过程中发生的各个重要事件。这样，客户端就可以知道主从切换进行到哪一步了，有助于了解切换进度。</p><h2 id="由哪个哨兵执行主从切换？"><a href="#由哪个哨兵执行主从切换？" class="headerlink" title="由哪个哨兵执行主从切换？"></a>由哪个哨兵执行主从切换？</h2><h3 id="投票下线"><a href="#投票下线" class="headerlink" title="投票下线"></a>投票下线</h3><p>任何一个实例只要自身判断主库“主观下线”后，就会给其他实例发送 <code>is-master-down-by-addr</code> 命令。接着，其他实例会根据自己和主库的连接情况，做出 Y 或 N 的响应，Y 相当于赞成票，N 相当于反对票。</p><img src="/2021/04/15/Redis/08/image-20210116155725926.png" class="" title="image-20210116155725926"><p>一个哨兵获得了仲裁所需的赞成票数后，就可以标记主库为“客观下线”。这个所需的赞成票数是通过哨兵配置文件中的 <code>quorum</code> 配置项设定的。例如，现在有 5 个哨兵，<code>quorum</code> 配置的是 3，那么，一个哨兵需要 3  张赞成票，就可以标记主库为“客观下线”了。这 3 张赞成票包括哨兵自己的一张赞成票和另外两个哨兵的赞成票。</p><h3 id="投票确认Leader"><a href="#投票确认Leader" class="headerlink" title="投票确认Leader"></a>投票确认Leader</h3><p>这个哨兵就可以再给其他哨兵发送命令，表明希望由自己来执行主从切换，并让所有其他哨兵进行投票。这个投票过程称为“<strong>Leader 选举</strong>”。因为最终执行主从切换的哨兵称为 Leader，投票过程就是确定 Leader。</p><p>任何一个想成为 Leader  的哨兵，要满足两个条件：第一，拿到半数以上的赞成票；第二，拿到的票数同时还需要大于等于哨兵配置文件中的 quorum 值。以 3  个哨兵为例，假设此时的 quorum 设置为 2，那么，任何一个想成为 Leader 的哨兵只要拿到 2 张赞成票，就可以了。</p><img src="/2021/04/15/Redis/08/image-20210116160103639.png" class="" title="image-20210116160103639"><p>如果 S3 没有拿到 2 票  Y，那么这轮投票就不会产生 Leader。哨兵集群会等待一段时间（也就是哨兵故障转移超时时间的 2  倍），再重新选举。这是因为，哨兵集群能够进行成功投票，很大程度上依赖于选举命令的正常<strong>网络传播</strong>。如果网络压力较大或有短时堵塞，就可能导致没有一个哨兵能拿到半数以上的赞成票。所以，等到网络拥塞好转之后，再进行投票选举，成功的概率就会增加。</p><p>需要注意的是，如果哨兵集群只有 2 个实例，此时，一个哨兵要想成为 Leader，必须获得 2 票，而不是 1  票。所以，如果有个哨兵挂掉了，那么，此时的集群是无法进行主从库切换的。因此，通常我们<strong>至少会配置 3  个哨兵实例</strong>。这一点很重要，你在实际应用时可不能忽略了。</p>]]></content>
     
@@ -80,63 +174,16 @@
   </entry>
   
   <entry>
-    <title>06、Redis</title>
-    <link href="http://universeinheart.github.io/2021/04/14/Redis/09/"/>
-    <id>http://universeinheart.github.io/2021/04/14/Redis/09/</id>
-    <published>2021-04-13T16:00:00.000Z</published>
-    <updated>2021-04-14T00:31:40.759Z</updated>
-    
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06、Redis</title>
-    <link href="http://universeinheart.github.io/2021/04/14/Redis/10/"/>
-    <id>http://universeinheart.github.io/2021/04/14/Redis/10/</id>
-    <published>2021-04-13T16:00:00.000Z</published>
-    <updated>2021-04-14T00:31:43.128Z</updated>
-    
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06、Redis</title>
-    <link href="http://universeinheart.github.io/2021/04/14/Redis/11/"/>
-    <id>http://universeinheart.github.io/2021/04/14/Redis/11/</id>
-    <published>2021-04-13T16:00:00.000Z</published>
-    <updated>2021-04-14T00:31:45.901Z</updated>
-    
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06、Redis</title>
+    <title>12、Redis 统计集合</title>
     <link href="http://universeinheart.github.io/2021/04/14/Redis/12/"/>
     <id>http://universeinheart.github.io/2021/04/14/Redis/12/</id>
     <published>2021-04-13T16:00:00.000Z</published>
-    <updated>2021-04-14T00:31:49.383Z</updated>
+    <updated>2021-04-16T15:15:53.667Z</updated>
     
+    <content type="html"><![CDATA[<h2 id="聚合统计"><a href="#聚合统计" class="headerlink" title="聚合统计"></a>聚合统计</h2><p>所谓的聚合统计，就是指 <strong>统计多个集合元素的聚合结果</strong>，包括：<strong>交集统计</strong>，<strong>差集统计</strong>，<strong>并集统计</strong></p><blockquote><p>统计手机 App 每天的<strong>新增用户数</strong>和第二天的<strong>留存用户数</strong>，正好对应了聚合统计。</p><p>用一个集合记录所有登录过 App 的用户 ID，直接使用 <strong>Set 类型</strong>，把 key 设置为 <code>user:id</code>，<strong>表示记录的是用户 ID</strong>，value 就是一个 <strong>Set 集合</strong>，里面是所有登录过 App 的用户 ID，我们可以把这个 Set 叫作<strong>累计用户 Set</strong></p><p>用另一个集合记录每一天登录过 App 的用户 ID，key 是 user:id 以及当天日期，例如 user：id:20200803，叫做<strong>每日用户 Set</strong></p><p><strong>在统计每天的新增用户时，我们只用计算每日用户 Set 和累计用户 Set 的差集就行。</strong></p></blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并集，将每日用户合并到累计用户Set</span></span><br><span class="line">SUNIONSTORE  user:id  user:id  user:id:<span class="number">20200803</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">// 差集，0804新增用户</span></span><br><span class="line">SDIFFSTORE  user:<span class="keyword">new</span>  user:id:<span class="number">20200804</span> user:id  </span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集，0804留存用户</span></span><br><span class="line">SINTERSTORE user:id:rem user:id:<span class="number">20200803</span> user:id:<span class="number">20200804</span></span><br></pre></td></tr></table></figure><p>Set  的差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致 Redis  实例阻塞。所以，我给你分享一个小建议：<strong>你可以从主从集群中选择一个从库，让它专门负责聚合计算，或者是把数据读取到客户端，在客户端来完成聚合统计</strong>，这样就可以规避阻塞主库实例和其他从库实例的风险了。</p><h2 id="排序统计"><a href="#排序统计" class="headerlink" title="排序统计"></a>排序统计</h2><p><code>Sorted Set</code>  根据元素的实际权重来排序和获取数据的。</p><p><code>Sorted Set</code> 的 <code>ZRANGEBYSCORE</code>  命令就可以按权重排序后返回元素。即使集合中的元素频繁更新，<code>Sorted Set</code> 也能通过 <code>ZRANGEBYSCORE</code>  命令准确地获取到按序排列的数据</p><p>假设越新的评论权重越大，目前最新评论的权重是 N，我们执行下面的命令时，就可以获得最新的 10 条评论：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RANGEBYSCORE comments N-9 N</span><br></pre></td></tr></table></figure><p>所以，在面对需要展示最新列表、排行榜等场景时，如果<strong>数据更新频繁</strong>或者<strong>需要分页显示</strong>，建议你<strong>优先考虑使用 Sorted Set</strong></p><h2 id="二值状态统计"><a href="#二值状态统计" class="headerlink" title="二值状态统计"></a>二值状态统计</h2><p>二值状态就是指集合元素的取值就 <strong>只有 0 和 1 两种</strong>。在签到打卡的场景中，我们只用记录签到（1）或未签到（0），所以它就是非常典型的二值状态</p><p><code>Bitmap</code> 是用 String 类型作为底层数据结构实现的一种统计二值状态的数据类型。String 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit 位利用起来，用来表示一个元素的二值状态。<strong>可以把 <code>Bitmap</code> 看作是一个 bit 数组</strong></p><p><code>Bitmap</code> 提供了 <code>GETBIT/SETBIT</code> 操作，使用一个偏移值 <code>offset</code> 对 bit 数组的某一个 bit 位进行读和写。不过，需要注意的是，Bitmap 的偏移量是从 0  开始算的，也就是说 offset 的最小值是 0。当使用 <code>SETBIT</code> 对一个 bit 位进行写操作时，这个 bit 位会被设置为  1。Bitmap 还提供了 <code>BITCOUNT</code> 操作，用来统计这个 bit 数组中所有“1”的个数。</p><blockquote><p><strong>怎么用 <code>Bitmap</code> 进行签到统计呢？</strong></p><p>假设我们要统计 ID 3000 的用户在 2020 年 8 月份的签到情况，就可以按照下面的步骤进行操作。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一步，执行下面的命令，记录该用户 8 月 3 号已签到。</span></span><br><span class="line">SETBIT uid:sign:<span class="number">3000</span>:<span class="number">202008</span> <span class="number">2</span> <span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//第二步，检查该用户 8 月 3 日是否签到</span></span><br><span class="line">GETBIT uid:sign:<span class="number">3000</span>:<span class="number">202008</span> <span class="number">2</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">//第三步，统计该用户在 8 月份的签到次数。</span></span><br><span class="line">BITCOUNT uid:sign:<span class="number">3000</span>:<span class="number">202008</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></blockquote><blockquote><p><strong>如果记录了 1 亿个用户 10 天的签到情况，你有办法统计出这 10 天连续签到的用户总数吗？</strong></p><p><code>Bitmap</code> 支持用 <code>BITOP</code> 命令对多个 <code>Bitmap</code> 按位做“与”“或”“异或”的操作，操作的结果会保存到一个新的 <code>Bitmap</code> 中。</p><p>在统计 1 亿个用户连续 10  天的签到情况时，可以把每天的日期作为 key，每个 key 对应一个 1 亿位的 Bitmap，每一个 bit  对应一个用户当天的签到情况。</p><p>接下来，我们对 10 个 Bitmap 做“与”操作，得到的结果也是一个 Bitmap。在这个 Bitmap  中，只有 10 天都签到的用户对应的 bit 位上的值才会是 1。</p><p>最后，我们可以用 BITCOUNT 统计下 Bitmap 中的 1  的个数，这就是连续签到 10 天的用户总数了。</p><p>现在，我们可以计算一下记录了 10 天签到情况后的内存开销。每天使用 1 个 1 亿位的  Bitmap，大约占 12MB 的内存（10^8/8/1024/1024），10 天的 Bitmap 的内存开销约为  120MB，内存压力不算太大。不过，在实际应用时，最好对 Bitmap 设置过期时间，让 Redis  自动删除不再需要的签到记录，以节省内存开销。</p></blockquote><h2 id="基数统计"><a href="#基数统计" class="headerlink" title="基数统计"></a>基数统计</h2><p>基数统计就是指 统计一个集合中<strong>不重复的元素个数</strong>。</p><p>网页 UV 的统计有个独特的地方，就是需要<strong>去重</strong>，一个用户一天内的多次访问只能算作一次。在 Redis 的集合类型中，<strong>Set 类型</strong>默认支持去重，所以看到有去重需求时，我们可能第一时间就会想到用 Set 类型。如果 page 非常火爆，UV 达到了千万，这个时候，一个 Set 就要记录千万个用户 ID。对于一个搞大促的电商网站而言，这样的页面可能有成千上万个，如果每个页面都用这样的一个 Set，就会消耗很大的内存空间。</p><p><code>HyperLogLog</code> 是一种用于统计基数的数据集合类型，它的最大优势就在于，<strong>当集合元素数量非常多时，它计算基数所需的空间总是固定的，而且还很小</strong></p><p>在 Redis 中，每个 <code>HyperLogLog</code> 只需要花费 12 KB 内存，就可以计算接近 2^64 个元素的基数。和元素越多就越耗费内存的 Set 和 Hash 类型相比，<code>HyperLogLog</code> 就非常节省空间。</p><p><code>HyperLogLog</code>  的统计规则是基于概率完成的，所以它给出的统计结果是有一定误差的，标准误算率是 0.81%。这也就意味着，你使用 HyperLogLog 统计的  UV 是 100 万，但实际的 UV 可能是 101 万。虽然误差率不算大，但是，如果你需要精确统计结果的话，最好还是继续用 Set 或  Hash 类型。</p><img src="/2021/04/14/Redis/12/image-20210121212414231.png" class="" title="image-20210121212414231">]]></content>
+    
+    
+    <summary type="html">有一亿个keys要统计，应该用哪种集合？</summary>
     
     
     
@@ -152,7 +199,7 @@
     <link href="http://universeinheart.github.io/2021/04/14/Redis/13/"/>
     <id>http://universeinheart.github.io/2021/04/14/Redis/13/</id>
     <published>2021-04-13T16:00:00.000Z</published>
-    <updated>2021-04-14T00:31:55.967Z</updated>
+    <updated>2021-04-16T15:17:00.102Z</updated>
     
     
     
@@ -217,27 +264,6 @@
   </entry>
   
   <entry>
-    <title>如何快速阅读</title>
-    <link href="http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BB/"/>
-    <id>http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BB/</id>
-    <published>2021-04-13T15:26:37.000Z</published>
-    <updated>2021-04-13T15:40:18.174Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>1、专注</p><p>2、消除干扰</p><p>3、增加视野，在书每页的两侧画垂直线，减少阅读范围</p><p>4、消除回溯，手指</p><p>5、想象，身临其境，可视化</p><p>6、长时间阅读</p><p>7、休息</p><p>8、练习</p><p>9、摘要</p>]]></content>
-    
-    
-    <summary type="html">如何快速阅读</summary>
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>历史上的经济泡沫</title>
     <link href="http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E7%BB%8F%E6%B5%8E%E6%B3%A1%E6%B2%AB/"/>
     <id>http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E7%BB%8F%E6%B5%8E%E6%B3%A1%E6%B2%AB/</id>
@@ -251,6 +277,27 @@
       
     <summary type="html">&lt;h2 id=&quot;郁金香狂热&quot;&gt;&lt;a href=&quot;#郁金香狂热&quot; class=&quot;headerlink&quot; title=&quot;郁金香狂热&quot;&gt;&lt;/a&gt;郁金香狂热&lt;/h2&gt;&lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背</summary>
       
+    
+    
+    
+    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何快速阅读</title>
+    <link href="http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BB/"/>
+    <id>http://universeinheart.github.io/2021/04/13/%E5%B0%8F%E5%86%8C%E5%AD%90/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E9%98%85%E8%AF%BB/</id>
+    <published>2021-04-13T15:26:37.000Z</published>
+    <updated>2021-04-13T15:40:18.174Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>1、专注</p><p>2、消除干扰</p><p>3、增加视野，在书每页的两侧画垂直线，减少阅读范围</p><p>4、消除回溯，手指</p><p>5、想象，身临其境，可视化</p><p>6、长时间阅读</p><p>7、休息</p><p>8、练习</p><p>9、摘要</p>]]></content>
+    
+    
+    <summary type="html">如何快速阅读</summary>
     
     
     
@@ -407,27 +454,6 @@
     <category term="CAP" scheme="http://universeinheart.github.io/tags/CAP/"/>
     
     <category term="分布式" scheme="http://universeinheart.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>01、基础架构：一条SQL查询语句是如何执行的</title>
-    <link href="http://universeinheart.github.io/2021/04/04/MySQL/01/"/>
-    <id>http://universeinheart.github.io/2021/04/04/MySQL/01/</id>
-    <published>2021-04-04T14:13:56.000Z</published>
-    <updated>2021-04-04T16:59:07.988Z</updated>
-    
-    <content type="html"><![CDATA[<p>有个最简单的表，表里只有一个ID字段，在执行下面这个查询语句时：</p><p><code>mysql&gt; select * from T where ID=10；</code></p><p> MySQL的基本架构示意图，可以清楚地看到SQL语句在MySQL的各个功能模块中的执行过程。</p><img src="image-20210127222256017.png" alt="image-20210127222256017"  /><p>MySQL可以分为 <strong>Server层</strong> 和 <strong>存储引擎层</strong> 两部分。</p><ol><li>Server层包括 <strong>连接器</strong>、<strong>查询缓存</strong>、<strong>分析器</strong>、<strong>优化器</strong>、<strong>执行器</strong>等，涵盖MySQL的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），<strong>所有跨存储引擎的功能都在这一层实现</strong>，比如存储过程、触发器、视图等。</li><li><strong>存储引擎层负责数据的存储和提取</strong>。其架构模式是插件式的，支持<code>InnoDB</code>、MyISAM、Memory等多个存储引擎。现在最常用的存储引擎是 InnoDB，它从MySQL 5.5.5版本开始成为了默认存储引擎。不同的存储引擎共用一个<strong>Server层</strong>，也就是从连接器到执行器的部分。</li></ol><h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><p>第一步，你会先连接到这个数据库上，这时候接待你的就是连接器。连接器负责跟客户端<strong>建立连接</strong>、<strong>获取权限</strong>、<strong>维持和管理连接</strong>。</p><p>连接命令一般是这么写的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h$ip -P$port -u$user -p</span><br></pre></td></tr></table></figure><p>输完命令之后，你就需要在交互对话里面输入密码。虽然密码也可以直接跟在-p后面写在命令行中，但这样可能会导致你的密码泄露。如果你连的是生产服务器，强烈建议你不要这么做。</p><p>连接命令中的mysql是客户端工具，用来跟服务端建立连接。在完成经典的TCP握手后，连接器就要开始认证你的身份，这个时候用的就是你输入的用户名和密码。</p><ul><li>如果用户名或密码不对，你就会收到一个”Access denied for user”的错误，然后客户端程序结束执行。</li><li>如果用户名密码认证通过，<strong>连接器会到权限表里面查出你拥有的权限</strong>。之后，这个连接里面的权限判断逻辑，都将依赖于此时读到的权限。</li></ul><p>这就意味着，一个用户成功建立连接后，即使你用管理员账号对这个用户的权限做了修改，也不会影响已经存在连接的权限。修改完成后，<strong>只有再新建的连接才会使用新的权限设置</strong>。</p><p>连接完成后，如果你没有后续的动作，这个连接就处于空闲状态，你可以在 <code>show processlist</code> 命令中看到它。</p><p>文本中这个图是 <code>show pocesslist</code> 的结果，其中的<code>Command</code>列显示为“<strong>Sleep</strong>”的这一行，就表示现在系统里面有一个空闲连接。</p><img src="image-20210127222851964.png" alt="image-20210127222851964"  /><p>客户端如果太长时间没动静，连接器就会自动将它断开。这个时间是由参数 <strong>wait_timeout</strong> 控制的，默认值是8小时。</p><p>如果在连接被断开之后，客户端再次发送请求的话，就会收到一个错误提醒： <code>Lost connection to MySQL server during query</code>。这时候如果你要继续，就需要重连，然后再执行请求了。</p><p>数据库里面，<strong>长连接</strong>是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。<strong>短连接</strong>则是指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。建立连接的过程通常是比较复杂的，所以我建议你在使用中要尽量减少建立连接的动作，也就是<strong>尽量使用长连接</strong>。</p><p>但是全部使用长连接后，你可能会发现，有些时候MySQL占用内存涨得特别快，这是因为 <strong>MySQL在执行过程中临时使用的内存是管理在连接对象里面的</strong>。这些资源会在连接断开的时候才释放。所以如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM），从现象看就是MySQL异常重启了。</p><p>  怎么解决这个问题呢？你可以考虑以下两种方案。</p><ol><li><strong>定期断开长连接</strong>。使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连。</li><li>如果你用的是MySQL 5.7或更新版本，可以在每次执行一个比较大的操作后，通过执行 <code>mysql_reset_connection</code>来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态。</li></ol><h2 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h2><p>MySQL拿到一个查询请求后，会先到查询缓存看看，之前是不是执行过这条语句。之前执行过的语句及其结果可能会以key-value对的形式，被直接缓存在内存中。key是查询的语句，value是查询的结果。如果你的查询能够直接在这个缓存中找到key，那么这个value就会被直接返回给客户端。</p><p>如果语句不在查询缓存中，就会继续后面的执行阶段。执行完成后，执行结果会被存入查询缓存中。你可以看到，如果查询命中缓存，MySQL不需要执行后面的复杂操作，就可以直接返回结果，这个效率会很高。</p><p><strong>建议你不要使用查询缓存</strong>，为什么呢？<strong>因为查询缓存往往弊大于利。</strong>查询缓存的<strong>失效非常频繁</strong>，只要有对一个表的更新，这个表上所有的查询缓存都会被清空。因此很可能你费劲地把结果存起来，还没使用呢，就被一个更新全清空了。        </p><p>对于更新压力大的数据库来说，查询缓存的命中率会非常低。除非你的业务就是有一张静态表，很长时间才会更新一次。比如，一个系统配置表，那这张表上的查询才适合使用查询缓存。</p><p>MySQL 8.0版本直接将查询缓存的整块功能删掉了，也就是说8.0开始彻底没有这个功能了。</p><h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><p> <strong>词法分析</strong> : 你输入的是由多个字符串和空格组成的一条SQL语句，MySQL需要识别出里面的字符串分别是什么，代表什么。MySQL从你输入的”select”这个关键字识别出来，这是一个查询语句。它也要把字符串“T”识别成“表名T”，把字符串“ID”识别成“列ID”。</p><p> <strong>语法分析</strong>： 根据词法分析的结果，语法分析器会根据语法规则，判断你输入的这个SQL语句是否满足MySQL语法。如果你的语句不对，就会收到 <code>You have an error in your SQL syntax</code> 的错误提醒，比如下面这个语句select少打了开头的字母“s”。一般语法错误会提示第一个出现错误的位置，所以你要关注的是紧接“use near”的内容。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; elect * from t where ID&#x3D;1;</span><br><span class="line"></span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; </span><br><span class="line">check the manual that corresponds to your MySQL server version </span><br><span class="line">for the right syntax to use near &#39;elect * from t where ID&#x3D;1&#39; at line 1</span><br></pre></td></tr></table></figure><h2 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h2><p>经过了分析器，MySQL就知道你要做什么了。在开始执行之前，还要先经过优化器的处理。</p><p>优化器是在表里面有多个索引的时候，<strong>决定使用哪个索引</strong>；或者在一个语句有多表关联（join）的时候，<strong>决定各个表的连接顺序</strong>。</p><p>比如你执行下面这样的语句，这个语句是执行两个表的join：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">join</span> t2 <span class="keyword">using</span>(ID) <span class="keyword">where</span> t1.c<span class="operator">=</span><span class="number">10</span> <span class="keyword">and</span> t2.d<span class="operator">=</span><span class="number">20</span>;</span><br></pre></td></tr></table></figure><ul><li>既可以先从表t1里面取出c=10的记录的ID值，再根据ID值关联到表t2，再判断t2里面d的值是否等于20。</li><li>也可以先从表t2里面取出d=20的记录的ID值，再根据ID值关联到t1，再判断t1里面c的值是否等于10。</li></ul><p>这两种执行方法的逻辑结果是一样的，但是执行的效率会有不同，而优化器的作用就是决定选择使用哪一个方案。优化器阶段完成后，这个语句的执行方案就确定下来了，然后进入执行器阶段。</p><h2 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h2><p>开始执行的时候，要先判断一下你对这个表T有没有执行查询的<strong>权限</strong>，如果没有，就会返回没有权限的错误，如下所示</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> T <span class="keyword">where</span> ID<span class="operator">=</span><span class="number">10</span>; </span><br><span class="line">ERROR <span class="number">1142</span> (<span class="number">42000</span>): <span class="keyword">SELECT</span> command denied <span class="keyword">to</span> <span class="keyword">user</span> <span class="string">&#x27;b&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> <span class="keyword">for</span> <span class="keyword">table</span> <span class="string">&#x27;T&#x27;</span></span><br></pre></td></tr></table></figure><p>如果有权限，就打开表继续执行。打开表的时候，执行器就会根据表的引擎定义，去使用这个引擎提供的接口。</p><p>比如我们这个例子中的表T中，ID字段没有索引，那么执行器的执行流程是这样的：</p><ol><li>调用InnoDB引擎接口取这个表的第一行，判断ID值是不是10，如果不是则跳过，如果是则将这行存在结果集中；</li><li>调用引擎接口取“下一行”，重复相同的判断逻辑，直到取到这个表的最后一行。</li><li>执行器将上述遍历过程中所有满足条件的行组成的记录集作为结果集返回给客户端。</li></ol><p>对于有索引的表，执行的逻辑也差不多。第一次调用的是“<strong>取满足条件的第一行</strong>”这个接口，之后循环取“<strong>满足条件的下一行</strong>”这个接口，这些接口都是引擎中已经定义好的。</p><p>你会在数据库的慢查询日志中看到一个 <code>rows_examined</code> 的字段，表示这个语句执行过程中扫描了多少行。这个值就是在执行器每次调用引擎获取数据行的时候累加的。在有些场景下，执行器调用一次，在引擎内部则扫描了多行，因此<strong>引擎扫描行数跟rows_examined并不是完全相同的。</strong></p><h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>如果表T中没有字段k，而你执行了这个语句 select * from T where k=1, 那肯定是会报“不存在这个列”的错误： “Unknown column ‘k’ in ‘where clause’”。</p><p>你觉得这个错误是在我们上面提到的哪个阶段报出来的呢？</p>]]></content>
-    
-    
-    <summary type="html">MySQL</summary>
-    
-    
-    
-    <category term="MySQL实战" scheme="http://universeinheart.github.io/categories/MySQL%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="MySQL" scheme="http://universeinheart.github.io/tags/MySQL/"/>
     
   </entry>
   
