@@ -6,7 +6,7 @@
   <link href="http://universeinheart.github.io/atom.xml" rel="self"/>
   
   <link href="http://universeinheart.github.io/"/>
-  <updated>2021-04-17T10:00:42.665Z</updated>
+  <updated>2021-04-18T15:48:28.919Z</updated>
   <id>http://universeinheart.github.io/</id>
   
   <author>
@@ -15,6 +15,120 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字节码增强技术</title>
+    <link href="http://universeinheart.github.io/2021/04/19/Java/000/"/>
+    <id>http://universeinheart.github.io/2021/04/19/Java/000/</id>
+    <published>2021-04-19T15:18:37.000Z</published>
+    <updated>2021-04-18T15:48:28.919Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="什么是字节码增强技术"><a href="#什么是字节码增强技术" class="headerlink" title="什么是字节码增强技术"></a>什么是字节码增强技术</h3><p>java字节码生成之后，<strong>运行期</strong>对其进行修改，增强其功能</p><h3 id="运行期"><a href="#运行期" class="headerlink" title="运行期"></a>运行期</h3><h3 id="字节码相关技术"><a href="#字节码相关技术" class="headerlink" title="字节码相关技术"></a>字节码相关技术</h3><ul><li>动态代理</li><li>CGLIB</li><li>javassist</li><li>asm</li></ul><h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><ul><li>实质上动态生成字节码与反射机制结合</li><li>运行期根据不同的入参生成不同的字节码文件，继承于Proxy对象，实现传入对象的实现接口</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyObject</span><span class="params">(Object o)</span></span>&#123;</span><br><span class="line">        object=o;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),o.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IllegalArgumentException e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;before invoke ...&quot;</span>);</span><br><span class="line">        Object result= method.invoke(object,args);</span><br><span class="line">        System.out.println(<span class="string">&quot;after invoke ...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id=&quot;什么是字节码增强技术&quot;&gt;&lt;a href=&quot;#什么是字节码增强技术&quot; class=&quot;headerlink&quot; title=&quot;什么是字节码增强技术&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/categories/Java/"/>
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>21世纪资本论</title>
+    <link href="http://universeinheart.github.io/2021/04/18/%E5%B0%8F%E5%86%8C%E5%AD%90/21%E4%B8%96%E7%BA%AA%E8%B5%84%E6%9C%AC%E8%AE%BA/"/>
+    <id>http://universeinheart.github.io/2021/04/18/%E5%B0%8F%E5%86%8C%E5%AD%90/21%E4%B8%96%E7%BA%AA%E8%B5%84%E6%9C%AC%E8%AE%BA/</id>
+    <published>2021-04-18T15:18:37.000Z</published>
+    <updated>2021-04-18T15:47:20.854Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>李嘉图：稀缺性原则</strong></p><p><strong>马克思：无限积累原则</strong></p><ol><li> 私人资本的积累和分配过程本身就具有使财富集中且往往过度集中的强大推动力</li><li>从长期来看，资本收益率（特别是顶级资本的收益率）明显超过经济增长率。两者之差导致初始资本之间的差距一直延续下去（资本持有者只需将资本收入的一小部分用于保持自己的生活水平，而将大部分用于再投资），并且可能造成资本的高度集中</li><li> 中国原则上可以凭借强有力的中央统一领导体制和高层领导者的反腐和促进公益的决心贯彻累进税制，免于游说集团的压力和竞选政治献金带来的束缚。</li><li>财富分配包含两个维度，一是“要素”分配，这里劳动力和资本被当作是“生产要素”，他们被抽象成两个均匀的实体；二是“个体”分配，这会考虑到个体层面上的劳动收入和资本收入的不平等。现实中这两个维度都非常重要。如果不同时分析这两个维度，是不可能完全理解分配问题的。</li><li>所有产出必须以某种收入的形式分配到劳动或资本上—或者是工资、薪水、酬金、奖金等（作为对工人和在生产过程中贡献了劳动力的人的报酬），或者是其他如利润、红利、利息、租金、版税等（作为对生产过程中使用的资本的所有者的报酬）</li><li>资本指的是能够划分所有权、可在市场中交换的非人力资产的总和，不仅包括所有形式的不动产（含居民住宅），还包括公司和政府机构所使用的金融资本和专业资本（厂房、基础设施、机器、专利等）。</li><li>资本从来不是一成不变的，至少在初期总是伴随着风险与企业家精神，但也总是在积累到足够大的数额后向租金的形式转化，那是它的使命，也是它的逻辑终点</li><li>拥有财富的好处在于，人们即使不工作也能继续消费和积累，或者说能够以比自己从事生产更快的速度来继续消费和积累。同样的逻辑也适用于殖民主义时代的国际舞台</li><li></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;李嘉图：稀缺性原则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;马克思：无限积累原则&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt; 私人</summary>
+      
+    
+    
+    
+    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>14.HTTP协议</title>
+    <link href="http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/14/"/>
+    <id>http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/14/</id>
+    <published>2021-04-18T01:44:37.000Z</published>
+    <updated>2021-04-18T15:41:57.928Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>HTTP</code> 称为协议，<a href="http://www.163.com/">www.163.com</a>  是一个域名，表示互联网上的一个位置。有的 URL 会有更详细的位置标识，例如 <a href="http://www.163.com/index.html">http://www.163.com/index.html</a>  。正是因为这个东西是统一的，所以当你把这样一个字符串输入到浏览器的框里的时候，浏览器才知道如何进行统一处理。</p><h3 id="HTTP-请求的准备"><a href="#HTTP-请求的准备" class="headerlink" title="HTTP 请求的准备"></a>HTTP 请求的准备</h3><h3 id="HTTP-请求的构建"><a href="#HTTP-请求的构建" class="headerlink" title="HTTP 请求的构建"></a>HTTP 请求的构建</h3><h3 id="第一部分：请求行"><a href="#第一部分：请求行" class="headerlink" title="第一部分：请求行"></a>第一部分：请求行</h3><h3 id="第二部分：首部字段"><a href="#第二部分：首部字段" class="headerlink" title="第二部分：首部字段"></a>第二部分：首部字段</h3><h3 id="HTTP-请求的发送"><a href="#HTTP-请求的发送" class="headerlink" title="HTTP 请求的发送"></a>HTTP 请求的发送</h3><h3 id="HTTP-返回的构建"><a href="#HTTP-返回的构建" class="headerlink" title="HTTP 返回的构建"></a>HTTP 返回的构建</h3><h3 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a>HTTP 2.0</h3><h3 id="QUIC-协议的“城会玩”"><a href="#QUIC-协议的“城会玩”" class="headerlink" title="QUIC 协议的“城会玩”"></a>QUIC 协议的“城会玩”</h3><h3 id="机制一：自定义连接机制"><a href="#机制一：自定义连接机制" class="headerlink" title="机制一：自定义连接机制"></a>机制一：自定义连接机制</h3><h3 id="机制二：自定义重传机制"><a href="#机制二：自定义重传机制" class="headerlink" title="机制二：自定义重传机制"></a>机制二：自定义重传机制</h3><h3 id="机制三：无阻塞的多路复用"><a href="#机制三：无阻塞的多路复用" class="headerlink" title="机制三：无阻塞的多路复用"></a>机制三：无阻塞的多路复用</h3><h3 id="机制四：自定义流量控制"><a href="#机制四：自定义流量控制" class="headerlink" title="机制四：自定义流量控制"></a>机制四：自定义流量控制</h3>]]></content>
+    
+    
+    <summary type="html">看个新闻原来这么麻烦</summary>
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>11.TCP协议（上）</title>
+    <link href="http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/"/>
+    <id>http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/</id>
+    <published>2021-04-18T01:43:37.000Z</published>
+    <updated>2021-04-18T15:36:33.211Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>TCP</code> 天然认为网络环境是恶劣的，丢包、乱序、重传，拥塞都是常有的事情，一言不合就可能送达不了，因而要从算法层面来保证可靠性。</p><h3 id="TCP-包头格式"><a href="#TCP-包头格式" class="headerlink" title="TCP 包头格式"></a>TCP 包头格式</h3><img src="/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/image-20210418101919820.png" class="" title="image-20210418101919820"><p>首先，<strong>源端口号</strong>和<strong>目标端口号</strong>是不可少的，这一点和 <code>UDP</code> 是一样的。如果没有这两个端口号。数据就不知道应该发给哪个应用。</p><p>接下来是<strong>包的序号</strong>。为什么要给包编号呢？当然是为了<strong>解决乱序</strong>的问题。不编好号怎么确认哪个应该先来，哪个应该后到呢。编号是为了解决乱序问题。</p><p>还应该有的就是<strong>确认序号</strong>。发出去的包应该有确认，要不然我怎么知道对方有没有收到呢？如果没有收到就应该重新发送，直到送达。这个可以解决丢包的问题。作为老司机，做事当然要靠谱，答应了就要做到，暂时做不到也要有个回复。</p><p><code>TCP</code>  是靠谱的协议，但是这不能说明它面临的网络环境好。从 IP 层面来讲，如果网络状况的确那么差，是没有任何可靠性保证的，而作为 <code>IP</code> 的上一层  <code>TCP</code> 也无能为力，唯一能做的就是更加努力，不断重传，通过各种算法保证。也就是说，对于 <code>TCP</code> 来讲，<code>IP</code>  层你丢不丢包，我管不着，但是我在我的层面上，会努力保证可靠性。</p><p><code>TCP</code> 是面向连接的，因而双方要维护连接的状态，这些带<strong>状态位</strong>的包的发送，会引起双方的状态变更。状态位 <code>SYN</code> 是发起一个连接，<code>ACK</code> 是回复，<code>RST</code> 是重新连接，<code>FIN</code> 是结束连接等。</p><p><code>TCP</code> 要做<strong>流量控制</strong>，通信双方各声明一个窗口，标识自己当前能够的处理能力，别发送的太快，撑死我，也别发的太慢，饿死我。</p><p><code>TCP</code> 还会做<strong>拥塞控制</strong>，对于真正的通路堵车不堵车，它无能为力，唯一能做的就是控制自己，也即控制发送的速度。不能改变世界，就改变自己嘛。</p><h3 id="TCP-的三次握手"><a href="#TCP-的三次握手" class="headerlink" title="TCP 的三次握手"></a>TCP 的三次握手</h3><p>首先，为什么要三次，而不是两次？按说两个人打招呼，一来一回就可以了啊？为了可靠，为什么不是四次？</p><p>我们还是假设这个通路是非常不可靠的，A 要发起一个连接，当发了第一个请求杳无音信的时候，会有很多的可能性，比如第一个请求包丢了，再如没有丢，但是绕了弯路，超时了，还有 B 没有响应，不想和我连接。</p><p>A 不能确认结果，于是再发，再发。终于，有一个请求包到了 B，但是请求包到了 B 的这个事情，目前 A 还是不知道的，A 还有可能再发。</p><p>B 收到了请求包，就知道了 A 的存在，并且知道 A 要和它建立连接。如果 B 不乐意建立连接，则 A 会重试一阵后放弃，连接建立失败，没有问题；如果 B 是乐意建立连接的，则会发送应答包给 A。当然对于 B 来说，这个应答包也是一入网络深似海，不知道能不能到达 A。这个时候 B 自然不能认为连接是建立好了，因为应答包仍然会丢，会绕弯路，或者 A 已经挂了都有可能。</p><p>而且这个时候 B 还能碰到一个诡异的现象就是，A 和 B 原来建立了连接，做了简单通信后，结束了连接。还记得吗？A 建立连接的时候，请求包重复发了几次，有的请求包绕了一大圈又回来了，B  会认为这也是一个正常的的请求的话，因此建立了连接，可以想象，这个连接不会进行下去，也没有个终结的时候，纯属单相思了。因而两次握手肯定不行。</p><p>B 发送的应答可能会发送多次，但是只要一次到达 A，A 就认为连接已经建立了，因为对于 A 来讲，他的消息有去有回。A 会给 B 发送应答之应答，而 B 也在等这个消息，才能确认连接的建立，只有等到了这个消息，对于 B 来讲，才算它的消息有去有回。</p><p>当然 A 发给 B 的应答之应答也会丢，也会绕路，甚至 B 挂了。按理来说，还应该有个应答之应答之应答，这样下去就没底了。所以四次握手是可以的，四十次都可以，关键四百次也不能保证就真的可靠了。只要双方的消息都有去有回，就基本可以了。</p><p>好在大部分情况下，A 和 B 建立了连接之后，A 会马上发送数据的，一旦 A 发送数据，则很多问题都得到了解决。例如 A 发给 B 的应答丢了，当 A 后续发送的数据到达的时候，B  可以认为这个连接已经建立，或者 B 压根就挂了，A 发送的数据，会报错，说 B 不可达，A 就知道 B 出事情了。</p><p>当然你可以说 A 比较坏，就是不发数据，建立连接后空着。我们在程序设计的时候，可以要求开启 keepalive 机制，即使没有真实的数据包，也有探活包。</p><p>另外，你作为服务端 B 的程序设计者，对于 A 这种长时间不发包的客户端，可以主动关闭，从而空出资源来给其他客户端使用。</p><p>三次握手除了双方建立连接外，主要还是为了沟通一件事情，就是 <strong>TCP 包的序号的问题</strong>。</p><p>A 要告诉 B，我这面发起的包的序号起始是从哪个号开始的，B 同样也要告诉 A，B 发起的包的序号起始是从哪个号开始的。为什么序号不能都从 1 开始呢？因为这样往往会出现冲突。</p><p>例如，A 连上 B 之后，发送了 1、2、3  三个包，但是发送 3 的时候，中间丢了，或者绕路了，于是重新发送，后来 A 掉线了，重新连上 B 后，序号又从 1 开始，然后发送  2，但是压根没想发送 3，但是上次绕路的那个 3 又回来了，发给了 B，B 自然认为，这就是下一个包，于是发生了错误。</p><p>因而，每个连接都要有不同的序号。这个序号的起始序号是随着时间变化的，可以看成一个 32 位的计数器，每 4 微秒加一，如果计算一下，如果到重复，需要 4 个多小时，那个绕路的包早就死翘翘了，因为我们都知道 IP 包头里面有个 <code>TTL</code>，也即生存时间。</p><p>好了，双方终于建立了信任，建立了连接。前面也说过，为了维护这个连接，双方都要维护一个状态机，在连接建立的过程中，双方的状态变化时序图就像这样。</p><img src="/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/image-20210418231407867.png" class="" title="image-20210418231407867"><p>一开始，客户端和服务端都处于 <code>CLOSED</code>  状态。先是服务端主动监听某个端口，处于 <code>LISTEN</code> 状态。然后客户端主动发起连接 <code>SYN</code>，之后处于 <code>SYN-SENT</code>  状态。服务端收到发起的连接，返回 <code>SYN</code>，并且 <code>ACK</code> 客户端的 <code>SYN</code>，之后处于 <code>SYN-RCVD</code> 状态。客户端收到服务端发送的 <code>SYN</code> 和  <code>ACK</code> 之后，发送 <code>ACK</code> 的 <code>ACK</code>，之后处于 <code>ESTABLISHED</code> 状态，因为它一发一收成功了。服务端收到 <code>ACK</code> 的 <code>ACK</code> 之后，处于 <code>ESTABLISHED</code> 状态，因为它也一发一收了。</p><h3 id="TCP-四次挥手"><a href="#TCP-四次挥手" class="headerlink" title="TCP 四次挥手"></a>TCP 四次挥手</h3><img src="/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/image-20210418232328788.png" class="" title="image-20210418232328788"><p>断开的时候，我们可以看到，当 A 说“<strong>不玩了</strong>”，就进入 <code>FIN_WAIT_1</code> 的状态，B 收到“<strong>A 不玩</strong>”的消息后，发送知道了，就进入 <code>CLOSE_WAIT</code> 的状态。</p><p>A 收到“<strong>B 说知道了</strong>”，就进入 <code>FIN_WAIT_2</code> 的状态，如果这个时候 B 直接跑路，则 A 将永远在这个状态。TCP 协议里面并没有对这个状态的处理，但是 <code>Linux</code> 有，可以调整 <code>tcp_fin_timeout</code> 这个参数，设置一个超时时间。</p><p>如果 B 没有跑路，发送了“<strong>B  也不玩了</strong>”的请求到达 A 时，A 发送<strong>“知道 B 也不玩了”</strong>的 <code>ACK</code> 后，从 <code>FIN_WAIT_2</code> 状态结束，按说 A  可以跑路了，但是最后的这个 <code>ACK</code> 万一 B 收不到呢？则 B 会重新发一个“<strong>B 不玩了</strong>”，这个时候 A 已经跑路了的话，B 就再也收不到  ACK 了，因而 <code>TCP</code> 协议要求 A 最后等待一段时间 <code>TIME_WAIT</code>，这个时间要足够长，长到如果 B 没收到 <code>ACK</code> 的话，“<strong>B  说不玩了</strong>”会重发的，A 会重新发一个 <code>ACK</code> 并且足够时间到达 B。</p><p>A 直接跑路还有一个问题是，A  的端口就直接空出来了，但是 B 不知道，B 原来发过的很多包很可能还在路上，如果 A 的端口被一个新的应用占用了，这个新的应用会收到上个连接中 B 发过来的包，虽然序列号是重新生成的，但是这里要上一个双保险，防止产生混乱，因而也需要等足够长的时间，等到原来 B  发送的所有的包都死翘翘，再空出端口来。</p><p>等待的时间设为 <code>2MSL</code>，<code>MSL</code> 是  <code>Maximum Segment Lifetime</code>，报文最大生存时间，它是任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。因为 <code>TCP</code>  报文基于是 <code>IP</code> 协议的，而 <code>IP</code> 头中有一个 <code>TTL</code> 域，是 <code>IP</code> 数据报可以经过的最大路由数，每经过一个处理他的路由器此值就减 1，当此值为 0 则数据报将被丢弃，同时发送 <code>ICMP</code> 报文通知源主机。协议规定 <code>MSL</code> 为 2 分钟，实际应用中常用的是 30 秒，1 分钟和 2  分钟等。</p><p>还有一个异常情况就是，B 超过了 <code>2MSL</code>  的时间，依然没有收到它发的 FIN 的 ACK，怎么办呢？按照 TCP 的原理，B 当然还会重发 FIN，这个时候 A 再收到这个包之后，A  就表示，我已经在这里等了这么长时间了，已经仁至义尽了，之后的我就都不认了，于是就直接发送 <code>RST</code>，B 就知道 A 早就跑了。</p><h3 id="TCP-状态机"><a href="#TCP-状态机" class="headerlink" title="TCP 状态机"></a>TCP 状态机</h3><p>将连接建立和连接断开的两个时序状态图综合起来，就是这个著名的 <strong>TCP 的状态机</strong>。</p><p>学习的时候比较建议将这个状态机和时序状态机对照着看，不然容易晕。</p><img src="/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/11/fd45f9ad6ed575ea6bfdaafeb3bfb62a.jpg" class="" title="img"><p>在这个图中，加黑加粗的部分，是上面说到的主要流程，</p><ul><li>阿拉伯数字的序号，是连接过程中的顺序</li><li>大写中文数字的序号，是连接断开过程中的顺序</li><li>加粗的实线是客户端 A 的状态变迁</li><li>加粗的虚线是服务端 B 的状态变迁</li></ul><blockquote><p>TCP 包头很复杂，但是主要关注五个问题，<strong>顺序问题</strong>，<strong>丢包问题</strong>，<strong>连接维护</strong>，<strong>流量控制</strong>，<strong>拥塞控制</strong></p></blockquote>]]></content>
+    
+    
+    <summary type="html">因性恶而复杂，先恶后善反轻松</summary>
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10.UDP协议</title>
+    <link href="http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/10/"/>
+    <id>http://universeinheart.github.io/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/10/</id>
+    <published>2021-04-18T01:26:37.000Z</published>
+    <updated>2021-04-18T01:43:04.634Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="TCP-和-UDP-有哪些区别？"><a href="#TCP-和-UDP-有哪些区别？" class="headerlink" title="TCP 和 UDP  有哪些区别？"></a>TCP 和 UDP  有哪些区别？</h3><p>一般面试的时候我问这两个协议的区别，大部分人会回答，TCP 是面向连接的，UDP  是面向无连接的。</p><p>什么叫面向连接，什么叫无连接呢？在互通之前，面向连接的协议会先建立连接。例如，TCP 会三次握手，而 UDP  不会。</p><p>为什么要建立连接呢？你 TCP 三次握手，我 UDP 也可以发三个包玩玩，有什么区别吗？</p><p><strong>所谓的建立连接，是为了在客户端和服务端维护连接，而建立一定的数据结构来维护双方交互的状态，用这样的数据结构来保证所谓的面向连接的特性。</strong></p><blockquote><p><strong>TCP 提供可靠交付</strong>。通过 TCP  连接传输的数据，无差错、不丢失、不重复、并且按序到达。我们都知道 IP  包是没有任何可靠性保证的，一旦发出去，就像西天取经，走丢了、被妖怪吃了，都只能随它去。但是 TCP  号称能做到那个连接维护的程序做的事情，这个下两节我会详细描述。而 <strong>UDP 继承了 IP 包的特性，不保证不丢失，不保证按顺序到达</strong>。</p></blockquote><blockquote><p><strong>TCP 是面向字节流的</strong>。发送的时候发的是一个流，没头没尾。IP 包可不是一个流，而是一个个的 IP 包。之所以变成了流，这也是 TCP 自己的状态维护做的事情。而 <strong>UDP 继承了 IP 的特性，基于数据报的，一个一个地发，一个一个地收</strong>。</p></blockquote><blockquote><p><strong>TCP 是可以有拥塞控制的</strong>。它意识到包丢弃了或者网络的环境不好了，就会根据情况调整自己的行为，看看是不是发快了，要不要发慢点。<strong>UDP 就不会，应用让我发，我就发，管它洪水滔天</strong>。</p></blockquote><blockquote><p><strong>TCP 其实是一个有状态服务</strong>，通俗地讲就是有脑子的，里面精确地记着发送了没有，接收到没有，发送到哪个了，应该接收哪个了，错一点儿都不行。而 <strong>UDP 则是无状态服务</strong>。通俗地说是没脑子的，天真无邪的，发出去就发出去了。</p></blockquote><p>我们可以这样比喻，如果 MAC  层定义了本地局域网的传输行为，IP  层定义了整个网络端到端的传输行为，这两层基本定义了这样的基因：网络传输是以包为单位的，二层叫帧，网络层叫包，传输层叫段。我们笼统地称为包。包单独传输，自行选路，在不同的设备封装解封装，不保证到达。基于这个基因，生下来的孩子 UDP 完全继承了这些特性，几乎没有自己的思想。</p><h3 id="UDP-包头是什么样的？"><a href="#UDP-包头是什么样的？" class="headerlink" title="UDP 包头是什么样的？"></a>UDP 包头是什么样的？</h3><p>当我发送的 UDP 包到达目标机器后，发现 MAC 地址匹配，于是就取下来，将剩下的包传给处理 IP 层的代码。把 IP 头取下来，发现目标 IP 匹配，接下来呢？这里面的数据包是给谁呢？</p><p>发送的时候，我知道我发的是一个 UDP  的包，收到的那台机器咋知道的呢？所以在 IP 头里面有个 8 位协议，这里会存放，数据里面到底是 TCP 还是 UDP，当然这里是  UDP。于是，如果我们知道 UDP 头的格式，就能从数据里面，将它解析出来。解析出来以后呢？数据给谁处理呢？</p><p>处理完传输层的事情，内核的事情基本就干完了，里面的数据应该交给应用程序自己去处理，可是一台机器上跑着这么多的应用程序，应该给谁呢？</p><p>无论应用程序写的使用 TCP 传数据，还是  UDP  传数据，都要监听一个端口。正是这个端口，用来区分应用程序，要不说端口不能冲突呢。两个应用监听一个端口，到时候包给谁呀？所以，按理说，无论是  TCP 还是 UDP 包头里面应该有端口号，根据端口号，将数据交给相应的应用程序。</p><img src="/2021/04/18/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/10/image-20210418091922388.png" class="" title="image-20210418091922388"><p>当我们看到 UDP 包头的时候，发现的确有端口号，有源端口号和目标端口号。因为是两端通信嘛，这很好理解。但是你还会发现，UDP 除了端口号，再没有其他的了。和下两节要讲的 TCP 头比起来，这个简直简单得一塌糊涂啊！</p><h3 id="UDP-的三大特点"><a href="#UDP-的三大特点" class="headerlink" title="UDP 的三大特点"></a>UDP 的三大特点</h3><p>第一，沟通简单，不需要一肚子花花肠子（大量的数据结构、处理逻辑、包头字段）。前提是它相信网络世界是美好的，秉承性善论，相信网络通路默认就是很容易送达的，不容易被丢弃的。</p><p>第二，轻信他人。它不会建立连接，虽然有端口号，但是监听在这个地方，谁都可以传给他数据，他也可以传给任何人数据，甚至可以同时传给多个人数据。</p><p>第三，愣头青，做事不懂权变。不知道什么时候该坚持，什么时候该退让。它不会根据网络的情况进行发包的拥塞控制，无论网络丢包丢成啥样了，它该怎么发还怎么发。</p><h3 id="UDP-的三大使用场景"><a href="#UDP-的三大使用场景" class="headerlink" title="UDP 的三大使用场景"></a>UDP 的三大使用场景</h3><p>第一，<strong>需要资源少</strong>，<strong>在网络情况比较好的内网</strong>，或者对于<strong>丢包不敏感的应用</strong>。这很好理解，就像如果你是领导，你会让你们组刚毕业的小朋友去做一些没有那么难的项目，打一些没有那么难的客户，或者做一些失败了也能忍受的实验性项目。</p><p>第二，<strong>不需要一对一沟通，建立连接，而是可以广播的应用</strong>。UDP 的不面向连接的功能，可以使得可以承载广播或者多播的协议。DHCP 就是一种广播的形式，就是基于 UDP  协议的。对于多播，我们在讲 IP 地址的时候，讲过一个 D  类地址，也即组播地址，使用这个地址，可以将包组播给一批机器。当一台机器上的某个进程想监听某个组播地址的时候，需要发送 IGMP  包，所在网络的路由器就能收到这个包，知道有个机器上有个进程在监听这个组播地址。当路由器收到这个组播地址的时候，会将包转发给这台机器，这样就实现了跨路由器的组播。在后面云中网络部分，有一个协议 VXLAN，也是需要用到组播，也是基于 UDP 协议的。</p><p>第三，<strong>需要处理速度快，时延低，可以容忍少数丢包，但是要求即便网络拥塞，也毫不退缩，一往无前的时候</strong>。UDP 简单、处理速度快，不像 TCP  那样，操这么多的心，各种重传啊，保证顺序啊，前面的不收到，后面的没法处理啊。等这些事情做完了，时延早就上去了。而 TCP  在网络不好出现丢包的时候，拥塞控制策略会主动的退缩，降低发送速度，这就相当于本来环境就差，还自断臂膀，用户本来就卡，这下更卡了。</p><p>当前很多应用都是要求低时延的，它们可不想用 TCP  如此复杂的机制，而是想根据自己的场景，实现自己的可靠和连接保证。例如，如果应用自己觉得，有的包丢了就丢了，没必要重传了，就可以算了，有的比较重要，则应用自己重传，而不依赖于  TCP。有的前面的包没到，后面的包到了，那就先给客户展示后面的嘛，干嘛非得等到齐了呢？如果网络不好，丢了包，那不能退缩啊，要尽快传啊，速度不能降下来啊，要挤占带宽，抢在客户失去耐心之前到达。由于 UDP  十分简单，基本啥都没做，也就给了应用“城会玩”的机会。同理如果你实现的应用需要有自己的连接策略，可靠保证，时延要求，使用 UDP，然后再应用层实现这些是再好不过了。</p><h3 id="基于-UDP-的“城会玩”的五个例子"><a href="#基于-UDP-的“城会玩”的五个例子" class="headerlink" title="基于 UDP 的“城会玩”的五个例子"></a>基于 UDP 的“城会玩”的五个例子</h3><h4 id="“城会玩”一：网页或者-APP-的访问"><a href="#“城会玩”一：网页或者-APP-的访问" class="headerlink" title="“城会玩”一：网页或者 APP 的访问"></a>“城会玩”一：网页或者 APP 的访问</h4><p>原来访问网页和手机 APP 都是基于 <code>HTTP</code>  协议的。<code>HTTP</code> 协议是基于 <code>TCP</code>  的，建立连接都需要多次交互，对于时延比较大的目前主流的移动互联网来讲，建立一次连接需要的时间会比较长，然而既然是移动中，<code>TCP</code>  可能还会断了重连，也是很耗时的。而且目前的 <code>HTTP</code> 协议，往往采取多个数据通道共享一个连接的情况，这样本来为了加快传输速度，但是 <code>TCP</code>  的严格顺序策略使得哪怕共享通道，前一个不来，后一个和前一个即便没关系，也要等着，时延也会加大。</p><p><code>QUIC</code>（全称 <code>Quick UDP  Internet Connections</code>，<strong>快速 UDP 互联网连接</strong>）是 Google 提出的一种基于 <code>UDP</code>  改进的通信协议，其目的是降低网络通信的延迟，提供更好的用户互动体验。</p><p>QUIC  在应用层上，会自己实现快速连接建立、减少重传时延，自适应拥塞控制，是应用层“城会玩”的代表。</p><h4 id="“城会玩”二：流媒体的协议"><a href="#“城会玩”二：流媒体的协议" class="headerlink" title="“城会玩”二：流媒体的协议"></a>“城会玩”二：流媒体的协议</h4><p>直播协议多使用 <code>RTMP</code>， 而这个 <code>RTMP</code> 协议也是基于 <code>UDP</code> 的。</p><p><code>TCP</code>  的严格顺序传输要保证前一个收到了，下一个才能确认，如果前一个收不到，下一个就算包已经收到了，在缓存里面，也需要等着。对于直播来讲，这显然是不合适的，因为老的视频帧丢了其实也就丢了，就算再传过来用户也不在意了，他们要看新的了，如果老是没来就等着，卡顿了，新的也看不了，那就会丢失客户，所以直播，实时性比较比较重要，宁可丢包，也不要卡顿的。</p><p>当网络不好的时候，<code>TCP</code> 协议会主动降低发送速度，这对本来当时就卡的看视频来讲是要命的，应该应用层马上重传，而不是主动让步。因而，很多直播应用，都基于 <code>UDP</code> 实现了自己的视频传输协议。</p><h4 id="“城会玩”三：实时游戏"><a href="#“城会玩”三：实时游戏" class="headerlink" title="“城会玩”三：实时游戏"></a>“城会玩”三：实时游戏</h4><p>实时游戏中客户端和服务端要建立长连接，来保证实时传输。但是游戏玩家很多，服务器却不多。由于维护 <code>TCP</code> 连接需要在内核维护一些数据结构，因而一台机器能够支撑的 <code>TCP</code> 连接数目是有限的，然后 <code>UDP</code> 由于是没有连接的，在异步 IO  机制引入之前，常常是应对海量客户端连接的策略。</p><p><code>TCP</code> 的强顺序问题，对战的游戏，对网络的要求很简单，玩家通过客户端发送给服务器鼠标和键盘行走的位置，服务器会处理每个用户发送过来的所有场景，处理完再返回给客户端，客户端解析响应，渲染最新的场景展示给玩家。</p><p>如果出现一个数据包丢失，所有事情都需要停下来等待这个数据包重发。客户端会出现等待接收数据，然而玩家并不关心过期的数据，激战中卡 1 秒，等能动了都已经死了。</p><p>游戏对实时要求较为严格的情况下，采用自定义的可靠 <code>UDP</code> 协议，自定义重传策略，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成的影响。</p><h4 id="“城会玩”四：IoT-物联网"><a href="#“城会玩”四：IoT-物联网" class="headerlink" title="“城会玩”四：IoT 物联网"></a>“城会玩”四：IoT 物联网</h4><p>一方面，物联网领域终端资源少，很可能只是个内存非常小的嵌入式系统，而维护 TCP 协议代价太大；</p><p>另一方面，物联网对实时性要求也很高，而 TCP 还是因为上面的那些原因导致时延大。</p><p>Google 旗下的 Nest 建立  <code>Thread Group</code>，推出了物联网通信协议 <code>Thread</code>，就是基于 <code>UDP</code> 协议的。</p><h4 id="“城会玩”五：移动通信领域"><a href="#“城会玩”五：移动通信领域" class="headerlink" title="“城会玩”五：移动通信领域"></a>“城会玩”五：移动通信领域</h4><p>在 4G 网络里，移动流量上网的数据面对的协议 <code>GTP-U</code> 是基于 <code>UDP</code> 的。因为移动网络协议比较复杂，而 <code>GTP</code> 协议本身就包含复杂的手机上线下线的通信协议。如果基于 <code>TCP</code>，<code>TCP</code> 的机制就显得非常多余，这部分协议我会在后面的章节单独讲解。</p>]]></content>
+    
+    
+    <summary type="html">因性善而简单，难免碰到“城会玩”</summary>
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>不要让“假勤奋”害了你，这才是你正确奋斗的打开方式</title>
@@ -221,6 +335,125 @@
   </entry>
   
   <entry>
+    <title>01.为什么要学习网络协议？</title>
+    <link href="http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/"/>
+    <id>http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/</id>
+    <published>2021-04-17T12:47:37.000Z</published>
+    <updated>2021-04-18T01:05:54.531Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="协议三要素"><a href="#协议三要素" class="headerlink" title="协议三要素"></a>协议三要素</h3><ul><li><strong>语法</strong>，就是这一段内容要符合一定的规则和格式。例如，括号要成对，结束要使用分号等。</li><li><strong>语义</strong>，就是这一段内容要代表某种意义。例如数字减去数字是有意义的，数字减去文本一般来说就没有意义。</li><li><strong>顺序</strong>，就是先干啥，后干啥。例如，可以先加上某个数值，然后再减去某个数值。</li></ul><p>浏览器之所以能够显示缤纷多彩的页面，是因为它收到了一段来自 <code>HTTP</code> 协议的“东西”</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">HTTP/1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Date</span><span class="punctuation">: </span>Tue, 27 Mar 2018 16:50:26 GMT</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>text/html;charset=UTF-8</span><br><span class="line"><span class="attribute">Content-Language</span><span class="punctuation">: </span>zh-CN</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;base href=&quot;https://pages.kaola.com/&quot; /&gt;</span><br><span class="line">&lt;meta charset=&quot;utf-8&quot;/&gt; &lt;title&gt;网易考拉3周年主会场&lt;/title&gt;</span><br></pre></td></tr></table></figure><h3 id="常用的网络协议有哪些？"><a href="#常用的网络协议有哪些？" class="headerlink" title="常用的网络协议有哪些？"></a>常用的网络协议有哪些？</h3><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417234940561.png" class="" title="image-20210417234940561"><h3 id="浏览器里面输入-URL之后发生了什么？"><a href="#浏览器里面输入-URL之后发生了什么？" class="headerlink" title="浏览器里面输入 URL之后发生了什么？"></a>浏览器里面输入 <code>URL</code>之后发生了什么？</h3><p>浏览器里面输入 <code>URL</code>。浏览器只知道名字，但是不知道具体的地点，所以不知道应该如何访问。于是，它打开地址簿去查找。可以使用一般的地址簿协议 <code>DNS</code> 去查找，还可以使用另一种更加精准的地址簿查找协议 <code>HTTPDNS</code>。无论用哪一种方法查找，最终都会得到这个地址：<code>106.114.138.24</code>。这个是 <code>IP</code> 地址，是互联网世界的“门牌号”。</p><p>知道了目标地址，浏览器就开始打包它的请求。对于普通的浏览请求，往往会使用 <code>HTTP</code> 协议；但是对于购物的请求，往往需要进行加密传输，因而会使用 <code>HTTPS</code> 协议。无论是什么协议，里面都会写明“你要买什么和买多少”。</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417205409698.png" class="" title="image-20210417205409698"><p><code>DNS</code>、<code>HTTP</code>、<code>HTTPS</code>  所在的层我们称为<strong>应用层</strong>。经过应用层封装后，浏览器会将应用层的包交给下一层去完成，通过 <code>socket</code>  编程来实现。下一层是传输层。</p><p><strong>传输层</strong>有两种协议，一种是无连接的协议 <code>UDP</code>，一种是面向连接的协议 <code>TCP</code>。对于支付来讲，往往使用 <code>TCP</code>  协议。所谓的面向连接就是，<code>TCP</code> 会保证这个包能够到达目的地。如果不能到达，就会重新发送，直至到达。</p><p><code>TCP</code> 协议里面会有两个端口，一个是浏览器监听的端口，一个是电商的服务器监听的端口。操作系统往往通过端口来判断，它得到的包应该给哪个进程。</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417205556434.png" class="" title="image-20210417205556434"><p>传输层封装完毕后，浏览器会将包交给操作系统的网络层。</p><p><strong>网络层</strong>的协议是 <code>IP</code> 协议。在 <code>IP</code> 协议里面会有源 <code>IP</code> 地址，即浏览器所在机器的 <code>IP</code> 地址和目标 <code>IP</code> 地址，也即电商网站所在服务器的 IP 地址。</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417205653686.png" class="" title="image-20210417205653686"><p>操作系统既然知道了目标 <code>IP</code> 地址，就开始想如何根据这个门牌号找到目标机器。操作系统往往会判断，这个目标 <code>IP</code> 地址是本地人，还是外地人。如果是本地人，从门牌号就能看出来，但是显然电商网站不在本地，而在遥远的地方。</p><p>操作系统知道要离开本地去远方。虽然不知道远方在何处，但是可以这样类比一下：如果去国外要去海关，去外地就要去网关。而操作系统启动的时候，就会被 <code>DHCP</code> 协议配置 <code>IP</code> 地址，以及默认的网关的 <code>IP</code> 地址 <code>192.168.1.1</code>。</p><p>操作系统如何将 <code>IP</code> 地址发给网关呢？在本地通信基本靠吼，于是操作系统大吼一声，谁是 <code>192.168.1.1</code> 啊？网关会回答它，我就是，我的本地地址在村东头。这个本地地址就是 <code>MAC</code> 地址，而大吼的那一声是 <code>ARP</code> 协议。</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417205917055.png" class="" title="image-20210417205917055"><p>于是操作系统将 <code>IP</code> 包交给了下一层，也就是 <strong>MAC 层</strong>。网卡再将包发出去。由于这个包里面是有 <code>MAC</code> 地址的，因而它能够到达网关。</p><p>网关收到包之后，会根据自己的知识，判断下一步应该怎么走。网关往往是一个路由器，到某个 IP 地址应该怎么走，这个叫作<strong>路由表</strong>。</p><p>路由器有点像玄奘西行路过的一个个国家的一个个城关。每个城关都连着两个国家，每个国家相当于一个局域网，在每个国家内部，都可以使用本地的地址 MAC 进行通信。</p><p>一旦跨越城关，就需要拿出 IP 头来，里面写着贫僧来自东土大唐（就是源 IP 地址），欲往西天拜佛求经（指的是目标 IP 地址）。路过宝地，借宿一晚，明日启程，请问接下来该怎么走啊？</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/image-20210417210045261.png" class="" title="image-20210417210045261"><p>城关往往是知道这些“知识”的，因为城关和临近的城关也会经常沟通。到哪里应该怎么走，这种沟通的协议称为<strong>路由协议</strong>，常用的有 <code>OSPF</code> 和 <code>BGP</code>。</p><p>城关与城关之间是一个国家，当网络包知道了下一步去哪个城关，还是要使用国家内部的 MAC 地址，通过下一个城关的 MAC 地址，找到下一个城关，然后再问下一步的路怎么走，一直到走出最后一个城关。</p><p>最后一个城关知道这个网络包要去的地方。于是，对着这个国家吼一声，谁是目标 IP 啊？目标服务器就会回复一个 MAC 地址。网络包过关后，通过这个 MAC 地址就能找到目标服务器。</p><p>目标服务器发现 MAC 地址对上了，取下 MAC 头来，发送给操作系统的网络层。发现 IP 也对上了，就取下 IP 头。IP 头里会写上一层封装的是 TCP 协议，然后将其交给传输层，即 TCP 层。</p><p>在这一层里，对于收到的每个包，都会有一个回复的包说明收到了。这个回复的包绝非这次下单请求的结果，例如购物是否成功，扣了多少钱等，而仅仅是 TCP 层的一个说明，即收到之后的回复。当然这个回复，会沿着刚才来的方向走回去，报个平安。因为一旦出了国门，西行路上千难万险，如果在这个过程中，网络包走丢了，例如进了大沙漠，或者被强盗抢劫杀害怎么办呢？因而到了要报个平安。</p><p>如果过一段时间还是没到，发送端的 TCP  层会重新发送这个包，还是上面的过程，直到有一天收到平安到达的回复。<strong>这个重试绝非你的浏览器重新将下单这个动作重新请求一次</strong>。对于浏览器来讲，就发送了一次下单请求，TCP 层不断自己闷头重试。除非 TCP 这一层出了问题，例如连接断了，才轮到浏览器的应用层重新发送下单请求。</p><p>当网络包平安到达 TCP 层之后，TCP 头中有目标端口号，通过这个端口号，可以找到电商网站的进程正在监听这个端口号，假设一个 Tomcat，将这个包发给电商网站。</p><img src="/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/01/a35e16acd0912ae3e79567ca0358df9e.jpg" class="" title="a35e16acd0912ae3e79567ca0358df9e"><p>电商网站的进程得到 HTTP  请求的内容，知道了要买东西，买多少。往往一个电商网站最初接待请求的这个 Tomcat  只是个接待员，负责统筹处理这个请求，而不是所有的事情都自己做。例如，这个接待员要告诉专门管理订单的进程，登记要买某个商品，买多少，要告诉管理库存的进程，库存要减少多少，要告诉支付的进程，应该付多少钱，等等。</p><p>如何告诉相关的进程呢？往往通过 RPC  调用，即远程过程调用的方式来实现。远程过程调用就是当告诉管理订单进程的时候，接待员不用关心中间的网络互连问题，会由 RPC 框架统一处理。RPC 框架有很多种，有基于 HTTP 协议放在 HTTP 的报文里面的，有直接封装在 TCP 报文里面的。</p><p>当接待员发现相应的部门都处理完毕，就回复一个 HTTPS 的包，告知下单成功。这个 HTTPS 的包，会像来的时候一样，经过千难万险到达你的个人电脑，最终进入浏览器，显示支付成功。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;协议三要素&quot;&gt;&lt;a href=&quot;#协议三要素&quot; class=&quot;headerlink&quot; title=&quot;协议三要素&quot;&gt;&lt;/a&gt;协议三要素&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;语法&lt;/strong&gt;，就是这一段内容要符合一定的规则和格式。例如，括号要成对，结束要使</summary>
+      
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>00.想成为技术牛人？先搞定网络协议！</title>
+    <link href="http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/00/"/>
+    <id>http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/00/</id>
+    <published>2021-04-17T12:42:37.000Z</published>
+    <updated>2021-04-17T12:46:56.741Z</updated>
+    
+    <content type="html"><![CDATA[<p>从以下三个角度和你分享我所理解的网络协议</p><p>第一，我会从身边经常见到的事情出发，用故事来讲解各种网络协议，然后慢慢扩展到不熟悉的领域。</p><p>例如，每个人都会查看 IP 地址，那我们就从这个命令开始，展开一些概念；很多人都在大学宿舍组过简单的网络来打游戏，我就从宿舍里最简单的网络概念开始讲；然后说到办公室，说到日常上网、购物、视频下载等过程涉及的协议；最后说到最陌生的数据中心。</p><p>第二，我会用贴近场景的方式来讲解网络协议，将各个层次的关系串起来，而非孤立地讲解某个概念。</p><p>常见的计算机网络课程往往会按照网络分层，一层一层地讲，却很少讲层与层之间的关系。例如，我们学习路由协议的时候，在真实场景中，这么多的算法和二层是什么关系呢？和四层又是什么关系呢？例如，在真实的网络通信中，我们访问一个网站，做一个支付，在 TCP 进行三次握手的时候，IP 层在干嘛？MAC 层又在干嘛？这些你是不是都清楚？</p><p>第三，我会在讲解完各个层次的网络协议之后，着重剖析如何在当下热门领域使用这些协议，比如云计算、容器和微服务。</p><p>一方面你可以知道网络协议真实应用的地方，另一方面你也可以通过上手使用云计算、容器、微服务来进一步加深对于协议的理解。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;从以下三个角度和你分享我所理解的网络协议&lt;/p&gt;
+&lt;p&gt;第一，我会从身边经常见到的事情出发，用故事来讲解各种网络协议，然后慢慢扩展到不熟悉的领域。&lt;/p&gt;
+&lt;p&gt;例如，每个人都会查看 IP 地址，那我们就从这个命令开始，展开一些概念；很多人都在大学宿舍组过简单的网络来打游戏</summary>
+      
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>00.想成为技术牛人？先搞定网络协议！</title>
+    <link href="http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/02/"/>
+    <id>http://universeinheart.github.io/2021/04/17/%E8%B6%A3%E8%B0%88%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/02/</id>
+    <published>2021-04-17T12:26:37.000Z</published>
+    <updated>2021-04-17T12:42:39.569Z</updated>
+    
+    
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>00.如何才能学好并发编程？</title>
+    <link href="http://universeinheart.github.io/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00/"/>
+    <id>http://universeinheart.github.io/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00/</id>
+    <published>2021-04-17T10:26:37.000Z</published>
+    <updated>2021-04-17T11:17:59.415Z</updated>
+    
+    <content type="html"><![CDATA[<p>学习最忌讳的就是“盲人摸象”，只看到局部，而没有看到全局。所以，你需要从一个个单一的知识和技术中“跳出来”，高屋建瓴地看并发编程。当然，这首要之事就是你建立起一张全景图。</p><img src="/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/00/image-20210417184724810.png" class="" title="image-20210417184724810"><p>并发编程领域可以抽象成三个核心问题：<strong>分工</strong>、<strong>同步</strong>和<strong>互斥</strong></p><h4 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h4><p>在现实世界里，分工是很复杂的，著名数学家华罗庚曾用“烧水泡茶”的例子通俗地讲解了统筹方法（一种安排工作进程的数学方法），“烧水泡茶”这么简单的事情都这么多说道，更何况是并发编程里的工程问题呢。</p><p><code>Java SDK</code> 并发包里的  <code>Executor</code>、<code>Fork/Join</code>、<code>Future</code>  本质上都是一种分工方法。除此之外，并发编程领域还总结了一些设计模式，基本上都是和分工方法相关的，例如生产者 -  消费者、<code>Thread-Per-Message</code>、<code>Worker Thread</code> 模式等都是用来指导你如何分工的。</p><p>学习这部分内容，最佳的方式就是和现实世界做对比。例如<strong>生产者 -  消费者模式</strong>，可以类比一下餐馆里的大厨和服务员，大厨就是生产者，负责做菜，做完放到出菜口，而服务员就是消费者，把做好的菜给你端过来。不过，我们经常会发现，出菜口有时候一下子出了好几个菜，服务员是可以把这一批菜同时端给你的。其实这就是生产者 - 消费者模式的一个优点，生产者一个一个地生产数据，而消费者可以批处理，这样就提高了性能。</p><h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>在项目执行过程中，任务之间是有依赖的，一个任务结束后，依赖它的后续任务就可以开工了，后续工作怎么知道可以开工了呢？这个就是靠沟通协作了，这是一项很重要的工作。</p><p>在并发编程领域里的同步，主要指的就是<strong>线程间的协作</strong>，本质上和现实生活中的协作没区别，不过是一个线程执行完了一个任务，如何通知执行后续任务的线程开工而已。</p><p>协作一般是和分工相关的。<code>Java SDK</code>  并发包里的 <code>Executor</code>、<code>Fork/Join</code>、<code>Future</code> 本质上都是分工方法，但同时也能解决线程协作的问题。例如，用 <code>Future</code>  可以发起一个异步调用，当主线程通过 <code>get()</code> 方法取结果时，主线程就会等待，当异步执行的结果返回时，<code>get()</code>  方法就自动返回了。主线程和异步线程之间的协作，<code>Future</code> 工具类已经帮我们解决了。除此之外，<code>Java SDK</code> 里提供的  <code>CountDownLatch</code>、<code>CyclicBarrier</code>、<code>Phaser</code>、<code>Exchanger</code> 也都是用来解决线程协作问题的。</p><p>工作中遇到的线程协作问题，基本上都可以描述为这样的一个问题：<strong>当某个条件不满足时，线程需要等待，当某个条件满足时，线程需要被唤醒执行</strong>。例如，在生产者 -  消费者模型里，也有类似的描述，“当队列满时，生产者线程等待，当队列不满时，生产者线程需要被唤醒执行；当队列空时，消费者线程等待，当队列不空时，消费者线程需要被唤醒执行。”</p><p>在 Java 并发编程领域，解决协作问题的核心技术是<strong>管程</strong>，上面提到的所有线程协作技术底层都是利用管程解决的。管程是一种解决并发问题的通用模型，除了能解决线程协作问题，还能解决下面我们将要介绍的互斥问题。可以这么说，<strong>管程是解决并发问题的万能钥匙</strong>。</p><h4 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h4><p>并发程序里，当多个线程同时访问同一个共享变量的时候，结果是不确定的。不确定，则意味着可能正确，也可能错误，事先是不知道的。而导致不确定的主要源头是<strong>可见性问题</strong>、<strong>有序性问题</strong>和<strong>原子性问题</strong>，为了解决这三个问题，Java  语言引入了内存模型，内存模型提供了一系列的规则，利用这些规则，我们可以避免可见性问题、有序性问题，但是还不足以完全解决线程安全问题。<strong>解决线程安全问题的核心方案还是互斥</strong>。</p><p><strong>所谓互斥，指的是同一时刻，只允许一个线程访问共享变量。</strong></p><p>实现互斥的核心技术就是<strong>锁</strong>，Java 语言里  <code>synchronized</code>、SDK 里的各种 <code>Lock</code>  都能解决互斥问题。虽说锁解决了安全性问题，但同时也带来了性能问题，那如何保证安全性的同时又尽量提高性能呢？可以分场景优化，Java SDK  里提供的 <code>ReadWriteLock</code>、<code>StampedLock</code> 就可以优化读多写少场景下锁的性能。还可以使用无锁的数据结构，例如 Java SDK 里提供的<strong>原子类</strong>都是基于无锁技术实现的。除此之外，还有一些其他的方案，原理是不共享变量或者变量只允许读。这方面，Java 提供了 <code>ThreadLocal</code> 和 <code>final</code> 关键字，还有一种 <code>Copy-on-write</code> 的模式。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;学习最忌讳的就是“盲人摸象”，只看到局部，而没有看到全局。所以，你需要从一个个单一的知识和技术中“跳出来”，高屋建瓴地看并发编程。当然，这首要之事就是你建立起一张全景图。&lt;/p&gt;
+&lt;img src=&quot;/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/categories/Java/"/>
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>17.ReadWriteLock：如何快速实现一个完备的缓存？</title>
+    <link href="http://universeinheart.github.io/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/17/"/>
+    <id>http://universeinheart.github.io/2021/04/17/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/17/</id>
+    <published>2021-04-17T10:26:37.000Z</published>
+    <updated>2021-04-17T12:39:32.866Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java 并发包中众多的工具类作用：<strong>分场景优化性能，提升易用性</strong></p><p>针对读多写少这种并发场景，Java 并发包提供了读写锁—— <code>ReadWriteLock</code>，非常容易使用，并且性能很好。</p><h3 id="什么是读写锁呢？"><a href="#什么是读写锁呢？" class="headerlink" title="什么是读写锁呢？"></a>什么是读写锁呢？</h3><p>所有的读写锁都遵守以下三条基本原则：</p><ol><li>允许多个线程同时读共享变量；</li><li>只允许一个线程写共享变量；</li><li>如果一个写线程正在执行写操作，此时禁止读线程读共享变量。</li></ol><p>读写锁与互斥锁的一个重要区别就是<strong>读写锁允许多个线程同时读共享变量</strong></p><h3 id="快速实现一个缓存"><a href="#快速实现一个缓存" class="headerlink" title="快速实现一个缓存"></a>快速实现一个缓存</h3><p>我们声明了一个 <code>Cache</code> 类，其中类型参数 K 代表缓存里 key 的类型，V 代表缓存里 value 的类型。</p><p>缓存的数据保存在 <code>Cache</code> 类内部的 <code>HashMap</code> 里面，<code>HashMap</code> 不是线程安全的，这里我们使用读写锁 <code>ReadWriteLock</code> 来保证其线程安全。</p><p><code>ReadWriteLock</code> 是一个接口，它的实现类是 <code>ReentrantReadWriteLock</code>，通过名字你应该就能判断出来，它是支持可重入的。</p><p>下面我们通过 <code>ReentrantReadWriteLock</code>创建了一把读锁和一把写锁。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cache</span> &lt; <span class="title">K</span>, <span class="title">V</span> &gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Map &lt; K, V &gt; m = <span class="keyword">new</span> HashMap &lt; &gt; ();</span><br><span class="line">    <span class="keyword">final</span> ReadWriteLock rwl = <span class="keyword">new</span> ReentrantReadWriteLock();</span><br><span class="line">    <span class="comment">// 读锁</span></span><br><span class="line">    <span class="keyword">final</span> Lock r = rwl.readLock();</span><br><span class="line">    <span class="comment">// 写锁</span></span><br><span class="line">    <span class="keyword">final</span> Lock w = rwl.writeLock();</span><br><span class="line">    <span class="comment">// 读缓存</span></span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">         r.lock();</span><br><span class="line">         <span class="keyword">try</span> &#123;</span><br><span class="line">             <span class="keyword">return</span> m.get(key);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">finally</span> &#123;</span><br><span class="line">             r.unlock();</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="comment">// 写缓存</span></span><br><span class="line">    <span class="function">V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">        w.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> m.put(key, v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            w.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>使用缓存首先要解决缓存数据的初始化问题</strong>。缓存数据的初始化，可以采用一次性加载的方式，也可以使用按需加载的方式。</p><p>如果源头数据的数据量不大，就可以采用一次性加载的方式，这种方式最简单，只需在应用启动的时候把源头数据查询出来，依次调用类似上面示例代码中的 <code>put()</code> 方法就可以了。</p><p>如果源头数据量非常大，那么就需要按需加载了，按需加载也叫<strong>懒加载</strong>，指的是只有当应用查询缓存，并且数据不在缓存里的时候，才触发加载源头相关数据进缓存的操作。</p><h3 id="实现缓存的按需加载"><a href="#实现缓存的按需加载" class="headerlink" title="实现缓存的按需加载"></a>实现缓存的按需加载</h3><p>文中下面的这段代码实现了按需加载的功能，这里我们假设缓存的源头是数据库。需要注意的是，如果缓存中没有缓存目标对象，那么就需要从数据库中加载，然后写入缓存，写缓存需要用到写锁，所以在代码中的⑤处，我们调用了 <code>w.lock()</code> 来获取写锁。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cache</span> &lt; <span class="title">K</span>, <span class="title">V</span> &gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Map &lt; K, V &gt; m = <span class="keyword">new</span> HashMap &lt; &gt; ();</span><br><span class="line">    <span class="keyword">final</span> ReadWriteLock rwl = <span class="keyword">new</span> ReentrantReadWriteLock();</span><br><span class="line">    <span class="keyword">final</span> Lock r = rwl.readLock();</span><br><span class="line">    <span class="keyword">final</span> Lock w = rwl.writeLock();</span><br><span class="line">    <span class="function">V <span class="title">get</span><span class="params">(K key)</span> </span>&#123;</span><br><span class="line">        V v = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//读缓存</span></span><br><span class="line">        r.lock();①</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            v = m.get(key);②</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            r.unlock();③</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//缓存中存在，返回</span></span><br><span class="line">        <span class="keyword">if</span>(v != <span class="keyword">null</span>) &#123;④</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//缓存中不存在，查询数据库</span></span><br><span class="line">        w.lock();⑤</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//再次验证</span></span><br><span class="line">            <span class="comment">//其他线程可能已经查询过数据库</span></span><br><span class="line">            v = m.get(key);⑥</span><br><span class="line">            <span class="keyword">if</span>(v == <span class="keyword">null</span>) &#123;⑦</span><br><span class="line">                <span class="comment">//查询数据库</span></span><br><span class="line">                v = 省略代码无数</span><br><span class="line">                m.put(key, v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            w.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>还需要注意的是，在获取写锁之后，我们并没有直接去查询数据库，而是在代码⑥⑦处，<strong>重新验证了一次缓存中是否存在</strong>，再次验证如果还是不存在，我们才去查询数据库并更新本地缓存。</p><blockquote><p>为什么我们要再次验证呢？</p><p>原因是在高并发的场景下，有可能会有多线程竞争写锁。假设缓存是空的，没有缓存任何东西，如果此时有三个线程 T1、T2 和 T3 同时调用 get() 方法，并且参数 key  也是相同的。那么它们会同时执行到代码⑤处，但此时只有一个线程能够获得写锁，假设是线程 T1，线程 T1  获取写锁之后查询数据库并更新缓存，最终释放写锁。此时线程 T2 和 T3 会再有一个线程能够获取写锁，假设是  T2，如果不采用再次验证的方式，此时 T2 会再次查询数据库。T2 释放写锁之后，T3 也会再次查询一次数据库。而实际上线程 T1  已经把缓存的值设置好了，T2、T3 完全没有必要再次查询数据库。<strong>所以，再次验证的方式，能够避免高并发场景下重复查询数据的问题。</strong></p></blockquote><h3 id="读写锁的升级与降级"><a href="#读写锁的升级与降级" class="headerlink" title="读写锁的升级与降级"></a>读写锁的升级与降级</h3><p>上面按需加载的示例代码中，在①处获取读锁，在③处释放读锁，那是否可以在②处的下面增加验证缓存并更新缓存的逻辑呢？详细的代码如下。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//读缓存</span></span><br><span class="line">r.lock();①</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    v = m.get(key);②</span><br><span class="line">    <span class="keyword">if</span>(v == <span class="keyword">null</span>) &#123;</span><br><span class="line">        w.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//再次验证并更新缓存</span></span><br><span class="line">            <span class="comment">//省略详细代码</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            w.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span> &#123;</span><br><span class="line">    r.unlock();③</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>先是获取读锁，然后再升级为写锁，对此还有个专业的名字，叫<strong>锁的升级</strong>。可惜 <code>ReadWriteLock</code>  并不支持这种升级。在上面的代码示例中，读锁还没有释放，此时获取写锁，会导致写锁永久等待，最终导致相关线程都被阻塞，永远也没有机会被唤醒。锁的升级是不允许的，这个你一定要注意。</p><p>不过，虽然锁的升级是不允许的，但是<strong>锁的降级却是允许的</strong>。以下代码来源自 <code>ReentrantReadWriteLock</code> 的官方示例，略做了改动。你会发现在代码①处，获取读锁的时候线程还是持有写锁的，这种锁的降级是支持的。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CachedData</span> </span>&#123;</span><br><span class="line">    Object data;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">boolean</span> cacheValid;</span><br><span class="line">    <span class="keyword">final</span> ReadWriteLock rwl = <span class="keyword">new</span> ReentrantReadWriteLock();</span><br><span class="line">    <span class="comment">// 读锁  </span></span><br><span class="line">    <span class="keyword">final</span> Lock r = rwl.readLock();</span><br><span class="line">    <span class="comment">//写锁</span></span><br><span class="line">    <span class="keyword">final</span> Lock w = rwl.writeLock();</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">processCachedData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取读锁</span></span><br><span class="line">        r.lock();</span><br><span class="line">        <span class="keyword">if</span>(!cacheValid) &#123;</span><br><span class="line">            <span class="comment">// 释放读锁，因为不允许读锁的升级</span></span><br><span class="line">            r.unlock();</span><br><span class="line">            <span class="comment">// 获取写锁</span></span><br><span class="line">            w.lock();</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 再次检查状态  </span></span><br><span class="line">                <span class="keyword">if</span>(!cacheValid) &#123;</span><br><span class="line">                    data = ...</span><br><span class="line">                    cacheValid = <span class="keyword">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 释放写锁前，降级为读锁</span></span><br><span class="line">                <span class="comment">// 降级是可以的</span></span><br><span class="line">                r.lock();①</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="comment">// 释放写锁</span></span><br><span class="line">                w.unlock();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 此处仍然持有读锁</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            use(data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            r.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>读写锁类似于  <code>ReentrantLock</code>，也支持公平模式和非公平模式。读锁和写锁都实现了 <code>java.util.concurrent.locks.Lock</code>  接口，所以除了支持 <code>lock()</code> 方法外，<code>tryLock()</code>、<code>lockInterruptibly()</code>  等方法也都是支持的。但是有一点需要注意，那就是只有写锁支持条件变量，读锁是不支持条件变量的，读锁调用 <code>newCondition()</code> 会抛出  <code>UnsupportedOperationException</code> 异常。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Java 并发包中众多的工具类作用：&lt;strong&gt;分场景优化性能，提升易用性&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;针对读多写少这种并发场景，Java 并发包提供了读写锁—— &lt;code&gt;ReadWriteLock&lt;/code&gt;，非常容易使用，并且性能很好。&lt;/p&gt;
+&lt;h3 i</summary>
+      
+    
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/categories/Java/"/>
+    
+    
+    <category term="Java" scheme="http://universeinheart.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title></title>
     <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/%E7%B2%BE%E8%BF%9B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%BE%88%E5%8E%89%E5%AE%B3%E7%9A%84%E4%BA%BA/"/>
     <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/%E7%B2%BE%E8%BF%9B%EF%BC%9A%E5%A6%82%E4%BD%95%E6%88%90%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%BE%88%E5%8E%89%E5%AE%B3%E7%9A%84%E4%BA%BA/</id>
@@ -255,248 +488,6 @@
     
     
     <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习方法论</title>
-    <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/04/"/>
-    <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/04/</id>
-    <published>2021-04-17T09:31:37.000Z</published>
-    <updated>2021-04-17T10:02:26.582Z</updated>
-    
-    <content type="html"><![CDATA[<p>学习，应该是分情况而言的，没有放之四海皆准的学习法则，不同的情况所用的方法也不同。我根据学习目的的不同，将学习分为三种情况。<br>一，应试学习。<br>二，技能学习。<br>三，方法论学习。</p><p>三种情况的认知学原理是相通的，所以首先我们要明白在最基础的层面，我们的大脑是如何吸收新知识的。</p><h2 id="认知学原理"><a href="#认知学原理" class="headerlink" title="认知学原理"></a>认知学原理</h2><img src="/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/04/image-20210417174737093.png" class="" title="image-20210417174737093"><p>上图左边是周边环境，有很多可看可听的事情、待解决的问题等，右边是科学家们称为<strong>工作记忆</strong>的大脑组成，它保存你正在思考的事情。工作记忆是大脑中让你意识到周围有什么的地方，比如看见一缕光落在布满灰尘的桌子上。</p><p><strong>长期记忆是一个储存你关于世界的事实性知识的巨大仓库</strong>:瓢虫身上有圆点，你最喜欢的冰淇淋口味等。事实性知识可以是抽象的，比如三角形是有三条边的封闭图形，或者你对狗的总体认知。长期记忆中的所有信息在于意识之外，在使用之前它都静静地待在那里，进人工作记忆时它才浮现到意识中。如果我问你北极熊是什么颜色，你几乎会脱口说出白色。白色这个信息刚才进人你的工作记忆。<strong>长期记忆中还包含了过程性知识，这是你对执行任务所必需的大脑过程的知识。</strong></p><p><strong>思考在你将周边环境和长期记忆中的信息用新的方法组合时发生</strong>，这一组合过程在工作记忆中发生。有些问题看上去很棘手，比如微积分方程，其原因在于我们的工作记忆中没有足够的空间来储存问题的所有信息。工作记忆的空间有限， 所以工作记忆空间一旦拥挤，思考就变得异常困难。</p><p>所谓学会了某种知识，就是这种知识成功存入了你的长期记忆中，并且在用的时候，可以马上调出浮现在工作记忆中。那么学习就简化为两个问题，<strong>一是如何将知识存入长期记忆中</strong>。<strong>二是如何成功调用，既所谓的“知识迁移</strong>”。</p><p>关于第一个问题，你的记忆系统是这样估量的：如果你仔细地思考过一件事情，你就有可能再度想起它，所以它应该被存储。因此你的记忆不是你想要记住或你尝试记住的事情，而是你所思考的事情。<strong>记忆是思考的残留物，所以要记住一个东西，就要思考这个东西的意义。</strong></p><p>第二个问题的关键在于给工作记忆扩容。工作记忆的空间是有限的，要想成功的运用复杂的知识，我们就需要让长期记忆中的知识打包合并，因为工作记忆空间的大小是由有意义的片段决定的，单个片段的信息量越大，我们对这个知识运用的越好。工作记忆扩容方法有两个。<strong>一是将新知识与已有知识做类比，寻找相同的深层结构，从而更好的理解和思考。第二个方法是你可以让工作记忆中操纵信息的过程更有效率</strong>。这种过程性知识也是存储在长期记忆中的，过程越有效率，在工作记忆中所占空间越小。下面我们对三种学习情况分别进行说明。</p><h2 id="应试学习"><a href="#应试学习" class="headerlink" title="应试学习"></a>应试学习</h2><p>应试学习即为了考试而进行的学习，有两种情况，一种是从小学到大学的课堂式学习，另一种是类似考研或考证的自学备考型学习。先说课堂学习，分四块内容，预习–听课–自习–复习。</p><p>预习是非常重要的，它为高效听课打下基础。预习的目的是给即将学习的知识在大脑中建立一定的背景知识，这样在听课时，这些知识在工作记忆中所占的空间就会减小，从而让我们有更多的思考空间。预习另一个好处是变被动学习为主动学习。预习过程中要找到自己的困惑点和难点，记录下来，在课堂中解决。这本身就是一个思考的过程，可以让知识记得更牢。</p><p>听课的第一要义是专注，要把自己的眼睛和大脑交给老师。有了专注的态度接下来做两件事。一是要不停的思考，思考老师讲的和你自己预习时理解的有没有差别。考虑老师所讲的概念，作用，合理性，是否存在矛盾，潜在应用，现实生活中的映射等。不明白的地方简要记下来。这是一个加深理解和记忆的过程，<strong>记住，记忆是思考的残留物</strong>。二是做笔记。做笔记推荐<strong>康奈尔笔记法</strong>，简单易学，并且符合认知学原理。淘宝康奈尔笔记本一搜一大把，15到20多的样子。</p><p>说完记笔记的方法，我们来看看我们应该在笔记本上记些什么？老师的补充讲解内容、老师自己独创的东西、上课讲的非常经典的例题和模型、老师反复强调的点以及<strong>自己灵光乍现的感悟</strong>等等。</p><p>什么内容完全没必要记进笔记？概念性的东西、课本上有的东西、已经烂熟于心的内容没必要记，但是还是要简单标注这些内容的页码，这样课后总结才容易找出知识脉络。</p><p>自习。做某一科作业时，先回顾这一科的课堂笔记，总结要点写在笔记本左侧的1号区域。这也是一个思考的过程，让知识进一步加深印象，并且通过思考将信息压缩。然后开始做作业，做作业的过程既是重新思考知识点如何运用的过程，也是需要你筛选好题和有疑问的题的过程，应该用不同符号标出，比如有疑问的题前边用？标记，觉得好的题目前边用*标出。</p><p>要着重总结知识点在题目中的运用方式，通过例题找出这个知识点运用的“套路”，这是一个寻找深层结构的过程。</p><p>一旦我们找到了深层结构，我们就真正掌握了这个知识点，剩下的就是要经常复习，让这个深层结构的调用路径也变成一整块有意义的片段存储在我们的长期记忆中。通过这样的总结和思考，我们便能举一反三。然后，要定期复习，每一科安排固定时间进行复习，复习时着重复习标记的题目和笔记内容，有新的想法随时添加到笔记中。</p><p>最后，等所有的课程都学完的时候，要总结和归纳所学知识，构建自己的知识框架，建议采用思维导图的方法，这样的总结可以让你对知识有个整体把握。学习的目的就是用尽可能少的例子找到问题和答案之间最普遍的规律。所以思维导图也要侧重总结普遍规律。具体步骤如下图：</p><img src="/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/04/image-20210417174856729.png" class="" title="image-20210417174856729"><h2 id="技能学习"><a href="#技能学习" class="headerlink" title="技能学习"></a>技能学习</h2><p>技能知识是指某种流程或某种技巧，通过不断的练习后指导我们解决现实中的某种问题的知识。包括各种软件学习，各种体育项目学习，摄影绘画等技巧的学习等等。这类知识的特点就是实操性极强，目的性极强。技能知识都是熟能生巧的知识，光说不练等于没学，实操才是硬道理。技能学习推荐采用<strong>刻意练习</strong>的方法。</p><h4 id="找个好老师"><a href="#找个好老师" class="headerlink" title="找个好老师"></a>找个好老师</h4><p>优秀的教练知道学习一件事情的最佳次序，他会给你演示正确的行为、提供有效的反馈，并且避免你“走弯路”。</p><p>如果没有条件参加课程或者找教练怎么办？其实我们已经拥有了一位万能的“教练”：互联网。你可以通过网络，找到：1.丰富的学习资料、工具（书籍、视频、录音、软件等）。2.特定领域的学习社群（qq群、微信群、论坛、线下沙龙等）相比真人的教练面对面教你，通过互联网自主学习效果会有所削减，但是维度更加丰富，你仍然可以从别人总结的“学习攻略”中快速的进步。</p><p>接下来是很关键的一步：设计你的刻意练习方法。</p><p>如果你没有导师教，就一定要结合网络找到的资料，设计属于自己的训练方案。</p><h4 id="有精确定义的目标和计划"><a href="#有精确定义的目标和计划" class="headerlink" title="有精确定义的目标和计划"></a>有精确定义的目标和计划</h4><p>关键在于要有目的的练习。学习这类知识首先要给自己定位，你要学到什么程度，比如学羽毛球，你是要到职业水平，还是业余顶尖水平，还是在你的同事们中间处于一个中上等水平。定了大目标后，要分解成若干小目标，小目标要足够具体，还是说羽毛球，如果你的大目标是专业或业余顶尖水平，那么你在制定计划时就不能只是从羽毛球的技术入手，还需要从自身体能，战略战术等层面共同拓展，而且最好是找一个专业的教练，循序渐进。如果你只想日常锻炼，处于同事中上等，则相对容易，但要进步，还是需要制定一个计划，比如这场球我要学习放短球，那你可以打之前看看放短球的视频，在比赛时尽量运用。</p><h4 id="要获得及时有效的反馈"><a href="#要获得及时有效的反馈" class="headerlink" title="要获得及时有效的反馈"></a>要获得及时有效的反馈</h4><p>练习最大的意义是要获得如何改进的反馈。有效反馈包含两方面：<strong>及时和客观</strong>。</p><p>你必须及时的知道你的练习对还是不对，如果不对，错在哪里。没有有效的反馈，你会因为错误的练习方式而产生相反的结果。这也是为什么请人教是最佳的学习方式，教练能够给你最有效的反馈：你练对了，他告诉你继续保持，你练错了，他马上就给你指正。</p><p>如果你想学某样技能，经济允许，就去找导师学，至少尽可能在“初学阶段”，花钱参加某种正式的培训，让专业导师带你先“正确的入门”。</p><p>如果没有条件花钱上课学，就给自己每次的练习做记录、录视频、录音，以观众视角看自己的练习过程，再对照正确的范例纠正自己，同样能获得有效的反馈。</p><p>不断获得反馈，才是严肃有效的刻意练习。</p><h4 id="坚持不懈的刻意练习"><a href="#坚持不懈的刻意练习" class="headerlink" title="坚持不懈的刻意练习"></a>坚持不懈的刻意练习</h4><p>接下来就是要不断的刻意练习，完成自己的学习目标，不断学习新技巧，巩固已学会的技巧。这个过程也是一个不断思考的过程，这些技能将慢慢储存到我们的长期记忆中，并且随着熟练程度的提高，这些知识会集成为信息密度越来越高的片段，在工作记忆中所占用的空间越来越小，最终成为“自动驾驶”的知识。</p><h2 id="理论性学习"><a href="#理论性学习" class="headerlink" title="理论性学习"></a>理论性学习</h2><p>这块儿知识指的是那些我们感兴趣，但是不用来考试或应用，或应用的很少的理论性知识。比如历史知识，天文知识，植物学知识等等。这些知识因为平常不怎么用，很容易学了就忘，推荐采用费曼学习法。</p><p>费曼学习法说起来很简单，只有两步，<strong>学习和解释</strong>。学习方法可以用我们上文描述的思维导图法，而解释的关键在于验证二字。<strong>学习是用有限的例子归纳某一知识的规律从而解决有关这个知识的新问题，解释的过程就是验证你是否学会的过程</strong>，如果不能言简意赅的说清楚某个知识点，说明信息在我们脑中压缩的还不够。说明我们对该知识的掌握还不够，还需要再进行归纳总结。</p><p>思维导图是以过程为主导的学习方法，注重知识的拆分，而费曼技巧是以目的为主导的学习方法，核心在于验证和使用知识。我们可以把我们学到的知识与好友进行讨论，或者也可以给自己复述。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;学习，应该是分情况而言的，没有放之四海皆准的学习法则，不同的情况所用的方法也不同。我根据学习目的的不同，将学习分为三种情况。&lt;br&gt;一，应试学习。&lt;br&gt;二，技能学习。&lt;br&gt;三，方法论学习。&lt;/p&gt;
-&lt;p&gt;三种情况的认知学原理是相通的，所以首先我们要明白在最基础的层面，我</summary>
-      
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/21%E4%B8%96%E7%BA%AA%E8%B5%84%E6%9C%AC%E8%AE%BA/"/>
-    <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/21%E4%B8%96%E7%BA%AA%E8%B5%84%E6%9C%AC%E8%AE%BA/</id>
-    <published>2021-04-17T09:30:38.937Z</published>
-    <updated>2021-04-17T10:11:26.687Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>李嘉图：稀缺性原则</strong></p><p><strong>马克思：无限积累原则</strong></p><ol><li> 私人资本的积累和分配过程本身就具有使财富集中且往往过度集中的强大推动力</li><li>从长期来看，资本收益率（特别是顶级资本的收益率）明显超过经济增长率。两者之差导致初始资本之间的差距一直延续下去（资本持有者只需将资本收入的一小部分用于保持自己的生活水平，而将大部分用于再投资），并且可能造成资本的高度集中</li><li> 中国原则上可以凭借强有力的中央统一领导体制和高层领导者的反腐和促进公益的决心贯彻累进税制，免于游说集团的压力和竞选政治献金带来的束缚。</li><li>财富分配包含两个维度，一是“要素”分配，这里劳动力和资本被当作是“生产要素”，他们被抽象成两个均匀的实体；二是“个体”分配，这会考虑到个体层面上的劳动收入和资本收入的不平等。现实中这两个维度都非常重要。如果不同时分析这两个维度，是不可能完全理解分配问题的。</li><li>所有产出必须以某种收入的形式分配到劳动或资本上—或者是工资、薪水、酬金、奖金等（作为对工人和在生产过程中贡献了劳动力的人的报酬），或者是其他如利润、红利、利息、租金、版税等（作为对生产过程中使用的资本的所有者的报酬）</li><li>资本指的是能够划分所有权、可在市场中交换的非人力资产的总和，不仅包括所有形式的不动产（含居民住宅），还包括公司和政府机构所使用的金融资本和专业资本（厂房、基础设施、机器、专利等）。</li><li>资本从来不是一成不变的，至少在初期总是伴随着风险与企业家精神，但也总是在积累到足够大的数额后向租金的形式转化，那是它的使命，也是它的逻辑终点</li><li>拥有财富的好处在于，人们即使不工作也能继续消费和积累，或者说能够以比自己从事生产更快的速度来继续消费和积累。同样的逻辑也适用于殖民主义时代的国际舞台</li><li></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;strong&gt;李嘉图：稀缺性原则&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;马克思：无限积累原则&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt; 私人资本的积累和分配过程本身就具有使财富集中且往往过度集中的强大推动力&lt;/li&gt;
-&lt;li&gt;从长期来看，资本收益率（特别是顶</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>如何能很好地安排好自己的时间？</title>
-    <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/03/"/>
-    <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/03/</id>
-    <published>2021-04-17T09:29:37.000Z</published>
-    <updated>2021-04-17T10:03:02.892Z</updated>
-    
-    <content type="html"><![CDATA[<p>人的一生两个最大的财富是：你的才华和你的时间。才华越来越多，但是时间越来越少，我们的一生可以说是用时间来换取才华。如果一天天过去了，我们的时间少了，而才华没有增加，那就是虚度了时光。所以，我们必须节省时间，有效率地使用时间。</p><p>如何有效率地利用时间呢？我有下面几个建议： </p><p><strong>1、做你真正感兴趣、与自己人生目标一致的事情。</strong>我发现我的“生产力”和我的“兴趣”有着直接的关系，而且这种关系还不是单纯的线性关系。如果面对我没有兴趣的事情，我可能会花掉40％的时间，但只能产生20％的效果；如果遇到我感兴趣的事情，我可能会花100％的时间而得到200％的效果。要在工作上奋发图强，身体健康固然重要，但是真正能改变你的状态的关键是心理而不是生理上的问题。真正地投入到你的工作中，你需要的是一种态度、一种渴望、一种意志。 </p><p><strong>2、****知道你的时间是如何花掉的。</strong>挑一个星期，每天记录下每30分钟做的事情，然后做一个分类（例如：读书、准备GRE、和朋友聊天、社团活动等）和统计，看看自己什么方面花了太多的时间。<strong>凡事想要进步，必须先理解现状。</strong>每天结束后，把一整天做的事记下来，每15分钟为一个单位（例如：1:00—1:15等车，1:15—1:45搭车，1:45—2:45与朋友喝茶……）。在一周结束后，分析一下，这周你的时间如何可以更有效率地安排？有没有活动占太大的比例？有没有方法可以增加效率？ </p><p>3、<strong>使用时间碎片和“死时间”。</strong>如果你做了上面的时间统计，你一定发现每天有很多时间流失掉了，例如等车、排队、走路、搭车等，可以用来背单字、打电话、温习功课等。现在随时随地都能上网，所以没有任何借口再发呆一次。重点是，无论自己忙还是不忙，你要把那些可以利用时间碎片做的事先准备好，到你有空闲的时候有计划地拿出来做。 </p><p><strong>3、要事为先</strong> - 每天一大早挑出最重要的三件事，当天一定要能够做完。在工作和生活中每天都有干不完的事，唯一能够做的就是分清轻<strong>重</strong>缓急。要理解急事不等于重要的事情。每天除了办又急又重要的事情外，一定要注意不要成为急事的奴隶。<strong>有些急但是不重要的事情，你要学会放掉，要能对人说 no!</strong> 而且每天这三件事里最好有一件重要但是不急的，这样才能确保你没有成为急事的奴隶。 </p><p><strong>4、要有纪律。</strong>有的年轻人会说自己“没有时间学习”，其实，换个说法就是“学习没有被排上优先级次序”。时间管理就是要找到自己的优先级，若颠倒顺序，一堆琐事占满了时间，重要的事情就没有空位了。”</p><p><strong>5、运用80％—20％原则。</strong>人如果利用最高效的时间，只要20％的投入就能产生80％的效率。相对来说，如果使用最低效的时间，80％的时间投入只能产生20%效率。一天头脑最清楚的时候，应该放在最需要专心的工作上。与朋友、家人在一起的时间，相对来说，不需要头脑那么清楚。所以，我们要把握一天中20％的最高效时间（有些人是早晨，也有些人是下午和晚上；除了时间之外，还要看你的心态，血糖的高低，休息是否足够等综合考量），专门用于最困难的科目和最需要思考的学习上。</p><p><strong>6、平衡工作和家庭。</strong>我对于家庭的时间分配是用下列的原则： </p><ul><li>划清界限、言出必行——对家人做出承诺后，而且一定要做到，但是希望其他时间得到谅解。制定较低的期望值以免造成失望。</li><li>忙中偷闲——不要一投入工作就忽视了家人，有时10分钟的体贴比10小时的陪伴还更受用。</li><li>闲中偷忙——学会怎么利用时间碎片。例如：家人没起床的时候，你就可以利用这段空闲时间去做你需要的工作。</li><li>注重有质量的时间（quality time）——时间不是每一分钟都是一样的，有时需要全神贯注，有时坐在旁边上网就可以了。要记得家人平时为你牺牲很多，度假、周末是你补偿的机会。</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;人的一生两个最大的财富是：你的才华和你的时间。才华越来越多，但是时间越来越少，我们的一生可以说是用时间来换取才华。如果一天天过去了，我们的时间少了，而才华没有增加，那就是虚度了时光。所以，我们必须节省时间，有效率地使用时间。&lt;/p&gt;
-&lt;p&gt;如何有效率地利用时间呢？我有下面几</summary>
-      
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://universeinheart.github.io/2021/04/17/Java/000/"/>
-    <id>http://universeinheart.github.io/2021/04/17/Java/000/</id>
-    <published>2021-04-17T09:28:39.826Z</published>
-    <updated>2021-04-17T09:35:01.258Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="什么是字节码增强技术"><a href="#什么是字节码增强技术" class="headerlink" title="什么是字节码增强技术"></a>什么是字节码增强技术</h3><p>java字节码生成之后，<strong>运行期</strong>对其进行修改，增强其功能</p><h3 id="运行期"><a href="#运行期" class="headerlink" title="运行期"></a>运行期</h3><h3 id="字节码相关技术"><a href="#字节码相关技术" class="headerlink" title="字节码相关技术"></a>字节码相关技术</h3><ul><li>动态代理</li><li>CGLIB</li><li>javassist</li><li>asm</li></ul><h3 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h3><ul><li>实质上动态生成字节码与反射机制结合</li><li>运行期根据不同的入参生成不同的字节码文件，继承于Proxy对象，实现传入对象的实现接口</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogProxy</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getProxyObject</span><span class="params">(Object o)</span></span>&#123;</span><br><span class="line">        object=o;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),o.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (IllegalArgumentException e)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;before invoke ...&quot;</span>);</span><br><span class="line">        Object result= method.invoke(object,args);</span><br><span class="line">        System.out.println(<span class="string">&quot;after invoke ...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;什么是字节码增强技术&quot;&gt;&lt;a href=&quot;#什么是字节码增强技术&quot; class=&quot;headerlink&quot; title=&quot;什么是字节码增强技术&quot;&gt;&lt;/a&gt;什么是字节码增强技术&lt;/h3&gt;&lt;p&gt;java字节码生成之后，&lt;strong&gt;运行期&lt;/strong&gt;对其进行修改</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>有效的读书笔记</title>
-    <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/00/"/>
-    <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/00/</id>
-    <published>2021-04-17T09:26:37.000Z</published>
-    <updated>2021-04-17T10:00:40.106Z</updated>
-    
-    <content type="html"><![CDATA[<p>这种亲手写下摘要和读后感的过程也绝不是简单的“流水账式操作”,写完就可以扔掉了。这些宝贵的内容,正是将来总有一天你能用到的知识储备。</p><p>把灵感记录在纸上,让思考书面化，让灵感脱离之前的抽象状态，会更容易将其理解消化，也能促使你把灵感用作创意材料，想用的时候就能信手拈来。</p><img src="/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/00/6303b24fdf951a8758c49712e81033ad.jpg" class="" title="img"><p>读书笔记需要我们读书、画重点、写读书笔记三个步骤,每个步骤都需要阅读。这种多次阅读留下的印象肯定会比普通的阅读深刻好几倍。如果是亲手摘抄,效果会更好。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;这种亲手写下摘要和读后感的过程也绝不是简单的“流水账式操作”,写完就可以扔掉了。这些宝贵的内容,正是将来总有一天你能用到的知识储备。&lt;/p&gt;
-&lt;p&gt;把灵感记录在纸上,让思考书面化，让灵感脱离之前的抽象状态，会更容易将其理解消化，也能促使你把灵感用作创意材料，想用的时候就能信</summary>
-      
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如果有时间看的东西</title>
-    <link href="http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/05/"/>
-    <id>http://universeinheart.github.io/2021/04/17/%E5%B0%8F%E5%86%8C%E5%AD%90/05/</id>
-    <published>2021-04-17T09:12:37.000Z</published>
-    <updated>2021-04-17T10:03:38.498Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="纪录片"><a href="#纪录片" class="headerlink" title="纪录片"></a>纪录片</h2><ol><li><p>无节制消费的元凶</p></li><li><ol><li>将产品制成易损品</li><li>制造焦虑，恐惧式营销</li><li>利用儿童影响大人的决策</li><li>信贷产品，宣扬超前消费</li><li>产品标签化（奢侈品）</li><li>激发非理性消费欲望</li></ol></li><li><p>但是还有书籍</p></li><li><p>万物与虚无</p></li><li><p>抽象：设计的艺术</p></li><li><p>积极心理学</p></li><li><p>粒子狂热</p></li><li><p>维度：数学漫步</p></li><li><p>公司的力量</p></li><li><p>神秘的混沌理论</p></li><li><p>人生果实</p></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;纪录片&quot;&gt;&lt;a href=&quot;#纪录片&quot; class=&quot;headerlink&quot; title=&quot;纪录片&quot;&gt;&lt;/a&gt;纪录片&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;无节制消费的元凶&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol&gt;
-&lt;li&gt;将产品制成易损品&lt;/li&gt;
-&lt;li&gt;制造焦虑，恐惧</summary>
-      
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>00、Netty基础</title>
-    <link href="http://universeinheart.github.io/2021/04/16/Netty/01/"/>
-    <id>http://universeinheart.github.io/2021/04/16/Netty/01/</id>
-    <published>2021-04-16T15:26:37.000Z</published>
-    <updated>2021-04-17T09:18:32.736Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>学习本课程的目标</p><ol><li>掌握<code>Java</code>网络编程基础知识和原理</li><li>使用<code>Netty</code>构建一个<code>Java</code>网络服务器</li><li>熟悉<code>Netty</code>核心源码以及深层原理</li><li>熟练诊断、分析并排查<code>Netty</code>使用中的故障</li></ol></blockquote><ul><li>本质：网络应用程序框架</li><li>实现：异步，事件驱动</li><li>特性：高性能、可维护、快速开发</li><li>用途：开发服务器和客户端</li></ul><img src="/2021/04/16/Netty/01/image-20210416233502685.png" class="" title="image-20210416233502685"><p>第一章、<code>Netty</code> 背景，现状与趋势</p><p>第二章、<code>Netty</code> 源码，从领域知识的角度剖析</p><p>第三章、<code>Netty</code> 源码，从请求处理的角度剖析</p><p>第四章、<code>Netty</code> 实战入门，写一个玩具项目</p><p>第五章、<code>Netty</code> 实战进阶，把玩具变产品</p><p>第六章、成为<code>Netty</code> 贡献者</p><h2 id="经典的三种IO模型"><a href="#经典的三种IO模型" class="headerlink" title="经典的三种IO模型"></a>经典的三种IO模型</h2><blockquote><p>BIO 同步阻塞方式</p><p>NIO 同步非阻塞方式</p><p>AIO 异步非阻塞方式</p></blockquote><img src="/2021/04/16/Netty/01/image-20210417142957552.png" class="" title="image-20210417142957552"><h4 id="阻塞与非阻塞"><a href="#阻塞与非阻塞" class="headerlink" title="阻塞与非阻塞"></a>阻塞与非阻塞</h4><ul><li>菜没好，要不要死等 -&gt; 数据就绪前要不要等待？</li><li>没有数据传过来时，读会阻塞直到有数据；缓冲区满时，写操作也会阻塞。</li><li>非阻塞遇到这些情况，都是直接返回。</li></ul><h4 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h4><ul><li>菜好了，谁端 -&gt; 数据就绪后，数据操作谁完成？</li><li>数据就绪后需要自己去读是同步</li><li>数据就绪直接读好再回调给程序是异步</li></ul><h3 id="为什么Netty目前只支持NIO"><a href="#为什么Netty目前只支持NIO" class="headerlink" title="为什么Netty目前只支持NIO"></a>为什么Netty目前只支持NIO</h3><p>为什么不建议使用BIO？</p><ul><li>连接数高的情况下：阻塞-&gt; 耗资源、效率低</li></ul><p>为什么删掉已经做好的AIO？</p><ul><li>Windows实现成熟，但是很少用来做服务器。</li><li>Linux常用来做服务器，但是AIO实现不够成熟。</li><li>Linux下AIO相比较NIO的性能提升不明显</li></ul><h2 id="Reactor的三种版本"><a href="#Reactor的三种版本" class="headerlink" title="Reactor的三种版本"></a>Reactor的三种版本</h2><p>Reactor是一种开发模式， 模式的核心流程：</p><ol><li>注册感兴趣的事件</li><li>扫描是否有感兴趣的事件发生</li><li>事件发生后作出相应的处理</li></ol><img src="/2021/04/16/Netty/01/image-20210417145140095.png" class="" title="image-20210417145140095"><h4 id="Reactor模式V1：单线程"><a href="#Reactor模式V1：单线程" class="headerlink" title="Reactor模式V1：单线程"></a>Reactor模式V1：单线程</h4><img src="/2021/04/16/Netty/01/image-20210417150923036.png" class="" title="image-20210417150923036"><h4 id="Reactor模式V2：多线程"><a href="#Reactor模式V2：多线程" class="headerlink" title="Reactor模式V2：多线程"></a>Reactor模式V2：多线程</h4><img src="/2021/04/16/Netty/01/image-20210417150944752.png" class="" title="image-20210417150944752"><h4 id="Reactor模式V3：主从多线程"><a href="#Reactor模式V3：主从多线程" class="headerlink" title="Reactor模式V3：主从多线程"></a>Reactor模式V3：主从多线程</h4><img src="/2021/04/16/Netty/01/image-20210417151004621.png" class="" title="image-20210417151004621"><h4 id="如何在Netty中使用Reactor模式"><a href="#如何在Netty中使用Reactor模式" class="headerlink" title="如何在Netty中使用Reactor模式"></a>如何在Netty中使用Reactor模式</h4><img src="/2021/04/16/Netty/01/image-20210417151230262.png" class="" title="image-20210417151230262"><h2 id="解析Netty对Reactor模式支持的常见疑问"><a href="#解析Netty对Reactor模式支持的常见疑问" class="headerlink" title="解析Netty对Reactor模式支持的常见疑问"></a>解析Netty对Reactor模式支持的常见疑问</h2><h4 id="Netty如何支持主从Reactor模式的？"><a href="#Netty如何支持主从Reactor模式的？" class="headerlink" title="Netty如何支持主从Reactor模式的？"></a>Netty如何支持主从Reactor模式的？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//io.netty.bootstrap.ServerBootstrap#group(io.netty.channel.EventLoopGroup, io.netty.channel.EventLoopGroup)</span></span><br><span class="line">    <span class="keyword">volatile</span> EventLoopGroup group;</span><br><span class="line"><span class="function"><span class="keyword">public</span> ServerBootstrap <span class="title">group</span><span class="params">(EventLoopGroup parentGroup, EventLoopGroup childGroup)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 对group进行赋值</span></span><br><span class="line">        <span class="keyword">super</span>.group(parentGroup);</span><br><span class="line">        ObjectUtil.checkNotNull(childGroup, <span class="string">&quot;childGroup&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.childGroup != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;childGroup set already&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.childGroup = childGroup;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//io.netty.bootstrap.AbstractBootstrap#initAndRegister</span></span><br><span class="line">    <span class="comment">//开始register</span></span><br><span class="line">   <span class="comment">// parentGroup 绑定 channel  -&gt;  NioServerSocketChannel</span></span><br><span class="line">        ChannelFuture regFuture = config().group().register(channel);</span><br><span class="line">        <span class="keyword">if</span> (regFuture.cause() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (channel.isRegistered()) &#123;</span><br><span class="line">                channel.close();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                channel.unsafe().closeForcibly();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//io.netty.bootstrap.ServerBootstrap.ServerBootstrapAcceptor#channelRead</span></span><br><span class="line"><span class="comment">// msg -&gt; NioSocketChannel</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">channelRead</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">final</span> Channel child = (Channel) msg;</span><br><span class="line"></span><br><span class="line">            child.pipeline().addLast(childHandler);</span><br><span class="line"></span><br><span class="line">            setChannelOptions(child, childOptions, logger);</span><br><span class="line">            setAttributes(child, childAttrs);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// childGroup 绑定 channel  -&gt;  NioSocketChannel</span></span><br><span class="line">                childGroup.register(child).addListener(<span class="keyword">new</span> ChannelFutureListener() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operationComplete</span><span class="params">(ChannelFuture future)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (!future.isSuccess()) &#123;</span><br><span class="line">                            forceClose(child, future.cause());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">                forceClose(child, t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h4 id="为什么说Netty的main-reactor-大多并不能用到一个线程组，只能线程组里面的一个？"><a href="#为什么说Netty的main-reactor-大多并不能用到一个线程组，只能线程组里面的一个？" class="headerlink" title="为什么说Netty的main reactor 大多并不能用到一个线程组，只能线程组里面的一个？"></a>为什么说Netty的main reactor 大多并不能用到一个线程组，只能线程组里面的一个？</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绑定地址和端口</span></span><br><span class="line">io.netty.bootstrap.AbstractBootstrap#doBind </span><br><span class="line">   |</span><br><span class="line">   v</span><br><span class="line"><span class="comment">// parentGroup 绑定 channel  -&gt;  NioServerSocketChannel</span></span><br><span class="line">io.netty.bootstrap.AbstractBootstrap#initAndRegister</span><br></pre></td></tr></table></figure><p>因为服务一般只绑定一个端口，<code>doBind</code>只会调用一次，所以<code>initAndRegister</code>只调用一次</p><h4 id="Netty给Channel-分配NIO-event-loop-的规则是什么？"><a href="#Netty给Channel-分配NIO-event-loop-的规则是什么？" class="headerlink" title="Netty给Channel 分配NIO event loop 的规则是什么？"></a>Netty给Channel 分配NIO event loop 的规则是什么？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// NioEventLoopGroup 继承 MultithreadEventLoopGroup</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//io.netty.channel.MultithreadEventLoopGroup#register(io.netty.channel.Channel)</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ChannelFuture <span class="title">register</span><span class="params">(Channel channel)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// next()方法根据下面的选择器中next方法选择一个NioEventLoop，将channel绑定到上面</span></span><br><span class="line">    <span class="keyword">return</span> next().register(channel);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// executors -&gt; NioEventLoop[]</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EventExecutorChooser <span class="title">newChooser</span><span class="params">(EventExecutor[] executors)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//根据待绑定的executor是否是2的幂次方，做出不同的选择</span></span><br><span class="line">    <span class="keyword">if</span> (isPowerOfTwo(executors.length)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PowerOfTwoEventExecutorChooser(executors);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> GenericEventExecutorChooser(executors);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="通用模式的NIO-实现多路复用器是怎么跨平台的？"><a href="#通用模式的NIO-实现多路复用器是怎么跨平台的？" class="headerlink" title="通用模式的NIO 实现多路复用器是怎么跨平台的？"></a>通用模式的NIO 实现多路复用器是怎么跨平台的？</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//SelectorProvider.provider 不同的JDK有不同的实现 </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NioEventLoopGroup</span><span class="params">(<span class="keyword">int</span> nThreads, ThreadFactory threadFactory)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>(nThreads, threadFactory, SelectorProvider.provider());</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">Netty基础</summary>
-    
-    
-    
-    <category term="Netty" scheme="http://universeinheart.github.io/categories/Netty/"/>
-    
-    
-    <category term="网络" scheme="http://universeinheart.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-    <category term="Netty" scheme="http://universeinheart.github.io/tags/Netty/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>09、Redis 切片集群</title>
-    <link href="http://universeinheart.github.io/2021/04/16/Redis/09/"/>
-    <id>http://universeinheart.github.io/2021/04/16/Redis/09/</id>
-    <published>2021-04-16T14:00:00.000Z</published>
-    <updated>2021-04-16T14:49:06.307Z</updated>
-    
-    <content type="html"><![CDATA[<p>在使用 <code>RDB</code> 进行持久化时，Redis 会  <code>fork</code> 子进程来完成，<code>fork</code> 操作的用时和 Redis 的数据量是 <strong>正相关</strong> 的，而 fork 在执行时会阻塞主线程。数据量越大，<code>fork</code>  操作造成的主线程阻塞的时间越长。所以，在使用 RDB 对 25GB 的数据进行持久化时，数据量较大，后台运行的子进程在 fork  创建时阻塞了主线程，于是就导致 Redis 响应变慢了。</p><p>切片集群，也叫分片集群，就是指启动多个  Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。 在切片集群中，实例在为 5GB 数据生成 RDB 时，数据量就小了很多，fork 子进程一般不会给主线程带来较长时间的阻塞。采用多个实例保存数据切片后，我们既能保存 25GB 数据，又避免了 fork 子进程阻塞主线程而导致的响应突然变慢。</p><h2 id="数据切片和实例的对应分布关系"><a href="#数据切片和实例的对应分布关系" class="headerlink" title="数据切片和实例的对应分布关系"></a>数据切片和实例的对应分布关系</h2><p><code>Redis Cluster</code> 方案中就规定了数据和实例的对应规则。</p><p><code>Redis Cluster</code>  方案采用哈希槽（<code>Hash Slot</code>，接下来我会直接称之为 <code>Slot</code>），来处理数据和实例之间的映射关系。在 <code>Redis Cluster</code>  方案中，一个切片集群共有 <code>16384</code> 个哈希槽，这些哈希槽类似于数据分区，每个键值对都会根据它的 key，被映射到一个哈希槽中。</p><p>首先根据键值对的 key，按照 <code>CRC16</code> 算法计算一个 16 bit 的值；然后，再用这个 16bit 值对 <code>16384</code> 取模，得到 0~16383 范围内的模数，每个模数代表一个相应编号的哈希槽</p><p>在部署 <code>Redis Cluster</code> 方案时，可以使用 <code>cluster create</code> 命令创建集群，此时，Redis 会自动把这些槽平均分布在集群实例上。例如，如果集群中有 N 个实例，那么，每个实例上的槽个数为 16384/N 个。我们也可以使用 <code>cluster meet</code> 命令手动建立实例间的连接，形成集群，再使用 <code>cluster addslots</code> 命令，指定每个实例上的哈希槽个数。<strong>在手动分配哈希槽时，需要把 16384 个槽都分配完，否则 Redis 集群无法正常工作。</strong></p><h2 id="客户端如何定位数据？"><a href="#客户端如何定位数据？" class="headerlink" title="客户端如何定位数据？"></a>客户端如何定位数据？</h2><blockquote><p>客户端为什么可以在访问任何一个实例时，都能获得所有的哈希槽信息呢？</p><p>这是因为，Redis 实例会把自己的哈希槽信息发给和它相连接的其它实例，来完成哈希槽分配信息的扩散。当实例之间相互连接后，每个实例就有所有哈希槽的映射关系了。</p><p>客户端收到哈希槽信息后，会把哈希槽信息缓存在本地。当客户端请求键值对时，会先计算键所对应的哈希槽，然后就可以给相应的实例发送请求了。</p></blockquote><p>实例和哈希槽的对应关系变更：</p><p>1、在集群中，实例有新增或删除，Redis 需要重新分配哈希槽。</p><p>2、为了负载均衡，Redis 需要把哈希槽在所有实例上重新分布一遍。</p><blockquote><p>客户端是无法主动感知最新的哈希槽分配信息，怎么办？</p><p>答：Redis Cluster 方案提供了一种重定向机制，当客户端把一个键值对的操作请求发给一个实例时，如果这个实例上并没有这个键值对映射的哈希槽，那么，这个实例就会给客户端返回下面的 <code>MOVED</code> 命令响应结果，这个结果中就包含了新实例的访问地址。</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; MOVED 命令表示，客户端请求的键值对所在的哈希槽 13320，实际是在 172.16.19.5 这个实例上</span><br><span class="line">GET hello:key</span><br><span class="line">(error) MOVED 13320 172.16.19.5:6379</span><br></pre></td></tr></table></figure><img src="/2021/04/16/Redis/09/image-20210119151846324.png" class="" title="image-20210119151846324">]]></content>
-    
-    
-    <summary type="html">数据增多了，是该加内存还是加实例？</summary>
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>11、Redis String 为什么不好用了？</title>
-    <link href="http://universeinheart.github.io/2021/04/16/Redis/10/"/>
-    <id>http://universeinheart.github.io/2021/04/16/Redis/10/</id>
-    <published>2021-04-16T14:00:00.000Z</published>
-    <updated>2021-04-16T14:53:52.340Z</updated>
-    
-    <content type="html"><![CDATA[<p>String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 <strong>保存数据时所消耗的内存空间较多</strong></p><p>使用 <strong>二级编码</strong>，实现 <strong>用集合类型保存单键值对</strong>，可以明显降低Redis实例的内存空间消耗</p><h3 id="String-类型的内存空间消耗在哪儿了"><a href="#String-类型的内存空间消耗在哪儿了" class="headerlink" title="String 类型的内存空间消耗在哪儿了?"></a>String 类型的内存空间消耗在哪儿了?</h3><p>除了记录实际数据，String 类型还需要额外的内存空间记录数据长度、空间使用等元数据信息</p><blockquote><p>String 类型具体是怎么保存数据的呢？</p><p>保存 64 位有符号整数时，String 类型会把它保存为一个 8 字节的 Long 类型整数，这种保存方式通常也叫作 int 编码方式。</p><p>保存的数据中包含字符时，String 类型就会用简单动态字符串（Simple Dynamic String，SDS）结构体来保存,在 <code>SDS</code> 中，<code>buf</code> 保存实际数据，而 <code>len</code> 和 <code>alloc</code> 本身其实是 <code>SDS</code> 结构体的额外开销。</p><ul><li><code>buf</code>：字节数组，保存实际数据。为了表示字节数组的结束，Redis 会自动在数组最后加一个“\0”，这就会额外占用 1 个字节的开销。</li><li><code>len</code>：占 4 个字节，表示 buf 的已用长度。</li><li><code>alloc</code>：也占个 4  字节，表示 buf 的实际分配长度，一般大于 len。</li></ul></blockquote><p>RedisObject </p><p>全局哈希表</p><p>jemalloc </p><h3 id="用什么数据结构可以节省内存"><a href="#用什么数据结构可以节省内存" class="headerlink" title="用什么数据结构可以节省内存?"></a>用什么数据结构可以节省内存?</h3><p><strong>压缩列表（ziplist）</strong>，这是一种非常节省内存的结构，压缩列表表头有三个字段 <code>zlbytes</code>、<code>zltail</code> 和 <code>zllen</code>，分别表示 <strong>列表长度</strong>、<strong>列表尾的偏移量</strong>，以及 <strong>列表中的 entry 个数</strong>。压缩列表尾还有一个 <code>zlend</code>，表示列表结束。</p><p>压缩列表之所以能节省内存，就在于它是用一系列 <strong>连续的 entry 保存数据</strong>。</p><p>每个 entry 的元数据包括下面几部分。</p><ul><li><code>prev_len</code>，表示前一个 entry  的长度。prev_len 有两种取值情况：1 字节或 5 字节。取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1  字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255  表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len  取值为 1 字节，否则，就取值为 5 字节。</li><li><code>len</code>：表示自身长度，4 字节；</li><li><code>encoding</code>：表示编码方式，1  字节；</li><li><code>content</code>：保存实际数据。</li></ul><h3 id="如何用集合类型保存单值键值对"><a href="#如何用集合类型保存单值键值对" class="headerlink" title="如何用集合类型保存单值键值对?"></a>如何用集合类型保存单值键值对?</h3><p>采用基于 Hash 类型的二级编码方法。就是把一个单值的数据拆分成两部分，前一部分作为 Hash 集合的 key，后一部分作为 Hash 集合的 value，这样一来，我们就可以把单值数据保存到 Hash 集合中了。</p><p>以图片 ID 1101000060  和图片存储对象 ID 3302000080 为例，我们可以把图片 ID 的前 7 位（1101000）作为 <strong>Hash 类型的键</strong>，把图片 ID  的最后 3 位（060）和图片存储对象 ID 分别作为 <strong>Hash 类型值中的 key 和 value</strong>。按照这种设计方法，我在 Redis  中插入了一组图片 ID 及其存储对象 ID 的记录，并且用 info 命令查看了内存开销，我发现，增加一条记录后，内存占用只增加了 16  字节，如下所示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039120</span><br><span class="line">127.0.0.1:6379&gt; hset 1101000 060 3302000080</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039136</span><br></pre></td></tr></table></figure><h3 id="Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"><a href="#Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？" class="headerlink" title="Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"></a>Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？</h3><p>Hash  类型设置了用压缩列表保存数据时的两个阈值，一旦超过了阈值，Hash  类型就会用哈希表来保存数据了。</p><p>这两个阈值分别对应以下两个配置项：</p><p><code>hash-max-ziplist-entries</code>：表示用压缩列表保存时哈希集合中的 <strong>最大元素个数</strong>。</p><p><code>hash-max-ziplist-value</code>：表示用压缩列表保存时哈希集合中 <strong>单个元素的最大长度</strong>。</p><p>如果我们往 Hash 集合中写入的元素个数超过了 <code>hash-max-ziplist-entries</code>，或者写入的单个元素大小超过了 <code>hash-max-ziplist-value</code>，Redis  就会自动把 Hash 类型的实现结构由 <strong>压缩列表转为哈希表</strong>。一旦从压缩列表转为了哈希表，Hash  类型就会一直用哈希表进行保存，而不会再转回压缩列表了。在节省内存空间方面，哈希表就没有压缩列表那么高效了。</p><p>为了能充分使用压缩列表的精简内存布局，我们一般要 <strong>控制保存在 Hash 集合中的元素个数</strong>。所以，在刚才的二级编码中，我们只用图片 ID 最后 3 位作为 Hash 集合的 key，也就保证了 Hash  集合的元素个数不超过 1000，同时，我们把 hash-max-ziplist-entries 设置为 1000，这样一来，Hash  集合就可以一直使用压缩列表来节省内存空间了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 &lt;strong&gt;保存数据时所消耗的内存空间较多&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用 &lt;strong&gt;二级编码&lt;/strong&gt;，实现 &lt;strong&gt;用集合类型保存单键值对&lt;/strong&gt;，可以明显降</summary>
-      
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>11、Redis String 为什么不好用了？</title>
-    <link href="http://universeinheart.github.io/2021/04/16/Redis/11/"/>
-    <id>http://universeinheart.github.io/2021/04/16/Redis/11/</id>
-    <published>2021-04-16T14:00:00.000Z</published>
-    <updated>2021-04-16T15:16:33.554Z</updated>
-    
-    <content type="html"><![CDATA[<p>String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 <strong>保存数据时所消耗的内存空间较多</strong></p><p>使用 <strong>二级编码</strong>，实现 <strong>用集合类型保存单键值对</strong>，可以明显降低Redis实例的内存空间消耗</p><h3 id="String-类型的内存空间消耗在哪儿了"><a href="#String-类型的内存空间消耗在哪儿了" class="headerlink" title="String 类型的内存空间消耗在哪儿了?"></a>String 类型的内存空间消耗在哪儿了?</h3><p>除了记录实际数据，String 类型还需要额外的内存空间记录数据长度、空间使用等元数据信息</p><blockquote><p>String 类型具体是怎么保存数据的呢？</p><p>保存 64 位有符号整数时，String 类型会把它保存为一个 8 字节的 Long 类型整数，这种保存方式通常也叫作 int 编码方式。</p><p>保存的数据中包含字符时，String 类型就会用简单动态字符串（Simple Dynamic String，SDS）结构体来保存,在 <code>SDS</code> 中，<code>buf</code> 保存实际数据，而 <code>len</code> 和 <code>alloc</code> 本身其实是 <code>SDS</code> 结构体的额外开销。</p><ul><li><code>buf</code>：字节数组，保存实际数据。为了表示字节数组的结束，Redis 会自动在数组最后加一个“\0”，这就会额外占用 1 个字节的开销。</li><li><code>len</code>：占 4 个字节，表示 buf 的已用长度。</li><li><code>alloc</code>：也占个 4  字节，表示 buf 的实际分配长度，一般大于 len。</li></ul></blockquote><p>RedisObject </p><p>全局哈希表</p><p>jemalloc </p><h3 id="用什么数据结构可以节省内存"><a href="#用什么数据结构可以节省内存" class="headerlink" title="用什么数据结构可以节省内存?"></a>用什么数据结构可以节省内存?</h3><p><strong>压缩列表（ziplist）</strong>，这是一种非常节省内存的结构，压缩列表表头有三个字段 <code>zlbytes</code>、<code>zltail</code> 和 <code>zllen</code>，分别表示 <strong>列表长度</strong>、<strong>列表尾的偏移量</strong>，以及 <strong>列表中的 entry 个数</strong>。压缩列表尾还有一个 <code>zlend</code>，表示列表结束。</p><img src="/2021/04/16/Redis/11/image-20210119201052779.png" class="" title="image-20210119201052779"><p>压缩列表之所以能节省内存，就在于它是用一系列 <strong>连续的 entry 保存数据</strong>。</p><p>每个 entry 的元数据包括下面几部分。</p><ul><li><code>prev_len</code>，表示前一个 entry  的长度。prev_len 有两种取值情况：1 字节或 5 字节。取值 1 字节时，表示上一个 entry 的长度小于 254 字节。虽然 1  字节的值能表示的数值范围是 0 到 255，但是压缩列表中 zlend 的取值默认是 255，因此，就默认用 255  表示整个压缩列表的结束，其他表示长度的地方就不能再用 255 这个值了。所以，当上一个 entry 长度小于 254 字节时，prev_len  取值为 1 字节，否则，就取值为 5 字节。</li><li><code>len</code>：表示自身长度，4 字节；</li><li><code>encoding</code>：表示编码方式，1  字节；</li><li><code>content</code>：保存实际数据。</li></ul><h3 id="如何用集合类型保存单值键值对"><a href="#如何用集合类型保存单值键值对" class="headerlink" title="如何用集合类型保存单值键值对?"></a>如何用集合类型保存单值键值对?</h3><p>采用基于 Hash 类型的二级编码方法。就是把一个单值的数据拆分成两部分，前一部分作为 Hash 集合的 key，后一部分作为 Hash 集合的 value，这样一来，我们就可以把单值数据保存到 Hash 集合中了。</p><p>以图片 ID 1101000060  和图片存储对象 ID 3302000080 为例，我们可以把图片 ID 的前 7 位（1101000）作为 <strong>Hash 类型的键</strong>，把图片 ID  的最后 3 位（060）和图片存储对象 ID 分别作为 <strong>Hash 类型值中的 key 和 value</strong>。按照这种设计方法，我在 Redis  中插入了一组图片 ID 及其存储对象 ID 的记录，并且用 info 命令查看了内存开销，我发现，增加一条记录后，内存占用只增加了 16  字节，如下所示：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039120</span><br><span class="line">127.0.0.1:6379&gt; hset 1101000 060 3302000080</span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br><span class="line">127.0.0.1:6379&gt; info memory</span><br><span class="line"><span class="comment"># Memory</span></span><br><span class="line">used_memory:1039136</span><br></pre></td></tr></table></figure><h3 id="Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"><a href="#Hash-类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？" class="headerlink" title="Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？"></a>Hash 类型底层结构什么时候使用压缩列表，什么时候使用哈希表呢？</h3><p>Hash  类型设置了用压缩列表保存数据时的两个阈值，一旦超过了阈值，Hash  类型就会用哈希表来保存数据了。</p><p>这两个阈值分别对应以下两个配置项：</p><p><code>hash-max-ziplist-entries</code>：表示用压缩列表保存时哈希集合中的 <strong>最大元素个数</strong>。</p><p><code>hash-max-ziplist-value</code>：表示用压缩列表保存时哈希集合中 <strong>单个元素的最大长度</strong>。</p><p>如果我们往 Hash 集合中写入的元素个数超过了 <code>hash-max-ziplist-entries</code>，或者写入的单个元素大小超过了 <code>hash-max-ziplist-value</code>，Redis  就会自动把 Hash 类型的实现结构由 <strong>压缩列表转为哈希表</strong>。一旦从压缩列表转为了哈希表，Hash  类型就会一直用哈希表进行保存，而不会再转回压缩列表了。在节省内存空间方面，哈希表就没有压缩列表那么高效了。</p><p>为了能充分使用压缩列表的精简内存布局，我们一般要 <strong>控制保存在 Hash 集合中的元素个数</strong>。所以，在刚才的二级编码中，我们只用图片 ID 最后 3 位作为 Hash 集合的 key，也就保证了 Hash  集合的元素个数不超过 1000，同时，我们把 hash-max-ziplist-entries 设置为 1000，这样一来，Hash  集合就可以一直使用压缩列表来节省内存空间了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;String 类型并不是适用于所有场合的，它有一个明显的短板，就是它 &lt;strong&gt;保存数据时所消耗的内存空间较多&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用 &lt;strong&gt;二级编码&lt;/strong&gt;，实现 &lt;strong&gt;用集合类型保存单键值对&lt;/strong&gt;，可以明显降</summary>
-      
-    
-    
-    
-    <category term="极客时间Redis实战" scheme="http://universeinheart.github.io/categories/%E6%9E%81%E5%AE%A2%E6%97%B6%E9%97%B4Redis%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Redis" scheme="http://universeinheart.github.io/tags/Redis/"/>
     
   </entry>
   
