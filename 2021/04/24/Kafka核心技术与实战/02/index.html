@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02.Kafka术语 | HelloWorld</title><meta name="keywords" content="消息中间件,Kafka"><meta name="author" content="xjf"><meta name="copyright" content="xjf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="--">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02.Kafka术语">
+<meta property="og:url" content="http://universeinheart.github.io/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="--">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-04-24T08:46:37.000Z">
+<meta property="article:modified_time" content="2021-04-24T09:37:38.383Z">
+<meta property="article:author" content="xjf">
+<meta property="article:tag" content="Kafka">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://universeinheart.github.io/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-04-24 17:37:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HelloWorld" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HelloWorld</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">02.Kafka术语</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-04-24T08:46:37.000Z" title="发表于 2021-04-24 16:46:37">2021-04-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-24T09:37:38.383Z" title="更新于 2021-04-24 17:37:38">2021-04-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Kafka/">Kafka</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="02.Kafka术语"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在 <code>Kafka</code> 中，发布订阅的对象是主题（<code>Topic</code>），你可以为每个业务、每个应用甚至是每类数据都创建专属的主题。</p>
+<p>向主题发布消息的客户端应用程序称为生产者（<code>Producer</code>），生产者程序通常持续不断地向一个或多个主题发送消息，而订阅这些主题消息的客户端应用程序就被称为消费者（<code>Consumer</code>）。</p>
+<p>和生产者类似，消费者也能够同时订阅多个主题的消息。我们把生产者和消费者统称为客户端（<code>Clients</code>）。你可以同时运行多个生产者和消费者实例，这些实例会不断地向 <code>Kafka</code> 集群中的多个主题生产和消费消息。</p>
+<p><code>Kafka</code> 的服务器端由被称为 <code>Broker</code> 的服务进程构成，即一个 <code>Kafka</code> 集群由多个 <code>Broker</code> 组成，<code>Broker</code> 负责接收和处理客户端发送过来的请求，以及对消息进行持久化。</p>
+<p>虽然多个 <code>Broker</code> 进程能够运行在同一台机器上，但更常见的做法是将不同的 <code>Broker</code> 分散运行在不同的机器上，这样如果集群中某一台机器宕机，即使在它上面运行的所有 <code>Broker</code> 进程都挂掉了，其他机器上的 <code>Broker</code> 也依然能够对外提供服务。这其实就是 <code>Kafka</code> 提供高可用的手段之一。</p>
+<p>实现高可用的另一个手段就是备份机制（<code>Replication</code>）。备份的思想很简单，就是把<strong>相同的数据拷贝到多台机器上</strong>，而这些相同的数据拷贝在 <code>Kafka</code> 中被称为副本（<code>Replica</code>）。副本的数量是可以配置的，这些副本保存着相同的数据，但却有不同的角色和作用。</p>
+<p><code>Kafka</code> 定义了两类副本：<strong>领导者副本</strong>（<code>Leader Replica</code>）和<strong>追随者副本</strong>（<code>Follower Replica</code>）。前者对外提供服务，这里的对外指的是与客户端程序进行交互；而后者只是被动地追随领导者副本而已，不能与外界进行交互。当然了，你可能知道在很多其他系统中追随者副本是可以对外提供服务的，比如 <code>MySQL</code> 的从库是可以处理读操作的，但是在 <code>Kafka</code> 中<strong>追随者副本不会对外提供服务</strong>。 </p>
+<p>副本的工作机制也很简单：生产者总是向领导者副本写消息；而消费者总是从领导者副本读消息。至于追随者副本，它只做一件事：向领导者副本发送请求，请求领导者把最新生产的消息发给它，这样它能保持与领导者的同步。</p>
+<p>伸缩性即所谓的 <code>Scalability</code>，是分布式系统中非常重要且必须要谨慎对待的问题。什么是伸缩性呢？我们拿副本来说，虽然现在有了领导者副本和追随者副本，但倘若领导者副本积累了太多的数据以至于单台 <code>Broker</code> 机器都无法容纳了，此时应该怎么办呢？一个很自然的想法就是，能否把数据分割成多份保存在不同的 <code>Broker</code> 上？</p>
+<p>如果你就是这么想的，那么恭喜你，<code>Kafka</code> 就是这么设计的。这种机制就是所谓的分区（<code>Partitioning</code>）。<code>Kafka</code> 中的分区机制指的是将<strong>每个主题划分成多个分区</strong>（<code>Partition</code>），<strong>每个分区是一组有序的消息日志</strong>。生产者生产的每条消息只会被发送到一个分区中，也就是说如果向一个双分区的主题发送一条消息，这条消息要么在分区 0 中，要么在分区 1 中。</p>
+<p>刚才提到的副本如何与这里的分区联系在一起呢？实际上，副本是在分区这个层级定义的。每个分区下可以配置若干个副本，其中只能有 1 个领导者副本和 N-1 个追随者副本。生产者向分区写入消息，每条消息在分区中的位置信息由一个叫位移（<code>Offset</code>）的数据来表征。分区位移总是从 0 开始，假设一个生产者向一个空分区写入了 10 条消息，那么这 10 条消息的位移依次是 0、1、2、……、9。</p>
+<blockquote>
+<p>完整地串联起 Kafka 的三层消息架构：</p>
+<ul>
+<li>第一层是<strong>主题层</strong>，每个主题可以配置 M 个分区，而每个分区又可以配置 N 个副本。</li>
+<li>第二层是<strong>分区层</strong>，每个分区的 N 个副本中只能有一个充当领导者角色，对外提供服务；其他 N-1 个副本是追随者副本，只是提供数据冗余之用。</li>
+<li>第三层是<strong>消息层</strong>，分区中包含若干条消息，每条消息的位移从 0 开始，依次递增。</li>
+<li>最后，客户端程序只能与分区的领导者副本进行交互。</li>
+</ul>
+</blockquote>
+<p><code>Kafka Broker</code> 是如何持久化数据的。总的来说，<code>Kafka</code> 使用<strong>消息日志</strong>（<code>Log</code>）来保存数据，一个日志就是磁盘上一个只能追加写（<code>Append-only</code>）消息的物理文件。因为只能追加写入，故避免了缓慢的随机 I/O 操作，改为性能较好的顺序 I/O 写操作，这也是实现 <code>Kafka</code> 高吞吐量特性的一个重要手段。</p>
+<p>不过如果你不停地向一个日志写入消息，最终也会耗尽所有的磁盘空间，因此 <code>Kafka</code> 必然要定期地删除消息以回收磁盘。怎么删除呢？简单来说就是通过日志段（<code>Log Segment</code>）机制。在 <code>Kafka</code> 底层，一个日志又进一步细分成多个日志段，消息被追加写到当前最新的日志段中，当写满了一个日志段后，<code>Kafka</code> 会自动切分出一个新的日志段，并将老的日志段封存起来。<code>Kafka</code> 在后台还有定时任务会定期地检查老的日志段是否能够被删除，从而实现回收磁盘空间的目的。</p>
+<p>在 Kafka 中实现这种点对点模型（<code>Peer to Peer，P2P</code>）的方法就是引入了<strong>消费者组</strong>（<code>Consumer Group</code>）。所谓的消费者组，指的是<strong>多个消费者实例共同组成一个组来消费一组主题</strong>。这组主题中的每个分区都只会被组内的一个消费者实例消费，其他消费者实例不能消费它。</p>
+<p>为什么要引入消费者组呢？主要是为了<strong>提升消费者端的吞吐量</strong>。多个消费者实例同时消费，加速整个消费端的吞吐量（TPS）。消费者实例可以是运行消费者应用的进程，也可以是一个线程，它们都称为一个消费者实例（Consumer Instance）。</p>
+<p>消费者组里面的所有消费者实例不仅“瓜分”订阅主题的数据，而且更酷的是它们还能彼此协助。假设组内某个实例挂掉了，<code>Kafka</code> 能够自动检测到，然后把这个 <code>Failed</code> 实例之前负责的分区转移给其他活着的消费者。这个过程就是 <code>Kafka</code> 中大名鼎鼎的“重平衡”（<code>Rebalance</code>）。嗯，其实既是大名鼎鼎，也是臭名昭著，因为由重平衡引发的消费者问题比比皆是。事实上，目前很多重平衡的 Bug 社区都无力解决。</p>
+<p>每个消费者在消费消息的过程中必然需要有个字段记录它当前消费到了分区的哪个位置上，这个字段就是<strong>消费者位移</strong>（<strong>Consumer Offset</strong>）。注意，这和上面所说的位移完全不是一个概念。上面的“位移”表征的是分区内的消息位置，它是不变的，即一旦消息被成功写入到一个分区上，它的位移值就是固定的了。而消费者位移则不同，它可能是随时变化的，毕竟它是消费者消费进度的指示器嘛。另外每个消费者有着自己的消费者位移，因此一定要区分这两类位移的区别。我个人把消息在分区中的位移称为分区位移，而把消费者端的位移称为消费者位移。</p>
+<p>总结一下今天提到的所有名词术语：</p>
+<ul>
+<li><strong>消息</strong>：<code>Record</code>。<code>Kafka</code> 是消息引擎嘛，这里的消息就是指 <code>Kafka</code> 处理的主要对象。</li>
+<li><strong>主题</strong>：<code>Topic</code>。主题是承载消息的逻辑容器，在实际使用中多用来区分具体的业务。</li>
+<li><strong>分区</strong>：<code>Partition</code>。一个有序不变的消息序列。每个主题下可以有多个分区。</li>
+<li><strong>消息位移</strong>：<code>Offset</code>。表示分区中每条消息的位置信息，是一个单调递增且不变的值。</li>
+<li><strong>副本</strong>：<code>Replica</code>。<code>Kafka</code> 中同一条消息能够被拷贝到多个地方以提供数据冗余，这些地方就是所谓的副本。副本还分为领导者副本和追随者副本，各自有不同的角色划分。副本是在分区层级下的，即每个分区可配置多个副本实现高可用。</li>
+<li><strong>生产者</strong>：<code>Producer</code>。向主题发布新消息的应用程序。</li>
+<li><strong>消费者</strong>：<code>Consumer</code>。从主题订阅新消息的应用程序。</li>
+<li><strong>消费者位移</strong>：<code>Consumer Offset</code>。表征消费者消费进度，每个消费者都有自己的消费者位移。</li>
+<li><strong>消费者组</strong>：<code>Consumer Group</code>。多个消费者实例共同组成的一个组，同时消费多个分区以实现高吞吐。</li>
+<li><strong>重平衡</strong>：<code>Rebalance</code>。消费者组内某个消费者实例挂掉后，其他消费者实例自动重新分配订阅主题分区的过程。<code>Rebalance</code> 是 <code>Kafka</code> 消费者端实现高可用的重要手段。</li>
+</ul>
+<img src="/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02/image-20210424173638327.png" class="" title="image-20210424173638327"></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Kafka/">Kafka</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">03.Kafka只是消息引擎系统吗？</div></div></a></div><div class="next-post pull-right"><a href="/2021/04/24/%E5%B0%8F%E5%86%8C%E5%AD%90/%E6%9B%BE%E5%9B%BD%E8%97%A9%E4%BF%AE%E8%BA%AB%E5%8D%81%E4%BA%8C%E6%B3%95/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">曾国藩修身十二法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/24/Kafka核心技术与实战/01/" title="01.消息引擎系统ABC"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-24</div><div class="title">01.消息引擎系统ABC</div></div></a></div><div><a href="/2021/04/24/Kafka核心技术与实战/03/" title="03.Kafka只是消息引擎系统吗？"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-24</div><div class="title">03.Kafka只是消息引擎系统吗？</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xjf</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HelloWorld" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:954475782@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello everyone</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/03/" title="03.Kafka只是消息引擎系统吗？">03.Kafka只是消息引擎系统吗？</a><time datetime="2021-04-24T08:47:37.000Z" title="发表于 2021-04-24 16:47:37">2021-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/02/" title="02.Kafka术语">02.Kafka术语</a><time datetime="2021-04-24T08:46:37.000Z" title="发表于 2021-04-24 16:46:37">2021-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/24/%E5%B0%8F%E5%86%8C%E5%AD%90/%E6%9B%BE%E5%9B%BD%E8%97%A9%E4%BF%AE%E8%BA%AB%E5%8D%81%E4%BA%8C%E6%B3%95/" title="曾国藩修身十二法">曾国藩修身十二法</a><time datetime="2021-04-24T07:07:37.000Z" title="发表于 2021-04-24 15:07:37">2021-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/24/Kafka%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%AE%9E%E6%88%98/01/" title="01.消息引擎系统ABC">01.消息引擎系统ABC</a><time datetime="2021-04-24T06:46:37.000Z" title="发表于 2021-04-24 14:46:37">2021-04-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/19/Netty/02/" title="01、Netty 解决 TCP 问题">01、Netty 解决 TCP 问题</a><time datetime="2021-04-19T15:26:37.000Z" title="发表于 2021-04-19 23:26:37">2021-04-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By xjf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
