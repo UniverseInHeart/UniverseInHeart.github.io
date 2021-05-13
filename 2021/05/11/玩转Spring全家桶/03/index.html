@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03.O/R Mapping 实践 | HelloWorld</title><meta name="keywords" content="Spring,SpringBoot,JDBC"><meta name="author" content="xjf"><meta name="copyright" content="xjf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="--">
+<meta property="og:type" content="article">
+<meta property="og:title" content="03.O&#x2F;R Mapping 实践">
+<meta property="og:url" content="http://universeinheart.github.io/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="--">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-05-11T15:26:37.000Z">
+<meta property="article:modified_time" content="2021-05-12T23:26:15.871Z">
+<meta property="article:author" content="xjf">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="JDBC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://universeinheart.github.io/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-13 07:26:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HelloWorld" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">69</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HelloWorld</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">03.O/R Mapping 实践</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-11T15:26:37.000Z" title="发表于 2021-05-11 23:26:37">2021-05-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-12T23:26:15.871Z" title="更新于 2021-05-13 07:26:15">2021-05-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/">玩转Spring全家桶</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="03.O/R Mapping 实践"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="认识-Spring-Data-JPA"><a href="#认识-Spring-Data-JPA" class="headerlink" title="认识 Spring Data JPA"></a>认识 Spring Data JPA</h2><h3 id="Java-Persistence-API"><a href="#Java-Persistence-API" class="headerlink" title="Java Persistence API"></a>Java Persistence API</h3><p>JPA 为对象关系映射提供了⼀种基于 POJO 的持久化模型</p>
+<ul>
+<li>简化数据持久化代码的开发⼯作</li>
+<li>为 Java 社区屏蔽不同持久化 API 的差异</li>
+</ul>
+<h3 id="Spring-Data"><a href="#Spring-Data" class="headerlink" title="Spring Data"></a>Spring Data</h3><p>在保留底层存储特性的同时，提供相对⼀致的、基于 Spring 的编程模型</p>
+<p>主要模块</p>
+<ul>
+<li>Spring Data Commons</li>
+<li>Spring Data JDBC</li>
+<li><strong>Spring Data JPA</strong></li>
+<li>Spring Data Redis</li>
+</ul>
+<img src="/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/image-20210511011936375.png" class="" title="image-20210511011936375">
+
+
+
+<h2 id="定义-JPA-实体对象"><a href="#定义-JPA-实体对象" class="headerlink" title="定义 JPA 实体对象"></a>定义 JPA 实体对象</h2><h3 id="常⽤-JPA-注解"><a href="#常⽤-JPA-注解" class="headerlink" title="常⽤ JPA 注解"></a>常⽤ JPA 注解</h3><p><strong>实体</strong></p>
+<ul>
+<li><code>@Entity</code>  注明这个类是一个实体</li>
+<li><code>@MappedSuperclass</code> </li>
+<li><code>@Table(name)</code>  实体和表关联</li>
+</ul>
+<p><strong>主键</strong></p>
+<ul>
+<li><code>@Id</code><ul>
+<li><code>@GeneratedValue(strategy, generator)</code> </li>
+<li><code>@SequenceGenerator(name, sequenceName)</code></li>
+</ul>
+</li>
+</ul>
+<img src="/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/image-20210511012943447.png" class="" title="image-20210511012943447">
+
+<p><strong>映射</strong></p>
+<ul>
+<li><code>@Column(name, nullable, length, insertable, updatable)</code> </li>
+<li><code>@JoinTable(name)</code>、<code>@JoinColumn(name)</code> </li>
+</ul>
+<p><strong>关系</strong> </p>
+<ul>
+<li><code>@OneToOne</code>、<code>@OneToMany</code>、<code>@ManyToOne</code>、<code>@ManyToMany</code></li>
+<li><code>@OrderBy</code></li>
+</ul>
+<h2 id="通过-Spring-Data-JPA-操作数据库"><a href="#通过-Spring-Data-JPA-操作数据库" class="headerlink" title="通过 Spring Data JPA 操作数据库"></a>通过 Spring Data JPA 操作数据库</h2><h3 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h3><p><code>@EnableJpaRepositories</code> 注解，自动发现 <code>Repository</code> 的扩展</p>
+<p><strong><code>Repository</code> 接⼝</strong></p>
+<ul>
+<li><code>CrudRepository&lt;T,ID&gt;</code></li>
+<li><code>PagingAndSortingRepository&lt;T,ID&gt;</code></li>
+<li><code>JpaRepository&lt;T,ID&gt;</code></li>
+</ul>
+<h3 id="定义查询"><a href="#定义查询" class="headerlink" title="定义查询"></a>定义查询</h3><p>根据⽅法名定义查询</p>
+<ul>
+<li>find…By… / read…By… / query…By… / get…By… </li>
+<li>count…By… </li>
+<li>…OrderBy…[Asc / Desc] </li>
+<li>And / Or / IgnoreCase </li>
+<li>Top / First / Distinct</li>
+</ul>
+<h3 id="分⻚查询"><a href="#分⻚查询" class="headerlink" title="分⻚查询"></a>分⻚查询</h3><ul>
+<li>PagingAndSortingRepository &lt;T, ID&gt;</li>
+<li>Pageable / Sort </li>
+<li>Slice / Page&lt;T, ID&gt;</li>
+</ul>
+<h3 id="保存实体"><a href="#保存实体" class="headerlink" title="保存实体"></a>保存实体</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Coffee latte = Coffee.builder().name(<span class="string">&quot;latte&quot;</span>).price(Money.of(CurrencyUnit.of(<span class="string">&quot;CNY&quot;</span>), <span class="number">30.0</span>)).build();</span><br><span class="line">coffeeRepository.save(latte);</span><br><span class="line"></span><br><span class="line">CoffeeOrder order = CoffeeOrder.builder()</span><br><span class="line">					.customer(<span class="string">&quot;Li Lei&quot;</span>)</span><br><span class="line">					.items(Collections.singletonList(espresso))</span><br><span class="line">					.state(OrderState.INIT)</span><br><span class="line">					.build();</span><br><span class="line">orderRepository.save(order);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="查询实体"><a href="#查询实体" class="headerlink" title="查询实体"></a>查询实体</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="meta">@NoRepositoryBean</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BaseRepository</span>&lt;<span class="title">T</span>, <span class="title">Long</span>&gt; <span class="keyword">extends</span> <span class="title">PagingAndSortingRepository</span>&lt;<span class="title">T</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">List&lt;T&gt; <span class="title">findTop3ByOrderByUpdateTimeDescIdAsc</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CoffeeOrderRepository</span> <span class="keyword">extends</span> <span class="title">BaseRepository</span>&lt;<span class="title">CoffeeOrder</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">List&lt;CoffeeOrder&gt; <span class="title">findByCustomerOrderById</span><span class="params">(String customer)</span></span>;</span><br><span class="line">    <span class="function">List&lt;CoffeeOrder&gt; <span class="title">findByItems_Name</span><span class="params">(String name)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">coffeeRepository.findAll(Sort.by(Sort.Direction.DESC, <span class="string">&quot;id&quot;</span>)).forEach(c -&gt; log.info(<span class="string">&quot;Loading &#123;&#125;&quot;</span>, c));</span><br><span class="line"></span><br><span class="line">List&lt;CoffeeOrder&gt; list = orderRepository.findTop3ByOrderByUpdateTimeDescIdAsc();</span><br><span class="line">log.info(<span class="string">&quot;findTop3ByOrderByUpdateTimeDescIdAsc: &#123;&#125;&quot;</span>, JSON.toJSONString(list));</span><br><span class="line"></span><br><span class="line">list = orderRepository.findByCustomerOrderById(<span class="string">&quot;Li Lei&quot;</span>);</span><br><span class="line">log.info(<span class="string">&quot;findByCustomerOrderById: &#123;&#125;&quot;</span>, JSON.toJSONString(list));</span><br><span class="line"><span class="comment">// 不开启事务会因为没Session而报LazyInitializationException</span></span><br><span class="line">list.forEach(o -&gt; &#123;</span><br><span class="line">			log.info(<span class="string">&quot;Order &#123;&#125;&quot;</span>, o.getId());</span><br><span class="line">			o.getItems().forEach(i -&gt; log.info(<span class="string">&quot;  Item &#123;&#125;&quot;</span>, i));</span><br><span class="line">		&#125;);</span><br><span class="line"></span><br><span class="line">list = orderRepository.findByItems_Name(<span class="string">&quot;latte&quot;</span>);</span><br><span class="line">log.info(<span class="string">&quot;findByItems_Name: &#123;&#125;&quot;</span>, JSON.toJSONString(list));</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Repository-是怎么从接⼝变成-Bean-的"><a href="#Repository-是怎么从接⼝变成-Bean-的" class="headerlink" title="Repository 是怎么从接⼝变成 Bean 的"></a>Repository 是怎么从接⼝变成 Bean 的</h2><h3 id="Repository-Bean-是如何创建的"><a href="#Repository-Bean-是如何创建的" class="headerlink" title="Repository Bean 是如何创建的"></a>Repository Bean 是如何创建的</h3><p><strong>JpaRepositoriesRegistrar</strong></p>
+<ul>
+<li>激活了 <code>@EnableJpaRepositories</code></li>
+<li>返回了 <code>JpaRepositoryConfigExtension</code> </li>
+</ul>
+<p><strong>RepositoryBeanDefinitionRegistrarSupport.registerBeanDefinitions</strong></p>
+<ul>
+<li>注册 <code>Repository Bean</code>（类型是 <code>JpaRepositoryFactoryBean</code> ） </li>
+</ul>
+<p><strong>RepositoryConfigurationDelegate.registerRepositoriesIn</strong></p>
+<ul>
+<li>注册找到的 repositories</li>
+</ul>
+<p><strong>RepositoryConfigurationExtensionSupport.getRepositoryConfigurations</strong> </p>
+<ul>
+<li>取得 <code>Repository</code> 配置 </li>
+</ul>
+<p><strong>JpaRepositoryFactory.getTargetRepository</strong> </p>
+<ul>
+<li>创建了 <code>Repository</code></li>
+</ul>
+<h3 id="接⼝中的⽅法是如何被解释的"><a href="#接⼝中的⽅法是如何被解释的" class="headerlink" title="接⼝中的⽅法是如何被解释的"></a>接⼝中的⽅法是如何被解释的</h3><p><strong>RepositoryFactorySupport.getRepository 添加了Advice</strong></p>
+<ul>
+<li><code>DefaultMethodInvokingMethodInterceptor</code></li>
+<li><code>QueryExecutorMethodInterceptor</code></li>
+</ul>
+<p><strong><code>AbstractJpaQuery.execute</code> 执⾏具体的查询</strong> </p>
+<p><strong>语法解析在 <code>Part/PartTree</code> 中</strong></p>
+<h2 id="通过-MyBatis-操作数据库"><a href="#通过-MyBatis-操作数据库" class="headerlink" title="通过 MyBatis 操作数据库"></a>通过 MyBatis 操作数据库</h2><h3 id="简单配置"><a href="#简单配置" class="headerlink" title="简单配置"></a>简单配置</h3><ul>
+<li>mybatis.mapper-locations = classpath*:mapper/**/*.xml</li>
+<li>mybatis.type-aliases-package = 类型别名的包名</li>
+<li>mybatis.type-handlers-package = TypeHandler扫描包名（类型转换处理器）</li>
+<li>mybatis.configuration.map-underscore-to-camel-case = true  </li>
+</ul>
+<h3 id="Mapper-的定义与扫描"><a href="#Mapper-的定义与扫描" class="headerlink" title="Mapper 的定义与扫描"></a>Mapper 的定义与扫描</h3><ul>
+<li><code>@MapperScan</code> 配置扫描位置</li>
+<li><code>@Mapper</code> 定义接⼝</li>
+<li>映射的定义—— XML 与注解</li>
+</ul>
+<img src="/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/image-20210512231958054.png" class="" title="image-20210512231958054">
+
+<h3 id="MyBatis-Generator"><a href="#MyBatis-Generator" class="headerlink" title="MyBatis Generator"></a>MyBatis Generator</h3><h3 id="MyBatis-PageHelper"><a href="#MyBatis-PageHelper" class="headerlink" title="MyBatis PageHelper"></a>MyBatis PageHelper</h3></article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a><a class="post-meta__tags" href="/tags/SpringBoot/">SpringBoot</a><a class="post-meta__tags" href="/tags/JDBC/">JDBC</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/05/13/Java/000/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java 动态代理</div></div></a></div><div class="next-post pull-right"><a href="/2021/04/28/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/01/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">01.JDBC必知必会01</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/28/玩转Spring全家桶/01/" title="01.JDBC必知必会01"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">01.JDBC必知必会01</div></div></a></div><div><a href="/2021/04/28/玩转Spring全家桶/02/" title="02.JDBC必知必会02"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-28</div><div class="title">02.JDBC必知必会02</div></div></a></div><div><a href="/2021/05/13/玩转Spring全家桶/04/" title="03.NoSQL 实践"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-13</div><div class="title">03.NoSQL 实践</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xjf</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">69</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HelloWorld" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:954475782@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello everyone</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86-Spring-Data-JPA"><span class="toc-number">1.</span> <span class="toc-text">认识 Spring Data JPA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-Persistence-API"><span class="toc-number">1.1.</span> <span class="toc-text">Java Persistence API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-Data"><span class="toc-number">1.2.</span> <span class="toc-text">Spring Data</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-JPA-%E5%AE%9E%E4%BD%93%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">定义 JPA 实体对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E2%BD%A4-JPA-%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.1.</span> <span class="toc-text">常⽤ JPA 注解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-Spring-Data-JPA-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">通过 Spring Data JPA 操作数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Repository"><span class="toc-number">3.1.</span> <span class="toc-text">Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.2.</span> <span class="toc-text">定义查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E2%BB%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.3.</span> <span class="toc-text">分⻚查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E5%AE%9E%E4%BD%93"><span class="toc-number">3.4.</span> <span class="toc-text">保存实体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%AE%9E%E4%BD%93"><span class="toc-number">3.5.</span> <span class="toc-text">查询实体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Repository-%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E6%8E%A5%E2%BC%9D%E5%8F%98%E6%88%90-Bean-%E7%9A%84"><span class="toc-number">4.</span> <span class="toc-text">Repository 是怎么从接⼝变成 Bean 的</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Repository-Bean-%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%9A%84"><span class="toc-number">4.1.</span> <span class="toc-text">Repository Bean 是如何创建的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E2%BC%9D%E4%B8%AD%E7%9A%84%E2%BD%85%E6%B3%95%E6%98%AF%E5%A6%82%E4%BD%95%E8%A2%AB%E8%A7%A3%E9%87%8A%E7%9A%84"><span class="toc-number">4.2.</span> <span class="toc-text">接⼝中的⽅法是如何被解释的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-MyBatis-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text">通过 MyBatis 操作数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE"><span class="toc-number">5.1.</span> <span class="toc-text">简单配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mapper-%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%89%AB%E6%8F%8F"><span class="toc-number">5.2.</span> <span class="toc-text">Mapper 的定义与扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyBatis-Generator"><span class="toc-number">5.3.</span> <span class="toc-text">MyBatis Generator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MyBatis-PageHelper"><span class="toc-number">5.4.</span> <span class="toc-text">MyBatis PageHelper</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/" title="03.NoSQL 实践">03.NoSQL 实践</a><time datetime="2021-05-13T15:26:37.000Z" title="发表于 2021-05-13 23:26:37">2021-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/13/Java/000/" title="Java 动态代理">Java 动态代理</a><time datetime="2021-05-13T15:18:37.000Z" title="发表于 2021-05-13 23:18:37">2021-05-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/05/11/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/03/" title="03.O/R Mapping 实践">03.O/R Mapping 实践</a><time datetime="2021-05-11T15:26:37.000Z" title="发表于 2021-05-11 23:26:37">2021-05-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/01/" title="01.JDBC必知必会01">01.JDBC必知必会01</a><time datetime="2021-04-28T15:26:37.000Z" title="发表于 2021-04-28 23:26:37">2021-04-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/28/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/02/" title="02.JDBC必知必会02">02.JDBC必知必会02</a><time datetime="2021-04-28T15:26:37.000Z" title="发表于 2021-04-28 23:26:37">2021-04-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By xjf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
