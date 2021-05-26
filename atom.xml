@@ -6,7 +6,7 @@
   <link href="http://universeinheart.github.io/atom.xml" rel="self"/>
   
   <link href="http://universeinheart.github.io/"/>
-  <updated>2021-05-16T09:09:13.687Z</updated>
+  <updated>2021-05-26T00:20:55.433Z</updated>
   <id>http://universeinheart.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>羽毛球教程</title>
+    <link href="http://universeinheart.github.io/2021/05/25/%E7%BE%BD%E6%AF%9B%E7%90%83/00/"/>
+    <id>http://universeinheart.github.io/2021/05/25/%E7%BE%BD%E6%AF%9B%E7%90%83/00/</id>
+    <published>2021-05-25T15:18:37.000Z</published>
+    <updated>2021-05-26T00:20:55.433Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="后场高位击球和前场反手击球发力方法"><a href="#后场高位击球和前场反手击球发力方法" class="headerlink" title="后场高位击球和前场反手击球发力方法"></a>后场高位击球和前场反手击球发力方法</h2><p>争取<strong>高手位主动击球</strong>是羽毛球运动最重要的意识之一，要通过判断，移动，取位获得对球的主动控制权</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;后场高位击球和前场反手击球发力方法&quot;&gt;&lt;a href=&quot;#后场高位击球和前场反手击球发力方法&quot; class=&quot;headerlink&quot; title=&quot;后场高位击球和前场反手击球发力方法&quot;&gt;&lt;/a&gt;后场高位击球和前场反手击球发力方法&lt;/h2&gt;&lt;p&gt;争取&lt;strong&gt;</summary>
+      
+    
+    
+    
+    <category term="羽毛球" scheme="http://universeinheart.github.io/categories/%E7%BE%BD%E6%AF%9B%E7%90%83/"/>
+    
+    
+    <category term="羽毛球" scheme="http://universeinheart.github.io/tags/%E7%BE%BD%E6%AF%9B%E7%90%83/"/>
+    
+  </entry>
   
   <entry>
     <title>08.Web 进阶开发</title>
@@ -115,7 +139,7 @@
     <link href="http://universeinheart.github.io/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/"/>
     <id>http://universeinheart.github.io/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/</id>
     <published>2021-05-13T15:26:37.000Z</published>
-    <updated>2021-05-15T16:20:51.457Z</updated>
+    <updated>2021-05-16T16:09:43.266Z</updated>
     
     <content type="html"><![CDATA[<h2 id="通过-Docker-辅助开发"><a href="#通过-Docker-辅助开发" class="headerlink" title="通过 Docker 辅助开发"></a>通过 Docker 辅助开发</h2><h3 id="什么是容器"><a href="#什么是容器" class="headerlink" title="什么是容器"></a>什么是容器</h3><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210513234130722.png" class="" title="image-20210513234130722"><h3 id="认识-Docker"><a href="#认识-Docker" class="headerlink" title="认识 Docker"></a>认识 Docker</h3><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210513234119641.png" class="" title="image-20210513234119641"><h3 id="Docker-常⽤命令"><a href="#Docker-常⽤命令" class="headerlink" title="Docker 常⽤命令"></a>Docker 常⽤命令</h3><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210513234104049.png" class="" title="image-20210513234104049"><h3 id="docker-run-的常⽤选项"><a href="#docker-run-的常⽤选项" class="headerlink" title="docker run 的常⽤选项"></a>docker run 的常⽤选项</h3><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210513234032281.png" class="" title="image-20210513234032281"><h3 id="国内-Docker-镜像配置"><a href="#国内-Docker-镜像配置" class="headerlink" title="国内 Docker 镜像配置"></a>国内 Docker 镜像配置</h3><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210513234048018.png" class="" title="image-20210513234048018"><h3 id="通过-Docker-启动-Redis"><a href="#通过-Docker-启动-Redis" class="headerlink" title="通过 Docker 启动 Redis"></a>通过 Docker 启动 Redis</h3><p><strong>官⽅指引</strong></p><ul><li><a href="https://hub.docker.com/_/redis">https://hub.docker.com/_/redis</a> </li></ul><p><strong>获取镜像</strong></p><ul><li>docker pull redis </li></ul><p><strong>启动 Redis</strong></p><ul><li>docker run –name redis -d -p 6379:6379 redis</li></ul><h2 id="在-Spring-中访问-Redis"><a href="#在-Spring-中访问-Redis" class="headerlink" title="在 Spring 中访问 Redis"></a>在 Spring 中访问 Redis</h2><ul><li>⽀持的客户端 <code>Jedis</code> / <code>Lettuce</code></li><li><code>RedisTemplate</code></li><li><code>Repository</code> ⽀持</li></ul><p><strong>Jedis 客户端</strong></p><ul><li><code>Jedis</code> 不是线程安全的</li><li>通过 <code>JedisPool</code> 获得 <code>Jedis</code> 实例</li><li>直接使⽤ <code>Jedis</code> 中的⽅法</li></ul><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210515122625375.png" class="" title="image-20210515122625375"><p><strong>Lettuce 客户端</strong></p><p>目前主流推荐驱动，基于Netty NIO，API线程安全</p><p><strong>Redission 客户端</strong></p><p>基于Netty NIO，API线程安全,大量分布式功能特性，JUC线程安全集合和工具的安全的分布式版本，分布式的数据结构和锁</p><h2 id="Redis-的哨兵与集群模式"><a href="#Redis-的哨兵与集群模式" class="headerlink" title="Redis 的哨兵与集群模式"></a>Redis 的哨兵与集群模式</h2><p><code>Redis Sentinel</code> 是 <code>Redis</code> 的⼀种⾼可⽤⽅案</p><ul><li>监控、通知、⾃动故障转移、服务发现</li></ul><img src="/2021/05/13/%E7%8E%A9%E8%BD%ACSpring%E5%85%A8%E5%AE%B6%E6%A1%B6/04/image-20210515170904613.png" class="" title="image-20210515170904613"><p><code>JedisSentinelPool</code> </p><ul><li>继承  Pool</li><li>HostAndPort initSentinels(Set<String> sentinels, final String masterName) <ul><li>遍历sentinels 找到master</li><li>遍历sentinels 为每个sentinel增加 MasterListener，以便后面做切换</li></ul></li><li>initPool</li></ul><p>Redis Cluster</p><ul><li>数据⾃动分⽚（分成16384个 Hash Slot ）</li><li> 在部分节点失效时有⼀定可⽤性 </li></ul><p>JedisCluster</p><ul><li>Jedis 只从 Master 读数据，如果想要⾃动读写分离，可以定制</li></ul><h2 id="了解-Spring-的缓存抽象"><a href="#了解-Spring-的缓存抽象" class="headerlink" title="了解 Spring 的缓存抽象"></a>了解 Spring 的缓存抽象</h2><h3 id="Spring-的缓存抽象"><a href="#Spring-的缓存抽象" class="headerlink" title="Spring 的缓存抽象"></a>Spring 的缓存抽象</h3><p>为不同的缓存提供⼀层抽象</p><ul><li>为 <code>Java</code> ⽅法增加缓存，缓存执⾏结果</li><li>⽀持<code>ConcurrentMap</code>、<code>EhCache</code>、<code>Caffeine</code>、<code>JCache</code>（JSR-107）</li><li>接⼝<ul><li><code>org.springframework.cache.Cache</code></li><li><code>org.springframework.cache.CacheManager</code></li></ul></li></ul><h3 id="基于注解的缓存"><a href="#基于注解的缓存" class="headerlink" title="基于注解的缓存"></a>基于注解的缓存</h3><p><strong>@EnableCaching</strong>  //  开启缓存</p><ul><li>@Cacheable</li><li>@CacheEvict </li><li>@CachePut </li><li>@Caching </li><li>@CacheConfig</li></ul><h2 id="Redis-在-Spring-中的其他⽤法"><a href="#Redis-在-Spring-中的其他⽤法" class="headerlink" title="Redis 在 Spring 中的其他⽤法"></a>Redis 在 Spring 中的其他⽤法</h2>]]></content>
     
@@ -316,7 +340,9 @@
     <link href="http://universeinheart.github.io/2021/05/01/MySQL/11/"/>
     <id>http://universeinheart.github.io/2021/05/01/MySQL/11/</id>
     <published>2021-05-01T14:13:56.000Z</published>
-    <updated>2021-05-01T10:03:47.730Z</updated>
+    <updated>2021-05-16T12:53:27.180Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在，几乎所有的系统都支持邮箱登录，如何在邮箱这样的字段上建立合理的索引，是我们今天要讨论的问题。</p><p>假设，你现在维护一个支持邮箱登录的系统，用户表是这么定义的：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> SUser(</span><br><span class="line">ID <span class="type">bigint</span> unsigned <span class="keyword">primary</span> key,</span><br><span class="line">email <span class="type">varchar</span>(<span class="number">64</span>), </span><br><span class="line">... </span><br><span class="line">)engine<span class="operator">=</span>innodb; </span><br></pre></td></tr></table></figure><p>由于要使用邮箱登录，所以业务代码中一定会出现类似于这样的语句：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> f1, f2 <span class="keyword">from</span> SUser <span class="keyword">where</span> email<span class="operator">=</span><span class="string">&#x27;xxx&#x27;</span>;</span><br></pre></td></tr></table></figure><p>如果email这个字段上没有索引，那么这个语句就只能做全表扫描。同时，MySQL是支持前缀索引的，也就是说，你可以定义字符串的一部分作为索引。默认地，如果你创建索引的语句不指定前缀长度，那么索引就会包含整个字符串。</p><p>比如，这两个在email字段上创建索引的语句：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> SUser <span class="keyword">add</span> index index1(email);</span><br><span class="line">或</span><br><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> SUser <span class="keyword">add</span> index index2(email(<span class="number">6</span>));</span><br></pre></td></tr></table></figure><p>第一个语句创建的index1索引里面，包含了每个记录的整个字符串；</p><img src="/2021/05/01/MySQL/11/image-20210516204710243.png" class="" title="image-20210516204710243"><p>第二个语句创建的index2索引里面，对于每个记录都是只取前6个字节。</p><img src="/2021/05/01/MySQL/11/image-20210516204723491.png" class="" title="image-20210516204723491"><p>从图中你可以看到，由于email(6)这个索引结构中每个邮箱字段都只取前6个字节（即：zhangs），所以占用的空间会更小，这就是使用前缀索引的优势。但，这同时带来的损失是，可能会增加额外的记录扫描次数。</p><p>接下来，我们再看看下面这个语句，在这两个索引定义下分别是怎么执行的。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> id,name,email <span class="keyword">from</span> SUser <span class="keyword">where</span> email<span class="operator">=</span><span class="string">&#x27;zhangssxyz@xxx.com&#x27;</span>;</span><br></pre></td></tr></table></figure><p><strong>如果使用的是index1</strong>（即email整个字符串的索引结构），执行顺序是这样的：</p><ol><li>从index1索引树找到满足索引值是<code>zhangssxyz@xxx.com</code>的这条记录，取得ID2的值；</li><li>到主键上查到主键值是ID2的行，判断email的值是正确的，将这行记录加入结果集；</li><li>取index1索引树上刚刚查到的位置的下一条记录，发现已经不满足email=<code>zhangssxyz@xxx.com</code>的条件了，循环结束。</li></ol><p>这个过程中，只需要回主键索引取一次数据，所以系统认为只扫描了一行。</p><p><strong>如果使用的是index2</strong>（即email(6)索引结构），执行顺序是这样的：</p><ol><li>从index2索引树找到满足索引值是’zhangs’的记录，找到的第一个是ID1；</li><li>到主键上查到主键值是ID1的行，判断出email的值不是<code>zhangssxyz@xxx.com</code>，这行记录丢弃；</li><li>取index2上刚刚查到的位置的下一条记录，发现仍然是’zhangs’，取出ID2，再到ID索引上取整行然后判断，这次值对了，将这行记录加入结果集；</li><li>重复上一步，直到在idxe2上取到的值不是’zhangs’时，循环结束。</li></ol><p>在这个过程中，要回主键索引取4次数据，也就是扫描了4行。</p><p>通过这个对比，你很容易就可以发现，使用前缀索引后，可能会导致查询语句读数据的次数变多。但是，对于这个查询语句来说，如果你定义的index2不是email(6)而是email(7），也就是说取email字段的前7个字节来构建索引的话，即满足前缀’zhangss’的记录只有一个，也能够直接查到ID2，只扫描一行就结束了。</p><p><strong>使用前缀索引，定义好长度，就可以做到既节省空间，又不用额外增加太多的查询成本。</strong></p><blockquote><p>当要给字符串创建前缀索引时，有什么方法能够确定我应该使用多长的前缀呢？</p><p>建立索引时关注的是<strong>区分度</strong>，区分度越高越好。因为区分度越高，意味着重复的键值越少。因此，我们可以通过统计索引上有多少个不同的值来判断要使用多长的前缀。</p><p>你可以使用下面这个语句，算出这个列上有多少个不同的值：<code>select count(distinct email) as L from SUser;</code></p><p>然后，依次选取不同长度的前缀来看这个值，比如我们要看一下4~7个字节的前缀索引，可以用这个语句：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">select</span> </span><br><span class="line">  <span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">4</span>)）<span class="keyword">as</span> L4,</span><br><span class="line">  <span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">5</span>)）<span class="keyword">as</span> L5,</span><br><span class="line">  <span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">6</span>)）<span class="keyword">as</span> L6,</span><br><span class="line">  <span class="built_in">count</span>(<span class="keyword">distinct</span> <span class="keyword">left</span>(email,<span class="number">7</span>)）<span class="keyword">as</span> L7,</span><br><span class="line"><span class="keyword">from</span> SUser;</span><br></pre></td></tr></table></figure><p>当然，使用前缀索引很可能会损失区分度，所以你需要预先设定一个可以接受的损失比例，比如5%。然后，在返回的L4~L7中，找出不小于 L * 95%的值，假设这里L6、L7都满足，你就可以选择前缀长度为6。</p></blockquote><h3 id="前缀索引对覆盖索引的影响"><a href="#前缀索引对覆盖索引的影响" class="headerlink" title="前缀索引对覆盖索引的影响"></a>前缀索引对覆盖索引的影响</h3>]]></content>
     
     
     <summary type="html">MySQL</summary>
@@ -440,30 +466,6 @@
     
     
     <category term="Kafka" scheme="http://universeinheart.github.io/tags/Kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>曾国藩修身十二法</title>
-    <link href="http://universeinheart.github.io/2021/04/24/%E5%B0%8F%E5%86%8C%E5%AD%90/%E6%9B%BE%E5%9B%BD%E8%97%A9%E4%BF%AE%E8%BA%AB%E5%8D%81%E4%BA%8C%E6%B3%95/"/>
-    <id>http://universeinheart.github.io/2021/04/24/%E5%B0%8F%E5%86%8C%E5%AD%90/%E6%9B%BE%E5%9B%BD%E8%97%A9%E4%BF%AE%E8%BA%AB%E5%8D%81%E4%BA%8C%E6%B3%95/</id>
-    <published>2021-04-24T07:07:37.000Z</published>
-    <updated>2021-04-24T15:47:19.236Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第一法、主敬"><a href="#第一法、主敬" class="headerlink" title="第一法、主敬"></a>第一法、主敬</h2><p><strong>整齐严肃，无时不惧。无事时心在腔子里，应事时专一不杂。清明在躬，如日之升。</strong></p><blockquote><p>每天保证衣冠外貌整齐，心思神情端正严肃，时时刻刻都要警惕、检查自己的念头、举止中有无背离义理之处。</p><p>平日里，闲居无事的时候宁静安泰，投入事务中则专心致志，不存杂念。</p><p>永远让自己的精神状态保持清澈，就如同旭日东升般光彩照人。</p></blockquote><h2 id="第二法、静坐"><a href="#第二法、静坐" class="headerlink" title="第二法、静坐"></a>第二法、静坐</h2><p><strong>每日不拘何时，静坐四刻，体念来复之仁心，正位凝命，如鼎之镇。</strong></p><blockquote><p>每天，一定要抽出一段时间静坐，以修身养性，并反省体悟自己天性中隐现的仁义之心。</p><p>正襟危坐，凝然镇定，如同宝鼎一般沉稳。</p></blockquote><h2 id="第三法、早起"><a href="#第三法、早起" class="headerlink" title="第三法、早起"></a>第三法、早起</h2><p><strong>黎明即起，醒后勿粘恋</strong></p><h2 id="第四法、读书不二"><a href="#第四法、读书不二" class="headerlink" title="第四法、读书不二"></a>第四法、读书不二</h2><p><strong>一书未点完，不看他书。东翻西阅，徒务外为人，每日以十页为率</strong></p><blockquote><p>一本书没有读完时，不要再看其他书籍。</p><p>东翻西阅随意读书，对自己的道德学问毫无益处。</p></blockquote><h2 id="第五法、读史"><a href="#第五法、读史" class="headerlink" title="第五法、读史"></a>第五法、读史</h2><p><strong>丙申年购《二十三史》，大人曰：“尔借钱买书，吾不惮极力为尔弥缝，尔能圈点一遍，则不负我矣。”嗣后每日圈点十页，间断不孝。</strong></p><h2 id="第六法、谨言"><a href="#第六法、谨言" class="headerlink" title="第六法、谨言"></a>第六法、谨言</h2><p><strong>刻刻留心，第一功夫</strong></p><h2 id="第七法、养气"><a href="#第七法、养气" class="headerlink" title="第七法、养气"></a>第七法、养气</h2><p><strong>气藏丹田，无不可对人言之事</strong></p><h2 id="第八法、保身"><a href="#第八法、保身" class="headerlink" title="第八法、保身"></a>第八法、保身</h2><p><strong>十二月奉大人手谕：“节劳，节欲，节饮食。”时时当作养病。</strong></p><h2 id="第九法、日知所亡"><a href="#第九法、日知所亡" class="headerlink" title="第九法、日知所亡"></a>第九法、日知所亡</h2><p><strong>每日读书记录心得语，有求深意是徇人</strong></p><blockquote><p>每天读书，都要将心得体会记录下来，不要刻意地从书中谋求深意，否则，就是曲从于他人。</p></blockquote><h2 id="第十法、月无亡所能"><a href="#第十法、月无亡所能" class="headerlink" title="第十法、月无亡所能"></a>第十法、月无亡所能</h2><p><strong>每月做诗文数首，以验积理之多寡，养气之盛否。不可一味耽著，最易溺心丧志。</strong></p><h2 id="第十一法、作字"><a href="#第十一法、作字" class="headerlink" title="第十一法、作字"></a>第十一法、作字</h2><p><strong>早饭后做字半时。凡笔墨应酬，当作自己课程。凡事不待明日，愈积愈难清。</strong></p><h2 id="第十二法、夜不出门"><a href="#第十二法、夜不出门" class="headerlink" title="第十二法、夜不出门"></a>第十二法、夜不出门</h2><p><strong>旷功疲神，切戒切戒！</strong></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;第一法、主敬&quot;&gt;&lt;a href=&quot;#第一法、主敬&quot; class=&quot;headerlink&quot; title=&quot;第一法、主敬&quot;&gt;&lt;/a&gt;第一法、主敬&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;整齐严肃，无时不惧。无事时心在腔子里，应事时专一不杂。清明在躬，如日之升。&lt;/strong&gt;</summary>
-      
-    
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-    <category term="杂记" scheme="http://universeinheart.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
     
   </entry>
   
