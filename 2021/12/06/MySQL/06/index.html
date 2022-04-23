@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>06、全局锁和表锁：给表加个字段怎么有这么多阻碍 | HelloWorld</title><meta name="keywords" content="MySQL"><meta name="author" content="xjf"><meta name="copyright" content="xjf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06、全局锁和表锁：给表加个字段怎么有这么多阻碍">
+<meta property="og:url" content="http://universeinheart.github.io/2021/12/06/MySQL/06/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="MySQL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-12-06T14:13:56.000Z">
+<meta property="article:modified_time" content="2021-12-24T13:27:52.516Z">
+<meta property="article:author" content="xjf">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://universeinheart.github.io/2021/12/06/MySQL/06/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-24 21:27:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HelloWorld" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HelloWorld</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">06、全局锁和表锁：给表加个字段怎么有这么多阻碍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-06T14:13:56.000Z" title="发表于 2021-12-06 22:13:56">2021-12-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-24T13:27:52.516Z" title="更新于 2021-12-24 21:27:52">2021-12-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL%E5%AE%9E%E6%88%98/">MySQL实战</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="06、全局锁和表锁：给表加个字段怎么有这么多阻碍"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>数据库锁设计的初衷是<strong>处理并发问题</strong></p>
+<p><strong>根据加锁的范围，MySQL里面的锁大致可以分成全局锁、表级锁和行锁三类</strong>。</p>
+<h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a><strong>全局锁</strong></h2><p>顾名思义，全局锁就是对<strong>整个数据库实例加锁</strong></p>
+<p>MySQL 提供了一个加<strong>全局读锁</strong>的方法，命令是 <code>Flush tables with read lock</code> (FTWRL)。当你需要让整个库处于只读状态的时候，可以使用这个命令，之后其他线程的以下语句会被阻塞：<strong>数据更新语句</strong>（数据的增删改）、<strong>数据定义语句</strong>（包括建表、修改表结构等）和<strong>更新类事务的提交语句</strong>。</p>
+<p><strong>全局锁的典型使用场景是，做全库逻辑备份。</strong>也就是把整库每个表都select出来存成文本。</p>
+<p>以前有一种做法，是通过FTWRL确保不会有其他线程对数据库做更新，然后对整个库做备份。注意，在备份过程中整个库完全处于只读状态。</p>
+<p>但是让整库都只读，听上去就很危险：</p>
+<ul>
+<li>如果你在主库上备份，那么在备份期间都不能执行更新，业务基本上就得停摆；</li>
+<li>如果你在从库上备份，那么备份期间从库不能执行主库同步过来的binlog，会导致主从延迟。</li>
+</ul>
+<p>看来加全局锁不太好。但是细想一下，<strong>备份为什么要加锁呢？</strong></p>
+<p>我们来看一下不加锁会有什么问题。假设你现在要维护“极客时间”的购买系统，关注的是用户账户余额表和用户课程表。</p>
+<p>现在发起一个逻辑备份。假设备份期间，有一个用户，他购买了一门课程，业务逻辑里就要扣掉他的余额，然后往已购课程里面加上一门课。</p>
+<p>如果时间顺序上是先备份账户余额表(u_account)，然后用户购买，然后备份用户课程表(u_course)，会怎么样呢？你可以看一下这个图：</p>
+<img src="/2021/12/06/MySQL/06/bcea4e49b0cd.png" class="" title="gg">
+
+<p>可以看到，这个备份结果里，用户A的数据状态是“账户余额没扣，但是用户课程表里面已经多了一门课”。如果后面用这个备份来恢复数据的话，用户A就发现，自己赚了。 如果备份表的顺序反过来，先备份用户课程表再备份账户余额表，又可能会出现什么结果？</p>
+<p><strong>不加锁的话，备份系统备份的得到的库不是一个逻辑时间点，这个视图是逻辑不一致的。</strong></p>
+<p>前面讲事务隔离的时候，其实是有一个方法能够拿到一致性视图的，就是在可重复读隔离级别下开启一个事务。</p>
+<p>官方自带的逻辑备份工具是<code>mysqldump</code>。当<code>mysqldump</code>使用参数<code>–single-transaction</code>的时候，导数据之前就会启动一个事务，来确保拿到一致性视图。而由于MVCC的支持，这个过程中数据是可以正常更新的。</p>
+<p>你一定在疑惑，有了这个功能，为什么还需要FTWRL呢？<strong>一致性读是好，但前提是引擎要支持这个隔离级别。</strong>比如，对于MyISAM这种不支持事务的引擎，如果备份过程中有更新，总是只能取到最新的数据，那么就破坏了备份的一致性。这时，我们就需要使用FTWRL命令了。所以，<strong>single-transaction方法只适用于所有的表使用事务引擎的库。</strong>如果有的表使用了不支持事务的引擎，那么备份就只能通过FTWRL方法。这往往是DBA要求业务开发人员使用InnoDB替代MyISAM的原因之一。</p>
+<p><strong>既然要全库只读，为什么不使用set global readonly=true的方式呢</strong>？</p>
+<p>确实<code>readonly</code>方式也可以让全库进入只读状态，但我还是会建议你用FTWRL方式，主要有两个原因：</p>
+<ul>
+<li>一是，在有些系统中，<code>readonly</code>的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。因此，修改global变量的方式影响面更大，我不建议你使用。</li>
+<li>二是，在异常处理机制上有差异。如果执行<code>FTWRL</code>命令之后由于客户端发生异常断开，那么<code>MySQL</code>会自动释放这个全局锁，整个库回到可以正常更新的状态。而将整个库设置为<code>readonly</code>之后，如果客户端发生异常，则数据库就会一直保持<code>readonly</code>状态，这样会导致整个库长时间处于不可写状态，风险较高。</li>
+</ul>
+<p>业务的更新不只是增删改数据（DML)，还有可能是加字段等修改表结构的操作（DDL）。不论是哪种方法，一个库被全局锁上以后，你要对里面任何一个表做加字段操作，都是会被锁住的。但是，即使没有被全局锁住，加字段也不是就能一帆风顺的，因为你还会碰到接下来我们要介绍的表级锁。</p>
+<h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a><strong>表级锁</strong></h2><p>MySQL里面表级别的锁有两种：一种是 <strong>表锁</strong>，一种是 <strong>元数据锁</strong>（meta data lock，MDL)。</p>
+<p><strong>表锁的语法是 <code>lock tables … read/write</code></strong></p>
+<p>与FTWRL类似，可以用 <code>unlock tables</code> 主动释放锁，也可以在客户端断开的时候自动释放。需要注意，lock tables语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</p>
+<blockquote>
+<p>举个例子, 如果在某个线程A中执行 <code>lock tables t1 read, t2 write;</code> 这个语句，则其他线程写t1、读写t2的语句都会被阻塞。同时，线程A在执行<code>unlock tables</code>之前，也只能执行读t1、读写t2的操作。连写t1都不允许，自然也不能访问其他表。</p>
+</blockquote>
+<p>在还没有出现更细粒度的锁的时候，表锁是最常用的处理并发的方式。而对于<code>InnoDB</code>这种支持行锁的引擎，一般不使用 <code>lock tables</code> 命令来控制并发，毕竟锁住整个表的影响面还是太大。</p>
+<p><strong>另一类表级的锁是MDL（metadata lock)。</strong>MDL不需要显式使用，在访问一个表的时候会被自动加上。MDL的作用是，<strong>保证读写的正确性</strong>。你可以想象一下，如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做变更，删了一列，那么查询线程拿到的结果跟表结构对不上，肯定是不行的。</p>
+<p>因此，在MySQL 5.5版本中引入了MDL，<strong>当对一个表做增删改查操作的时候，加MDL读锁；当要对表做结构变更操作的时候，加MDL写锁。</strong></p>
+<ul>
+<li>读锁之间不互斥，因此你可以有多个线程同时对一张表增删改查。</li>
+<li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。</li>
+</ul>
+<p>因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才能开始执行。虽然MDL锁是系统默认会加的，但却是你不能忽略的一个机制。</p>
+<p>比如下面这个例子，我经常看到有人掉到这个坑里：给一个小表加个字段，导致整个库挂了。你肯定知道，给一个表加字段，或者修改字段，或者加索引，需要扫描全表的数据。在对大表操作的时候，你肯定会特别小心，以免对线上服务造成影响。而实际上，即使是小表，操作不慎也会出问题。我们来看一下下面的操作序列，假设表t是一个小表。</p>
+<p>备注：这里的实验环境是MySQL 5.6。</p>
+<img src="/2021/12/06/MySQL/06/6ececdfb0ce.jpeg" class="" title="gg">
+
+<p>session A 先启动，这时候会对表t加一个MDL读锁。</p>
+<p>session B 需要的也是MDL读锁，因此可以正常执行。</p>
+<p>session C会被blocked，是因为session A的MDL读锁还没有释放，而session C需要MDL写锁，因此只能被阻塞。</p>
+<p>如果只有session C自己被阻塞还没什么关系，但是之后所有要在表t上新申请MDL读锁的请求也会被session C阻塞。前面我们说了，所有对表的增删改查操作都需要先申请MDL读锁，就都被锁住，等于这个表现在完全不可读写了。</p>
+<p>如果某个表上的查询语句频繁，而且客户端有重试机制，也就是说超时后会再起一个新session再请求的话，这个库的线程很快就会爆满。</p>
+<p>你现在应该知道了，<strong>事务中的MDL锁，在语句执行开始时申请，但是语句结束后并不会马上释放，而会等到整个事务提交后再释放</strong>。</p>
+<blockquote>
+<p><strong>如何安全地给小表加字段？</strong></p>
+<p>首先我们要<strong>解决长事务</strong>，事务不提交，就会一直占着MDL锁。在MySQL的<code>information_schema</code> 库的 <code>innodb_trx</code> 表中，你可以查到当前执行中的事务。如果你要做DDL变更的表刚好有长事务在执行，要考虑先暂停DDL，或者kill掉这个长事务。</p>
+<p>如果你要变更的表是一个热点表，虽然数据量不大，但是上面的请求很频繁，而你不得不加个字段，你该怎么做呢？这时候kill可能未必管用，因为新的请求马上就来了。比较理想的机制是，在<code>alter table</code>语句里面设定<strong>等待时间</strong>，如果在这个指定的等待时间里面能够拿到MDL写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。之后开发人员或者DBA再通过重试命令重复这个过程。 </p>
+<p>MariaDB已经合并了AliSQL的这个功能，所以这两个开源分支目前都支持DDL NOWAIT/WAIT n这个语法。</p>
+<p><code>ALTER TABLE tbl_name NOWAIT add column ...</code> </p>
+<p><code>ALTER TABLE tbl_name WAIT N add column ...</code> </p>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><p>全局锁主要用在逻辑备份过程中。对于全部是InnoDB引擎的库，我建议你选择使用 <code>–single-transaction</code> 参数，对应用会更友好。</p>
+<p>表锁一般是在数据库引擎不支持行锁的时候才会被用到的。如果你发现你的应用程序里有lock tables这样的语句，你需要追查一下，比较可能的情况是：</p>
+<ul>
+<li>要么是你的系统现在还在用MyISAM这类不支持事务的引擎，那要安排升级换引擎；</li>
+<li>要么是你的引擎升级了，但是代码还没升级。我见过这样的情况，最后业务开发就是把lock tables 和 unlock tables 改成 begin 和 commit，问题就解决了。</li>
+</ul>
+<p>MDL会直到事务提交才释放，在做表结构变更的时候，你一定要小心不要导致锁住线上查询和更新。</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a><strong>思考题</strong></h2><p>备份一般都会在备库上执行，你在用 <code>–single-transaction</code> 方法做逻辑备份的过程中，如果主库上的一个小表做了一个DDL，比如给一个表上加了一列。这时候，从备库上会看到什么现象呢？</p>
+<p>假设这个DDL是针对表t1的， 这里我把备份过程中几个关键的语句列出来：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Q1:<span class="keyword">SET</span> SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</span><br><span class="line">Q2:<span class="keyword">START</span> TRANSACTION  <span class="keyword">WITH</span> CONSISTENT SNAPSHOT；</span><br><span class="line"><span class="comment">/* other tables */</span></span><br><span class="line">Q3:<span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line"><span class="comment">/* 时刻 1 */</span></span><br><span class="line">Q4:<span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> `t1`;</span><br><span class="line"><span class="comment">/* 时刻 2 */</span></span><br><span class="line">Q5:<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> `t1`;</span><br><span class="line"><span class="comment">/* 时刻 3 */</span></span><br><span class="line">Q6:<span class="keyword">ROLLBACK</span> <span class="keyword">TO</span> <span class="keyword">SAVEPOINT</span> sp;</span><br><span class="line"><span class="comment">/* 时刻 4 */</span></span><br><span class="line"><span class="comment">/* other tables */</span></span><br></pre></td></tr></table></figure>
+
+<p>在备份开始的时候，为了确保RR（可重复读）隔离级别，再设置一次RR隔离级别(Q1);</p>
+<p>启动事务，这里用 WITH CONSISTENT SNAPSHOT确保这个语句执行完就可以得到一个一致性视图（Q2)；</p>
+<p>设置一个保存点，这个很重要（Q3）；</p>
+<p>show create 是为了拿到表结构(Q4)，然后正式导数据 （Q5），回滚到SAVEPOINT sp，在这里的作用是释放 t1的MDL锁 （Q6。当然这部分属于“超纲”，上文正文里面都没提到。</p>
+<p>DDL从主库传过来的时间按照效果不同，我打了四个时刻。题目设定为小表，我们假定到达后，如果开始执行，则很快能够执行完成。</p>
+<p>参考答案如下：</p>
+<ol>
+<li>如果在Q4语句执行之前到达，现象：没有影响，备份拿到的是DDL后的表结构。</li>
+<li>如果在“时刻 2”到达，则表结构被改过，Q5执行的时候，报 Table definition has changed, please retry transaction，现象：mysqldump终止；</li>
+<li>如果在“时刻3”到达，mysqldump占着t1的MDL读锁，binlog被阻塞，现象：主从延迟，直到Q6执行完成。</li>
+<li>从“时刻4”开始，mysqldump释放了MDL读锁，现象：没有影响，备份拿到的是DDL前的表结构。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">xjf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://universeinheart.github.io/2021/12/06/MySQL/06/">http://universeinheart.github.io/2021/12/06/MySQL/06/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://universeinheart.github.io" target="_blank">HelloWorld</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/12/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/01/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">1、为什么要学习数据结构与算法</div></div></a></div><div class="next-post pull-right"><a href="/2021/12/04/MySQL/07/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">07、行锁功过：怎么减少行锁对性能的影响</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/04/MySQL/01/" title="01、基础架构：一条SQL查询语句是如何执行的"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">01、基础架构：一条SQL查询语句是如何执行的</div></div></a></div><div><a href="/2021/04/04/MySQL/03/" title="03、事务隔离：为什么你改了我还看不见"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">03、事务隔离：为什么你改了我还看不见</div></div></a></div><div><a href="/2021/04/04/MySQL/02/" title="02、日志系统：一条SQL更新语句是如何执行的"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">02、日志系统：一条SQL更新语句是如何执行的</div></div></a></div><div><a href="/2021/04/04/MySQL/04/" title="04、深入浅出索引（上）"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">04、深入浅出索引（上）</div></div></a></div><div><a href="/2021/12/04/MySQL/07/" title="07、行锁功过：怎么减少行锁对性能的影响"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-04</div><div class="title">07、行锁功过：怎么减少行锁对性能的影响</div></div></a></div><div><a href="/2021/04/04/MySQL/05/" title="05、深入浅出索引（下）"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">05、深入浅出索引（下）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xjf</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HelloWorld" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:954475782@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello everyone</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%94%81"><span class="toc-number">1.</span> <span class="toc-text">全局锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BA%A7%E9%94%81"><span class="toc-number">2.</span> <span class="toc-text">表级锁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">思考题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/09/" title="09、Redis 切片集群">09、Redis 切片集群</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/10/" title="10、第1～9讲课后思考题答案及常见问题答疑">10、第1～9讲课后思考题答案及常见问题答疑</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/11/" title="11、Redis String 为什么不好用了？">11、Redis String 为什么不好用了？</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/10/Redis/04/" title="04、Redis AOF日志">04、Redis AOF日志</a><time datetime="2022-04-10T11:50:15.000Z" title="发表于 2022-04-10 19:50:15">2022-04-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/09/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/10/" title="可观测性">可观测性</a><time datetime="2022-04-09T15:26:37.000Z" title="发表于 2022-04-09 23:26:37">2022-04-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By xjf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

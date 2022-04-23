@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从类库到服务 | HelloWorld</title><meta name="keywords" content="架构,系统"><meta name="author" content="xjf"><meta name="copyright" content="xjf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从类库到服务">
+<meta property="og:url" content="http://universeinheart.github.io/2022/04/06/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/7/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="架构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2022-04-06T15:26:37.000Z">
+<meta property="article:modified_time" content="2022-04-07T00:47:51.825Z">
+<meta property="article:author" content="xjf">
+<meta property="article:tag" content="架构">
+<meta property="article:tag" content="系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://universeinheart.github.io/2022/04/06/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-04-07 08:47:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HelloWorld" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HelloWorld</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">从类库到服务</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-06T15:26:37.000Z" title="发表于 2022-04-06 23:26:37">2022-04-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-04-07T00:47:51.825Z" title="更新于 2022-04-07 08:47:51">2022-04-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84/">凤凰架构</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="从类库到服务"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>微服务架构其中一个重要设计原则是“通过服务来实现独立自治的组件”，强调应采用<strong>“服务”（Service）</strong>而不再是“类库”（Library）来构建组件化的程序，这两者的差别在于类库是在编译期静态链接到程序中的，通过调用本地方法来使用其中的功能，而服务是进程外组件，通过调用<strong>远程</strong>方法来使用其中的功能。</p>
+<p>微服务相互调用才能正常运作的分布式系统中，每个节点都互相扮演着服务的生产者与消费者的多重角色，形成了一套复杂的网状调用关系，此时，至少有（但不限于）以下三个问题是必须考虑并得到妥善解决的：</p>
+<ul>
+<li>对消费者来说，外部的服务由谁提供？具体在什么网络位置？<strong>（服务发现）</strong></li>
+<li>对生产者来说，内部哪些服务需要暴露？哪些应当隐藏？应当以何种形式暴露服务？以什么规则在集群中分配请求？<strong>（服务的网关路由）</strong></li>
+<li>对调用过程来说，如何保证每个远程服务都接收到相对平均的流量，获得尽可能高的服务质量与可靠性？<strong>（服务的负载均衡）</strong></li>
+</ul>
+<h2 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h2><h2 id="网关路由"><a href="#网关路由" class="headerlink" title="网关路由"></a>网关路由</h2><p>网关（Gateway） 用来表示位于内部区域边缘，与外界进行交互的某个物理或逻辑设备，</p>
+<p>微服务中网关的首要职责就是作为统一的出口对外提供服务，将外部访问网关地址的流量，根据适当的规则路由到内部集群中正确的服务节点之上，因此，微服务中的网关，也常被称为“服务网关”或者“API 网关”，微服务中的网关首先应该是个路由器，在满足此前提的基础上，网关还可以根据需要作为流量过滤器来使用，提供某些额外的可选的功能，譬如安全、认证、授权、限流、监控、缓存，等等。简而言之</p>
+<blockquote>
+<p>网关 = 路由器（基础职能） + 过滤器（可选职能）</p>
+</blockquote>
+<p>针对“<strong>路由</strong>”这个基础职能，服务网关主要考量的是能够支持路由的“网络协议层次”和“性能与可用性”两方面的因素。</p>
+<p><strong>网络协议层次</strong>是指负载均衡中介绍过的四层流量转发与七层流量代理，仅从技术实现角度来看，对于路由这项工作，负载均衡器与服务网关在实现上是没有什么差别的，很多服务网关本身就是基于老牌的负载均衡器来实现的，譬如基于 Nginx、HAProxy 开发的 Ingress Controller，基于 Netty 开发的 Zuul 2.0 等；但从目的角度看，负载均衡器与服务网关会有一些区别，具体在于前者是为了根据均衡算法对流量进行平均地路由，后者是为了根据流量中的某种特征进行正确地路由。网关必须能够识别流量中的特征，这意味着网关能够支持的网络通信协议的层次将会直接限制后端服务节点能够选择的服务通信方式。</p>
+<blockquote>
+<p>如果服务集群只提供像 Etcd 这样直接基于 TCP 的访问的服务，那只部署四层网关便可满足，网关以 IP 报文中源地址、目标地址为特征进行路由；</p>
+<p>如果服务集群要提供 HTTP 服务的话，那就必须部署一个七层网关，网关根据 HTTP 报文中的 URL、Header 等信息为特征进行路由；</p>
+<p>如果服务集群还要提供更上层的 WebSocket、SOAP 等服务，那就必须要求网关同样能够支持这些上层协议，才能从中提取到特征。</p>
+</blockquote>
+<p><strong>性能与可用性</strong>，由于网关是所有服务对外的总出口，是流量必经之地，所以网关的路由性能将导致全局的、系统性的影响，如果经过网关路由会有 1 毫秒的性能损失，就意味着整个系统所有服务的响应延迟都会增加 1 毫秒。网关的性能与它的工作模式和自身实现算法都有关系，但毫无疑问工作模式是最关键的因素，如果能够采用 DSR 三角传输模式，原理上就决定了性能一定会比代理模式来的强 </p>
+<p>不过，因为今天 REST 和 JSON-RPC 等基于 HTTP 协议的服务接口在对外部提供的服务中占绝对主流的地位，所以我们所讨论的服务网关默认都必须支持七层路由，通常就默认无法直接进行流量转发，只能采用代理模式。在这个前提约束下，网关的性能主要取决于它们如何代理网络请求，也即它们的网络 I/O 模型，下面笔者正好借这个场景介绍一下网络 I/O 的基础知识。</p>
+<h2 id="网络-I-O-模型"><a href="#网络-I-O-模型" class="headerlink" title="网络 I/O 模型"></a>网络 I/O 模型</h2><p>在套接字接口抽象下，网络 I/O 的出入口就是 <code>Socket</code> 的读和写，<code>Socket</code> 在操作系统接口中被抽象为数据流，网络 I/O 可以理解为对流的操作。每一次网络访问，从远程主机返回的数据会先存放到操作系统内核的缓冲区中，然后内核的缓冲区复制到应用程序的地址空间，所以当发生一次网络请求发生后，将会按顺序经历“<strong>等待数据从远程主机到达缓冲区</strong>”和“<strong>将数据从缓冲区拷贝到应用程序地址空间</strong>”两个阶段，根据实现这两个阶段的不同方法，人们把网络 I/O 模型总结为两类、五种模型：两类是指<strong>同步 I/O</strong>与<strong>异步 I/O</strong>，五种是指在同步 IO 中又分有划分出<strong>阻塞 I/O</strong>、<strong>非阻塞 I/O</strong>、<strong>多路复用 I/O</strong>和<strong>信号驱动 I/O</strong>四种细分模型以及<strong>异步I/O模型</strong>。</p>
+<blockquote>
+<p>同步是指调用端发出请求之后，得到结果之前必须一直等待，与之相对的就是异步，发出调用请求之后将立即返回，不会马上得到处理结果，结果将通过状态变化和回调来通知调用者。</p>
+<p>阻塞和非阻塞是针对请求处理过程，指在收到调用请求之后，返回结果之前，当前处理线程是否会被挂起。</p>
+</blockquote>
+<p>以“如何领到外卖”为情景，将之类比解释如下：</p>
+<ul>
+<li><p><strong>异步 I/O</strong>（Asynchronous I/O）：好比你在美团外卖订了个盒饭，付款之后你自己该干嘛还干嘛去，饭做好了骑手自然会到门口打电话通知你。异步 I/O 中数据到达缓冲区后，不需要由调用进程主动进行从缓冲区复制数据的操作，而是复制完成后由操作系统向线程发送信号，所以它一定是非阻塞的。</p>
+</li>
+<li><p><strong>同步 I/O</strong></p>
+<p>（Synchronous I/O）：好比你自己去饭堂打饭，这时可能有如下情形发生：</p>
+<ul>
+<li><strong>阻塞 I/O</strong>（Blocking I/O）：你去到饭堂，发现饭还没做好，你也干不了别的，只能打个瞌睡（线程休眠），直到饭做好，这就是被阻塞了。阻塞 I/O 是最直观的 I/O 模型，逻辑清晰，也比较节省 CPU 资源，但缺点就是线程休眠所带来的上下文切换，这是一种需要切换到内核态的重负载操作，不应当频繁进行。</li>
+<li><strong>非阻塞 I/O</strong>（Non-Blocking I/O）：你去到饭堂，发现饭还没做好，你就回去了，然后每隔 3 分钟来一次饭堂看饭做好了没，直到饭做好。非阻塞 I/O 能够避免线程休眠，对于一些很快就能返回结果的请求，非阻塞 I/O 可以节省切换上下文切换的消耗，但是对于较长时间才能返回的请求，非阻塞 I/O 反而白白浪费了 CPU 资源，所以目前并不常用。</li>
+<li><strong>多路复用 I/O</strong>（Multiplexing I/O）：多路复用 I/O 本质上是阻塞 I/O 的一种，但是它的好处是可以在同一条阻塞线程上处理多个不同端口的监听。类比的情景是你名字叫雷锋，代表整个宿舍去饭堂打饭，去到饭堂，发现饭还没做好，还是继续打瞌睡，但哪个舍友的饭好了，你就马上把那份饭送回去，然后继续打着瞌睡哼着歌等待其他的饭做好。多路复用 I/O 是目前的高并发网络应用的主流，它下面还可以细分 select、epoll、kqueue 等不同实现，这里就不作展开了。</li>
+<li><strong>信号驱动 I/O</strong>（Signal-Driven I/O）：你去到饭堂，发现饭还没做好，但你跟厨师熟，跟他说饭做好了叫你，然后回去该干嘛干嘛，等收到厨师通知后，你把饭从饭堂拿回宿舍。这里厨师的通知就是那个“信号”，信号驱动 I/O 与异步 I/O 的区别是“从缓冲区获取数据”这个步骤的处理，前者收到的通知是可以开始进行复制操作了，即要你自己从饭堂拿回宿舍，在复制完成之前线程处于阻塞状态，所以它仍属于同步 I/O 操作，而后者收到的通知是复制操作已经完成，即外卖小哥已经把饭送到了。</li>
+</ul>
+</li>
+</ul>
+<p>显而易见，异步 I/O 模型是最方便的，毕竟能叫外卖谁愿意跑饭堂啊，但前提是你学校里有开展外卖业务。同样，异步 I/O 受限于操作系统，Windows NT 内核早在 3.5 以后，就通过<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IOCP">IOCP</a>实现了真正的异步 I/O 模型。而 Linux 系统下，是在 Linux Kernel 2.6 才首次引入，目前也还并不算很完善，因此在 Linux 下实现高并发网络编程时仍是以多路复用 I/O 模型模式为主。</p>
+<p>以 Zuul 网关为例，在 Zuul 1.0 时，它采用的是阻塞 I/O 模型来进行最经典的“一条线程对应一个连接”（Thread-per-Connection）的方式来代理流量，采用阻塞 I/O 意味着它会有线程休眠，就有上下文切换的成本，所以如果后端服务普遍属于<strong>计算密集型</strong>（CPU Bound，可以通俗理解为服务耗时比较长，主要消耗在 CPU 上）时，这种模式能够相对节省网关的 CPU 资源，但如果后端服务普遍都是 <strong>I/O 密集型</strong>（I/O Bound，可以理解服务都很快返回，主要消耗在 I/O 上），它就会由于频繁的上下文切换而降低性能。在 Zuul 的 2.0 版本，最大的改进就是基于 <code>Netty Server</code> 实现了异步 I/O 模型来处理请求，大幅度减少了线程数，获得了更高的性能和更低的延迟。</p>
+<p><strong>网关的可用性问题</strong>，任何系统的网络调用过程中都至少会有一个单点存在，这是由用户只通过唯一的一个地址去访问系统所决定的。作为后端对外服务代理人角色的网关经常被视为整个系统的入口，往往很容易成为网络访问中的单点，这时候它的可用性就尤为重要。由于网关的地址具有唯一性，就不像之前<a target="_blank" rel="noopener" href="https://icyfenix.cn/distribution/connect/service-discovery.html">服务发现</a>那些注册中心那样直接做个集群，随便访问哪一台都可以解决问题。为此，对网关的可用性方面，我们应该考虑到以下几点：</p>
+<ul>
+<li><strong>网关应尽可能轻量</strong>，尽管网关作为服务集群统一的出入口，可以很方便地做安全、认证、授权、限流、监控，等等的功能，但给网关附加这些能力时还是要仔细权衡，取得功能性与可用性之间的平衡，过度增加网关的职责是危险的。</li>
+<li>网关选型时，应该尽可能选择较<strong>成熟的产品实现</strong>，譬如 Nginx Ingress Controller、KONG、Zuul 这些经受过长期考验的产品，而不能一味只考虑性能选择最新的产品，性能与可用性之间的平衡也需要权衡。</li>
+<li>在需要高可用的生产环境中，应当考虑在网关之前部署负载均衡器或者<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Equal-cost_multi-path_routing">等价路由器</a>（ECMP），让那些更成熟健壮的设施（往往是硬件物理设备）去充当整个系统的入口地址，这样网关也可以进行扩展了</li>
+</ul>
+<h2 id="客户端负载均衡器"><a href="#客户端负载均衡器" class="headerlink" title="客户端负载均衡器"></a>客户端负载均衡器</h2><img src="/2022/04/06/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/7/image-20220407083820770.png" class="" title="image-20220407083820770">
+
+<p>客户端均衡器是和服务实例一一对应的，而且与服务实例并存于同一个进程之内。这个特点能为它带来很多好处</p>
+<ul>
+<li>负载均衡器与服务之间信息交换是进程内的方法调用，不存在任何额外的网络开销。</li>
+<li>不依赖集群边缘的设施，所有内部流量都仅在服务集群的内部循环，避免了出现前文那样，集群内部流量要“绕场一周”的尴尬局面。</li>
+<li>分散式的均衡器意味着天然避免了集中式的单点问题，它的带宽资源将不会像集中式均衡器那样敏感</li>
+<li>客户端均衡器要更加灵活，能够针对每一个服务实例单独设置均衡策略等参数，访问某个服务，是不是需要具备亲和性，选择服务的策略是随机、轮询、加权还是最小连接等等，都可以单独设置而不影响其它服务。</li>
+</ul>
+<p>它得到上述诸多好处的同时，缺点同样也是不少的：</p>
+<ul>
+<li>它与服务运行于同一个进程之内，意味着它的选型受到服务所使用的编程语言的限制，譬如用 Golang 开发的微服务就不太可能搭配 Spring Cloud Load Balancer 来使用，要为每种语言都实现对应的能够支持复杂网络情况的均衡器是非常难的。客户端均衡器的这个缺陷有违于微服务中技术异构不应受到限制的原则。</li>
+<li>从个体服务来看，由于是共用一个进程，均衡器的稳定性会直接影响整个服务进程的稳定性，消耗的 CPU、内存等资源也同样影响到服务的可用资源。</li>
+<li>由于请求的来源可能是来自集群中任意一个服务节点，而不再是统一来自集中式均衡器，这就使得内部网络安全和信任关系变得复杂，当攻破任何一个服务时，更容易通过该服务突破集群中的其他部分。</li>
+<li>服务集群的拓扑关系是动态的，每一个客户端均衡器必须持续跟踪其他服务的健康状况，以实现上线新服务、下线旧服务、自动剔除失败的服务、自动重连恢复的服务等均衡器必须具备的功能。由于这些操作都需要通过访问服务注册中心来完成，数量庞大的客户端均衡器一直持续轮询服务注册中心，也会为它带来不小的负担。</li>
+</ul>
+<p>在 Java 领域，客户端均衡器中最具代表性的产品是 Netflix Ribbon 和 Spring Cloud Load Balancer，随着微服务的流行，它们在 Java 微服务中已积聚了相当可观的使用者。</p>
+<h2 id="代理负载均衡器"><a href="#代理负载均衡器" class="headerlink" title="代理负载均衡器"></a>代理负载均衡器</h2><p>代理均衡器对此前的客户端负载均衡器的改进是将原本嵌入在服务进程中的均衡器提取出来，作为一个进程之外，同一 Pod 之内的特殊服务，放到<a target="_blank" rel="noopener" href="https://icyfenix.cn/architecture/architect-history/post-microservices.html">边车代理</a>中去实现，它的流量关系如图所示。</p>
+<img src="/2022/04/06/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/7/image-20220407084422831.png" class="" title="image-20220407084422831">
+
+<p>虽然代理均衡器与服务实例不再是进程内通信，而是通过网络协议栈进行数据交换的，数据要经过操作系统的协议栈，要进行打包拆包、计算校验和、维护序列号等网络数据的收发步骤，流量比起之前的客户端均衡器确实多增加了一系列处理步骤。不过，Kubernetes 严格保证了同一个 Pod 中的容器不会跨越不同的节点，这些容器共享着同一个网络名称空间，因此代理均衡器与服务实例的交互，实质上是对本机回环设备的访问，仍然要比真正的网络交互高效且稳定得多。</p>
+<p>代理均衡器付出的代价较小，但从服务进程中分离出来所获得的收益却是非常显著的：</p>
+<ul>
+<li>代理均衡器不再受编程语言的限制。集中不同编程语言的使用者的力量，更容易打造出能面对复杂网络情况的、高效健壮的均衡器。即使退一步说，独立于服务进程的均衡器也不会由于自身的稳定性影响到服务进程的稳定。</li>
+<li>在服务拓扑感知方面代理均衡器也要更有优势。由于边车代理接受控制平面的统一管理，当服务节点拓扑关系发生变化时，控制平面就会主动向边车代理发送更新服务清单的控制指令，这避免了此前客户端均衡器必须长期主动轮询服务注册中心所造成的浪费。</li>
+<li>在安全性、可观测性上，由于边车代理都是一致的实现，有利于在服务间建立双向 mTLS 通信，也有利于对整个调用链路给出更详细的统计信息。</li>
+</ul>
+<p>总体而言，边车代理这种通过同一个 Pod 的独立容器实现的负载均衡器是目前处理微服务集群内部流量最理想的方式，只是服务网格本身仍是初生事物，还不足够成熟，对操作系统、网络和运维方面的知识要求也较高，但有理由相信随着时间的推移，未来这将会是微服务的主流通信方式。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84/">架构</a><a class="post-meta__tags" href="/tags/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/09/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/10/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">可观测性</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/23/Redis/33/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">33、Redis  脑裂：一次奇怪的数据丢失</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/01/09/凤凰架构-构建可靠的大型分布式系统/1/" title="访问远程服务"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-09</div><div class="title">访问远程服务</div></div></a></div><div><a href="/2022/04/09/凤凰架构-构建可靠的大型分布式系统/10/" title="可观测性"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-09</div><div class="title">可观测性</div></div></a></div><div><a href="/2022/01/20/凤凰架构-构建可靠的大型分布式系统/3/" title="透明多级分流系统"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-20</div><div class="title">透明多级分流系统</div></div></a></div><div><a href="/2022/01/09/凤凰架构-构建可靠的大型分布式系统/2/" title="事务处理"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-09</div><div class="title">事务处理</div></div></a></div><div><a href="/2021/05/01/开始学架构/01/" title="01、架构到底是指什么？"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-01</div><div class="title">01、架构到底是指什么？</div></div></a></div><div><a href="/2021/05/02/开始学架构/02/" title="02、架构设计的历史背景"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-02</div><div class="title">02、架构设计的历史背景</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xjf</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HelloWorld" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:954475782@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello everyone</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="toc-number">1.</span> <span class="toc-text">服务发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E5%85%B3%E8%B7%AF%E7%94%B1"><span class="toc-number">2.</span> <span class="toc-text">网关路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C-I-O-%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">网络 I&#x2F;O 模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%99%A8"><span class="toc-number">4.</span> <span class="toc-text">客户端负载均衡器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%99%A8"><span class="toc-number">5.</span> <span class="toc-text">代理负载均衡器</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/09/" title="09、Redis 切片集群">09、Redis 切片集群</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/10/" title="10、第1～9讲课后思考题答案及常见问题答疑">10、第1～9讲课后思考题答案及常见问题答疑</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/11/" title="11、Redis String 为什么不好用了？">11、Redis String 为什么不好用了？</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/10/Redis/04/" title="04、Redis AOF日志">04、Redis AOF日志</a><time datetime="2022-04-10T11:50:15.000Z" title="发表于 2022-04-10 19:50:15">2022-04-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/09/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/10/" title="可观测性">可观测性</a><time datetime="2022-04-09T15:26:37.000Z" title="发表于 2022-04-09 23:26:37">2022-04-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By xjf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

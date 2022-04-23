@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15、答疑文章（一）：日志和索引相关问题 | HelloWorld</title><meta name="keywords" content="MySQL"><meta name="author" content="xjf"><meta name="copyright" content="xjf"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15、答疑文章（一）：日志和索引相关问题">
+<meta property="og:url" content="http://universeinheart.github.io/2021/01/05/MySQL/15/index.html">
+<meta property="og:site_name" content="HelloWorld">
+<meta property="og:description" content="MySQL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-01-05T13:13:56.000Z">
+<meta property="article:modified_time" content="2022-01-06T07:17:48.774Z">
+<meta property="article:author" content="xjf">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://universeinheart.github.io/2021/01/05/MySQL/15/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":false,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-06 15:17:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HelloWorld" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/favicon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HelloWorld</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">15、答疑文章（一）：日志和索引相关问题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-05T13:13:56.000Z" title="发表于 2021-01-05 21:13:56">2021-01-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-01-06T07:17:48.774Z" title="更新于 2022-01-06 15:17:48">2022-01-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/MySQL%E5%AE%9E%E6%88%98/">MySQL实战</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="15、答疑文章（一）：日志和索引相关问题"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="日志相关问题"><a href="#日志相关问题" class="headerlink" title="日志相关问题"></a>日志相关问题</h2><p>在两阶段提交的不同瞬间，MySQL如果发生异常重启，是怎么保证数据完整性的？</p>
+<img src="/2021/01/05/MySQL/15/image-20220105145827689.png" class="" title="image-20220105145827689">
+
+<h3 id="在两阶段提交的不同时刻，MySQL异常重启会出现什么现象。"><a href="#在两阶段提交的不同时刻，MySQL异常重启会出现什么现象。" class="headerlink" title="在两阶段提交的不同时刻，MySQL异常重启会出现什么现象。"></a><strong>在两阶段提交的不同时刻，MySQL异常重启会出现什么现象。</strong></h3><p>如果在图中时刻A的地方，也就是写入<code>redo log</code> 处于 <code>prepare</code>阶段之后、写<code>binlog</code>之前，发生了崩溃（crash），由于此时<code>binlog</code>还没写，<code>redo log</code>也还没提交，所以崩溃恢复的时候，这个事务会回滚。这时候，<code>binlog</code>还没写，所以也不会传到备库。到这里，大家都可以理解。</p>
+<p>大家出现问题的地方，主要集中在时刻B，也就是<code>binlog</code>写完，<code>redo log</code>还没commit前发生crash，那崩溃恢复的时候MySQL会怎么处理？</p>
+<p>我们先来看一下崩溃恢复时的判断规则。</p>
+<ol>
+<li>如果<code>redo log</code>里面的事务是完整的，也就是已经有了commit标识，则直接提交；</li>
+<li>如果<code>redo log</code>里面的事务只有完整的prepare，则判断对应的事务binlog是否存在并完整：<br>a. 如果是，则提交事务；<br>b. 否则，回滚事务。</li>
+</ol>
+<p>这里，时刻B发生crash对应的就是2(a)的情况，崩溃恢复过程中事务会被提交。</p>
+<p>现在，我们继续延展一下这个问题。</p>
+<h3 id="MySQL怎么知道binlog是完整的"><a href="#MySQL怎么知道binlog是完整的" class="headerlink" title="MySQL怎么知道binlog是完整的?"></a>MySQL怎么知道binlog是完整的?</h3><p>回答：一个事务的binlog是有完整格式的：</p>
+<ul>
+<li>statement格式的binlog，最后会有COMMIT；</li>
+<li>row格式的binlog，最后会有一个XID event。</li>
+</ul>
+<p>另外，在MySQL 5.6.2版本以后，还引入了binlog-checksum参数，用来验证binlog内容的正确性。对于binlog日志由于磁盘原因，可能会在日志中间出错的情况，MySQL可以通过校验checksum的结果来发现。所以，MySQL还是有办法验证事务binlog的完整性的。</p>
+<h3 id="redo-log-和-binlog是怎么关联起来的"><a href="#redo-log-和-binlog是怎么关联起来的" class="headerlink" title="redo log 和 binlog是怎么关联起来的?"></a>redo log 和 binlog是怎么关联起来的?</h3><p>回答：它们有一个共同的数据字段，叫<code>XID</code>。崩溃恢复的时候，会按顺序扫描 redo log：</p>
+<ul>
+<li>如果碰到既有prepare、又有commit的redo log，就直接提交；</li>
+<li>如果碰到只有parepare、而没有commit的redo log，就拿着XID去binlog找对应的事务。</li>
+</ul>
+<h3 id="处于prepare阶段的redo-log加上完整binlog，重启就能恢复，MySQL为什么要这么设计"><a href="#处于prepare阶段的redo-log加上完整binlog，重启就能恢复，MySQL为什么要这么设计" class="headerlink" title="处于prepare阶段的redo log加上完整binlog，重启就能恢复，MySQL为什么要这么设计?"></a>处于prepare阶段的redo log加上完整binlog，重启就能恢复，MySQL为什么要这么设计?</h3><p>回答：其实，这个问题还是跟我们在反证法中说到的数据与备份的一致性有关。在时刻B，也就是binlog写完以后MySQL发生崩溃，这时候binlog已经写入了，之后就会被从库（或者用这个binlog恢复出来的库）使用。</p>
+<p>所以，在主库上也要提交这个事务。采用这个策略，主库和备库的数据就保证了一致性。</p>
+<h3 id="如果这样的话，为什么还要两阶段提交呢？干脆先redo-log写完，再写binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？"><a href="#如果这样的话，为什么还要两阶段提交呢？干脆先redo-log写完，再写binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？" class="headerlink" title="如果这样的话，为什么还要两阶段提交呢？干脆先redo log写完，再写binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？"></a>如果这样的话，为什么还要两阶段提交呢？干脆先redo log写完，再写binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？</h3><p>回答：其实，两阶段提交是经典的分布式系统问题，并不是MySQL独有的。</p>
+<p>如果必须要举一个场景，来说明这么做的必要性的话，那就是事务的持久性问题。</p>
+<p>对于InnoDB引擎来说，如果redo log提交完成了，事务就不能回滚（如果这还允许回滚，就可能覆盖掉别的事务的更新）。而如果redo log直接提交，然后binlog写入的时候失败，InnoDB又回滚不了，数据和binlog日志又不一致了。</p>
+<p>两阶段提交就是为了给所有人一个机会，当每个人都说“我ok”的时候，再一起提交。</p>
+<h3 id="那能不能只用redo-log，不要binlog？"><a href="#那能不能只用redo-log，不要binlog？" class="headerlink" title="那能不能只用redo log，不要binlog？"></a>那能不能只用redo log，不要binlog？</h3><p>回答：如果只从崩溃恢复的角度来讲是可以的。你可以把binlog关掉，这样就没有两阶段提交了，但系统依然是crash-safe的。</p>
+<p>但是，如果你了解一下业界各个公司的使用场景的话，就会发现在正式的生产库上，<code>binlog</code>都是开着的。因为<code>binlog</code>有着redo log无法替代的功能。</p>
+<p>一个是<strong>归档</strong>。redo log是循环写，写到末尾是要回到开头继续写的。这样历史日志没法保留，redo log也就起不到归档的作用。</p>
+<p>一个就是MySQL系统依赖于<code>binlog</code>。binlog作为MySQL一开始就有的功能，被用在了很多地方。其中，MySQL系统高可用的基础，就是binlog复制。</p>
+<p>还有很多公司有异构系统（比如一些数据分析系统），这些系统就靠消费MySQL的binlog来更新自己的数据。关掉binlog的话，这些下游系统就没法输入了。</p>
+<p>总之，由于现在包括MySQL高可用在内的很多系统机制都依赖于binlog，所以“鸠占鹊巢”redo log还做不到。你看，发展生态是多么重要。</p>
+<h3 id="redo-log一般设置多大？"><a href="#redo-log一般设置多大？" class="headerlink" title="redo log一般设置多大？"></a>redo log一般设置多大？</h3><p>回答：redo log太小的话，会导致很快就被写满，然后不得不强行刷redo log，这样WAL机制的能力就发挥不出来了。</p>
+<p>所以，如果是现在常见的几个TB的磁盘的话，就不要太小气了，直接将redo log设置为4个文件、每个文件1GB吧。</p>
+<h3 id="正常运行中的实例，数据写入后的最终落盘，是从-redo-log-更新过来的还是从-buffer-pool-更新过来的呢？"><a href="#正常运行中的实例，数据写入后的最终落盘，是从-redo-log-更新过来的还是从-buffer-pool-更新过来的呢？" class="headerlink" title="正常运行中的实例，数据写入后的最终落盘，是从 redo log 更新过来的还是从 buffer pool 更新过来的呢？"></a>正常运行中的实例，数据写入后的最终落盘，是从 redo log 更新过来的还是从 buffer pool 更新过来的呢？</h3><p>回答：这个问题其实问得非常好。这里涉及到了，“redo log里面到底是什么”的问题。</p>
+<p>实际上，redo log并没有记录数据页的完整数据，所以它并没有能力自己去更新磁盘数据页，也就不存在“数据最终落盘，是由redo log更新过去”的情况。</p>
+<ol>
+<li>如果是正常运行的实例的话，数据页被修改以后，跟磁盘的数据页不一致，称为脏页。最终数据落盘，就是把内存中的数据页写盘。这个过程，甚至与redo log毫无关系。</li>
+<li>在崩溃恢复场景中，InnoDB如果判断到一个数据页可能在崩溃恢复的时候丢失了更新，就会将它读到内存，然后让redo log更新内存内容。更新完成后，内存页变成脏页，就回到了第一种情况的状态。</li>
+</ol>
+<h3 id="redo-log-buffer-是什么？是先修改内存，还是先写redo-log文件？"><a href="#redo-log-buffer-是什么？是先修改内存，还是先写redo-log文件？" class="headerlink" title="redo log buffer 是什么？是先修改内存，还是先写redo log文件？"></a>redo log buffer 是什么？是先修改内存，还是先写redo log文件？</h3><p>回答：这两个问题可以一起回答。</p>
+<p>在一个事务的更新过程中，日志是要写多次的。比如下面这个事务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">insert into t1 ...</span><br><span class="line">insert into t2 ...</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+
+<p>这个事务要往两个表中插入记录，插入数据的过程中，生成的日志都得先保存起来，但又不能在还没commit的时候就直接写到redo log文件里。</p>
+<p>所以，redo log buffer 就是一块内存，用来先存redo日志的。也就是说，在执行第一个insert的时候，数据的内存被修改了，redo log buffer 也写入了日志。</p>
+<p>但是，真正把日志写到redo log文件（文件名是 ib_logfile+数字），是在执行commit语句的时候做的。</p>
+<p>（这里说的是事务执行过程中不会“主动去刷盘”，以减少不必要的IO消耗。但是可能会出现“被动写入磁盘”，比如内存不够、其他事务提交等情况。这个问题我们会在后面文章《MySQL有哪些“饮鸩止渴”的提高性能的方法？》中再详细展开）。</p>
+<p>单独执行一个更新语句的时候，InnoDB会自己启动一个事务，在语句执行完成的时候提交。过程跟上面是一样的，只不过是“压缩”到了一个语句里面完成。</p>
+<h2 id="业务设计问题"><a href="#业务设计问题" class="headerlink" title="业务设计问题"></a>业务设计问题</h2><p>业务上有这样的需求，A、B两个用户，如果互相关注，则成为好友。设计上是有两张表，一个是like表，一个是friend表，like表有user_id、liker_id两个字段，我设置为复合唯一索引即uk_user_id_liker_id。语句执行逻辑是这样的：</p>
+<p>以A关注B为例：<br>第一步，先查询对方有没有关注自己（B有没有关注A）<br>select * from like where user_id = B and liker_id = A;</p>
+<p>如果有，则成为好友<br>insert into friend;</p>
+<p>没有，则只是单向关注关系<br>insert into like;</p>
+<p>但是如果A、B同时关注对方，会出现不会成为好友的情况。因为上面第1步，双方都没关注对方。第1步即使使用了排他锁也不行，因为记录不存在，行锁无法生效。</p>
+<p>请问这种情况，在MySQL锁层面有没有办法处理？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `<span class="keyword">like</span>` (</span><br><span class="line">  `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `user_id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `liker_id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `uk_user_id_liker_id` (`user_id`,`liker_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `friend` (</span><br><span class="line">  id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `friend_1_id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `firned_2_id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `uk_friend` (`friend_1_id`,`firned_2_id`)</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>疑问，在并发场景下，同时有两个人，设置为关注对方，就可能导致无法成功加为朋友关系。</p>
+<img src="/2021/01/05/MySQL/15/image-20220105163131222.png" class="" title="image-20220105163131222">
+
+<p>由于一开始A和B之间没有关注关系，所以两个事务里面的select语句查出来的结果都是空。</p>
+<p>因此，session 1的逻辑就是“既然B没有关注A，那就只插入一个单向关注关系”。session 2也同样是这个逻辑。</p>
+<p>这个结果对业务来说就是bug了。因为在业务设定里面，这两个逻辑都执行完成以后，是应该在friend表里面插入一行记录的。</p>
+<p>如提问里面说的，“第1步即使使用了排他锁也不行，因为记录不存在，行锁无法生效”。</p>
+<p>不过，我想到了另外一个方法，来解决这个问题。</p>
+<p>首先，要给“like”表增加一个字段，比如叫作 relation_ship，并设为整型，取值1、2、3。</p>
+<blockquote>
+<p>值是1的时候，表示user_id 关注 liker_id;<br>值是2的时候，表示liker_id 关注 user_id;<br>值是3的时候，表示互相关注。</p>
+</blockquote>
+<p>然后，当 A关注B的时候，逻辑改成如下所示的样子：应用代码里面，比较A和B的大小</p>
+<p>如果A&lt;B，就执行下面的逻辑</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">begin</span>; <span class="comment">/*启动事务*/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `<span class="keyword">like</span>`(user_id, liker_id, relation_ship) <span class="keyword">values</span>(A, B, <span class="number">1</span>) </span><br><span class="line">	<span class="keyword">on</span> duplicate key update relation_ship<span class="operator">=</span>relation_ship <span class="operator">|</span> <span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> relation_ship <span class="keyword">from</span> `<span class="keyword">like</span>` <span class="keyword">where</span> user_id<span class="operator">=</span>A <span class="keyword">and</span> liker_id<span class="operator">=</span>B;</span><br><span class="line"><span class="comment">/*代码中判断返回的 relation_ship，</span></span><br><span class="line"><span class="comment">  如果是1，事务结束，执行 commit</span></span><br><span class="line"><span class="comment">  如果是3，则执行下面这两个语句：</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="keyword">insert</span> ignore <span class="keyword">into</span> friend(friend_1_id, friend_2_id) <span class="keyword">values</span>(A,B);</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果A&gt;B，则执行下面的逻辑</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">begin</span>; <span class="comment">/*启动事务*/</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `<span class="keyword">like</span>`(user_id, liker_id, relation_ship) <span class="keyword">values</span>(B, A, <span class="number">2</span>) </span><br><span class="line">	<span class="keyword">on</span> duplicate key update relation_ship<span class="operator">=</span>relation_ship <span class="operator">|</span> <span class="number">2</span>;</span><br><span class="line"><span class="keyword">select</span> relation_ship <span class="keyword">from</span> `<span class="keyword">like</span>` <span class="keyword">where</span> user_id<span class="operator">=</span>B <span class="keyword">and</span> liker_id<span class="operator">=</span>A;</span><br><span class="line"><span class="comment">/*代码中判断返回的 relation_ship，</span></span><br><span class="line"><span class="comment">  如果是2，事务结束，执行 commit</span></span><br><span class="line"><span class="comment">  如果是3，则执行下面这两个语句：</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">insert</span> ignore <span class="keyword">into</span> friend(friend_1_id, friend_2_id) <span class="keyword">values</span>(B,A);</span><br><span class="line"><span class="keyword">commit</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个设计里，让“like”表里的数据保证 user_id &lt; liker_id，这样不论是A关注B，还是B关注A，在操作“like”表的时候，如果反向的关系已经存在，就会出现行锁冲突。</p>
+<p>然后，<code>insert … on duplicate</code> 语句，确保了在事务内部，执行了这个SQL语句后，就强行占住了这个行锁，之后的select 判断relation_ship这个逻辑时就确保了是在行锁保护下的读操作。</p>
+<p>操作符 “|” 是按位或，连同最后一句insert语句里的 ignore，是为了保证重复调用时的幂等性。</p>
+<p>这样，即使在双方“同时”执行关注操作，最终数据库里的结果，也是like表里面有一条关于A和B的记录，而且relation_ship的值是3， 并且friend表里面也有了A和B的这条记录。</p>
+<p>不知道你会不会吐槽：之前明明还说尽量不要使用唯一索引，结果这个例子一上来我就创建了两个。这里我要再和你说明一下，之前文章我们讨论的，是在“业务开发保证不会插入重复记录”的情况下，着重要解决性能问题的时候，才建议尽量使用普通索引。</p>
+<p>而像这个例子里，按照这个设计，业务根本就是保证“我一定会插入重复数据，数据库一定要要有唯一性约束”，这时就没啥好说的了，唯一索引建起来吧。</p>
+<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><p>我们创建了一个简单的表 t，并插入一行，然后对这一行做修改。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t` (</span><br><span class="line">`id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">`a` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span></span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这时候，表 t 里有唯一的一行数据(1,2)。假设，我现在要执行：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> update t <span class="keyword">set</span> a<span class="operator">=</span><span class="number">2</span> <span class="keyword">where</span> id<span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>你会看到这样的结果：</p>
+<img src="/2021/01/05/MySQL/15/image-20220105165006252.png" class="" title="image-20220105165006252">
+
+<p>结果显示，匹配(rows matched)了一行，修改(Changed)了0行。</p>
+<p>仅从现象上看，MySQL内部在处理这个命令的时候，可以有以下三种选择：</p>
+<ol>
+<li>更新都是先读后写的，MySQL读出数据，发现a的值本来就是2，不更新，直接返回，执行结束；</li>
+<li>MySQL调用了InnoDB引擎提供的“修改为(1,2)”这个接口，但是引擎发现值与原来相同，不更新，直接返回；</li>
+<li>InnoDB认真执行了“把这个值修改成(1,2)”这个操作，该加锁的加锁，该更新的更新。</li>
+</ol>
+<p>你觉得实际情况会是以上哪种呢？你可否用构造实验的方式，来证明你的结论？进一步地，可以思考一下，MySQL为什么要选择这种策略呢？</p>
+<p> 答案：</p>
+<p>第一个选项是，MySQL读出数据，发现值与原来相同，不更新，直接返回，执行结束。这里我们可以用一个锁实验来确认。</p>
+<p>假设，当前表t里的值是(1,2)，session B 的update 语句被blocked了，加锁这个动作是InnoDB才能做的，所以排除选项1。</p>
+<img src="/2021/01/05/MySQL/15/image-20220106150137143.png" class="" title="image-20220106150137143">
+
+<p>第二个选项是，MySQL调用了InnoDB引擎提供的接口，但是引擎发现值与原来相同，不更新，直接返回。有没有这种可能呢？这里我用一个可见性实验来确认。</p>
+<img src="/2021/01/05/MySQL/15/image-20220106150729345.png" class="" title="image-20220106150729345">
+
+<p>假设当前表里的值是(1,2)。session A 的第二个select 语句是一致性读（快照读)，它是不能看见 session B的更新的。</p>
+<p>现在它返回的是(1,3)，表示它看见了某个新的版本，这个版本只能是 session A 自己的update语句做更新的时候生成。</p>
+<p>所以，我们上期思考题的答案应该是选项3，即：InnoDB认真执行了“把这个值修改成(1,2)”这个操作，该加锁的加锁，该更新的更新。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">xjf</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://universeinheart.github.io/2021/01/05/MySQL/15/">http://universeinheart.github.io/2021/01/05/MySQL/15/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://universeinheart.github.io" target="_blank">HelloWorld</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/01/05/MySQL/16/"><img class="prev-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">16、orderby 是怎么工作的</div></div></a></div><div class="next-post pull-right"><a href="/2021/01/04/MySQL/14/"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">14、count(*)这么慢，我该怎么办</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/04/04/MySQL/01/" title="01、基础架构：一条SQL查询语句是如何执行的"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">01、基础架构：一条SQL查询语句是如何执行的</div></div></a></div><div><a href="/2021/04/04/MySQL/03/" title="03、事务隔离：为什么你改了我还看不见"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">03、事务隔离：为什么你改了我还看不见</div></div></a></div><div><a href="/2021/04/04/MySQL/02/" title="02、日志系统：一条SQL更新语句是如何执行的"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">02、日志系统：一条SQL更新语句是如何执行的</div></div></a></div><div><a href="/2021/04/04/MySQL/04/" title="04、深入浅出索引（上）"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">04、深入浅出索引（上）</div></div></a></div><div><a href="/2021/12/04/MySQL/07/" title="07、行锁功过：怎么减少行锁对性能的影响"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-04</div><div class="title">07、行锁功过：怎么减少行锁对性能的影响</div></div></a></div><div><a href="/2021/04/04/MySQL/05/" title="05、深入浅出索引（下）"><img class="cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-04-04</div><div class="title">05、深入浅出索引（下）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/favicon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">xjf</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">31</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HelloWorld" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:954475782@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Hello everyone</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">日志相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E6%97%B6%E5%88%BB%EF%BC%8CMySQL%E5%BC%82%E5%B8%B8%E9%87%8D%E5%90%AF%E4%BC%9A%E5%87%BA%E7%8E%B0%E4%BB%80%E4%B9%88%E7%8E%B0%E8%B1%A1%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">在两阶段提交的不同时刻，MySQL异常重启会出现什么现象。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93binlog%E6%98%AF%E5%AE%8C%E6%95%B4%E7%9A%84"><span class="toc-number">1.2.</span> <span class="toc-text">MySQL怎么知道binlog是完整的?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log-%E5%92%8C-binlog%E6%98%AF%E6%80%8E%E4%B9%88%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5%E7%9A%84"><span class="toc-number">1.3.</span> <span class="toc-text">redo log 和 binlog是怎么关联起来的?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E4%BA%8Eprepare%E9%98%B6%E6%AE%B5%E7%9A%84redo-log%E5%8A%A0%E4%B8%8A%E5%AE%8C%E6%95%B4binlog%EF%BC%8C%E9%87%8D%E5%90%AF%E5%B0%B1%E8%83%BD%E6%81%A2%E5%A4%8D%EF%BC%8CMySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%99%E4%B9%88%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.4.</span> <span class="toc-text">处于prepare阶段的redo log加上完整binlog，重启就能恢复，MySQL为什么要这么设计?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%99%E6%A0%B7%E7%9A%84%E8%AF%9D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%91%A2%EF%BC%9F%E5%B9%B2%E8%84%86%E5%85%88redo-log%E5%86%99%E5%AE%8C%EF%BC%8C%E5%86%8D%E5%86%99binlog%E3%80%82%E5%B4%A9%E6%BA%83%E6%81%A2%E5%A4%8D%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%BF%85%E9%A1%BB%E5%BE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E5%BF%97%E9%83%BD%E5%AE%8C%E6%95%B4%E6%89%8D%E5%8F%AF%E4%BB%A5%E3%80%82%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E6%A0%B7%E7%9A%84%E9%80%BB%E8%BE%91%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">如果这样的话，为什么还要两阶段提交呢？干脆先redo log写完，再写binlog。崩溃恢复的时候，必须得两个日志都完整才可以。是不是一样的逻辑？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%A3%E8%83%BD%E4%B8%8D%E8%83%BD%E5%8F%AA%E7%94%A8redo-log%EF%BC%8C%E4%B8%8D%E8%A6%81binlog%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">那能不能只用redo log，不要binlog？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log%E4%B8%80%E8%88%AC%E8%AE%BE%E7%BD%AE%E5%A4%9A%E5%A4%A7%EF%BC%9F"><span class="toc-number">1.7.</span> <span class="toc-text">redo log一般设置多大？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C%E4%B8%AD%E7%9A%84%E5%AE%9E%E4%BE%8B%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%86%99%E5%85%A5%E5%90%8E%E7%9A%84%E6%9C%80%E7%BB%88%E8%90%BD%E7%9B%98%EF%BC%8C%E6%98%AF%E4%BB%8E-redo-log-%E6%9B%B4%E6%96%B0%E8%BF%87%E6%9D%A5%E7%9A%84%E8%BF%98%E6%98%AF%E4%BB%8E-buffer-pool-%E6%9B%B4%E6%96%B0%E8%BF%87%E6%9D%A5%E7%9A%84%E5%91%A2%EF%BC%9F"><span class="toc-number">1.8.</span> <span class="toc-text">正常运行中的实例，数据写入后的最终落盘，是从 redo log 更新过来的还是从 buffer pool 更新过来的呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redo-log-buffer-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E5%85%88%E4%BF%AE%E6%94%B9%E5%86%85%E5%AD%98%EF%BC%8C%E8%BF%98%E6%98%AF%E5%85%88%E5%86%99redo-log%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="toc-number">1.9.</span> <span class="toc-text">redo log buffer 是什么？是先修改内存，还是先写redo log文件？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">业务设计问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">思考题</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/09/" title="09、Redis 切片集群">09、Redis 切片集群</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/10/" title="10、第1～9讲课后思考题答案及常见问题答疑">10、第1～9讲课后思考题答案及常见问题答疑</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/16/Redis/11/" title="11、Redis String 为什么不好用了？">11、Redis String 为什么不好用了？</a><time datetime="2022-04-16T14:00:00.000Z" title="发表于 2022-04-16 22:00:00">2022-04-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/10/Redis/04/" title="04、Redis AOF日志">04、Redis AOF日志</a><time datetime="2022-04-10T11:50:15.000Z" title="发表于 2022-04-10 19:50:15">2022-04-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/09/%E5%87%A4%E5%87%B0%E6%9E%B6%E6%9E%84-%E6%9E%84%E5%BB%BA%E5%8F%AF%E9%9D%A0%E7%9A%84%E5%A4%A7%E5%9E%8B%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/10/" title="可观测性">可观测性</a><time datetime="2022-04-09T15:26:37.000Z" title="发表于 2022-04-09 23:26:37">2022-04-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By xjf</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
